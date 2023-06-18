@@ -1,0 +1,168 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body, html {
+   height: 100vh;
+}
+
+.input {
+   background-color: #EBA63F;
+   color: black;
+   padding: 10px 0;
+   font-size: 1rem;
+
+   &__container {
+      max-width: 1000px;
+      margin: 0px auto;
+   }
+
+   &__title {
+      text-align: center;
+      padding-bottom: 10px;
+      font-size: 1.3rem;
+   }
+
+   &__form {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+   }
+
+   .tier__top, .tier__bottom, &__tier, .tier__amount {
+      margin: 0px 0px 5px 0px;
+      width: 40%;
+      align-self: center;
+
+      label {
+         text-align: center;
+         padding-bottom: 2px;
+      }
+   }
+
+   &__option {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      align-items: center;
+      column-gap: 10px;
+
+      .option__item {
+         width: 31%;
+         display: flex;
+         flex-direction: column;
+         
+         input {
+            width: 10%;
+            height: 0.8rem;
+            
+         }
+   
+         label {
+            text-align: right;
+         }
+      }
+   }
+
+   &__side {
+      width: 25%;
+      align-self: center;
+      text-align: center;
+
+      label {
+         text-align: center;
+         padding-bottom: 2px;
+      }
+   }
+
+   &__button {
+      align-self: center;
+   }
+}
+
+.wraper {
+   min-height: 100%;
+   overflow: clip;
+   display: flex;
+   flex-direction: column;
+}
+
+.content {
+   flex: 1 1 auto;
+   // padding-top: 3.125rem;
+}
+
+.global {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   padding-bottom: 10px;
+   column-gap: 10px;
+
+   label {
+      text-align: center;
+      padding-bottom: 2px;
+   }
+
+   &__item {
+      width: 24%;
+      display: flex;
+      flex-direction: column;
+   }
+}
+
+.local {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   padding-bottom: 10px;
+   column-gap: 10px;
+
+   label {
+      text-align: center;
+      padding-bottom: 2px;
+   }
+
+   &__item {
+      width: 31%;
+      display: flex;
+      flex-direction: column;
+   }
+
+   .option__item{
+      width: 31%;
+      text-align: center;
+   }
+}
+
+.dishwasher-select {
+   width: 25%;
+   line-height: 1.2;
+   font-size: 0.8rem;
+   border-radius: 5px;
+   padding: 0px 5px;
+   border: 1px solid grey;
+   appearance: none;
+   margin-left: 5px;
+}
+
+.items {
+   display: flex;
+   flex-direction: column;
+   margin: 0 auto;
+   align-items: center;
+   width: 40%;
+
+   &__table {
+      width: 80%;
+      text-align: left;
+
+      td {
+         padding: 0px 3px;
+      }
+   }
+}
+

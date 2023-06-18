@@ -3,3 +3,17 @@
    padding: 0;
    box-sizing: border-box;
 }
+
+.input {
+   background-color: aqua;
+   color: black;
+   padding: 10px 0;
+   font-size: 1rem;
+
+}
+
+.input__container {
+   max-width: 1000px;
+   margin: 0px auto;
+
+}

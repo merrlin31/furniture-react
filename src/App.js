@@ -1,9 +1,12 @@
-import './styles/App.css';
+import './styles/App.scss';
+import { Main } from './components/Main';
 
 function App() {
   return (
-    <div className="App">
-      gfhgfhgit re
+    <div className="App wraper">
+      <header>gg</header>
+      <Main />
+      <footer>hh</footer>
     </div>
   );
 }

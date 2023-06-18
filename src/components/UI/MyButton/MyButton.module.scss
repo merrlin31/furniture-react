@@ -1,0 +1,28 @@
+.button {
+   width: 150px;
+   line-height: 1.6;
+   font-size: 1.2rem;
+   margin: 5px;
+   margin-top: 10px;
+   border-radius: 5px;
+   border: none;
+   transition: 0.3s;
+}
+
+.green {
+   background-color: #438945;
+   color: white;
+
+   &:hover {
+      background-color: lighten($color: #438945, $amount: 5%);
+   }
+}
+
+.brown {
+   background-color: #633808;
+   color: white;
+
+   &:hover {
+      background-color: lighten($color: #633808, $amount: 5%);
+   }
+}
