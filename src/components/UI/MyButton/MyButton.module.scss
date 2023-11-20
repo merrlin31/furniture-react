@@ -1,3 +1,5 @@
+@import "../../../styles/variable";
+
 .button {
    width: 150px;
    line-height: 1.6;
@@ -10,19 +12,28 @@
 }
 
 .green {
-   background-color: #438945;
+   background-color: $green-btn;
    color: white;
 
    &:hover {
-      background-color: lighten($color: #438945, $amount: 5%);
+      background-color: lighten($color: $green-btn, $amount: 5%);
    }
 }
 
 .brown {
-   background-color: #633808;
+   background-color: $brown-btn;
    color: white;
 
    &:hover {
-      background-color: lighten($color: #633808, $amount: 5%);
+      background-color: lighten($color: $brown-btn, $amount: 5%);
+   }
+}
+
+.dark-blue {
+   background-color: $dark-blue-btn;
+   color: white;
+
+   &:hover {
+      background-color: lighten($color: $dark-blue-btn, $amount: 5%);
    }
 }
