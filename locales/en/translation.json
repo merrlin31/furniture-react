@@ -1,0 +1,39 @@
+{
+   "text": "some text",
+   "material": "Material",
+   "levelType1": "Lower level",
+   "levelType2": "Верхня шафа",
+   "levelType3": "Антресоль",
+   "levelAmount1": "One",
+   "levelAmount2": "Two",
+   "sectionBottomType1": "Звичайна шафа",
+   "sectionBottomType2": "Кутова шафа з'єднувальна",
+   "sectionBottomType3": "Кутова шафа",
+   "sectionBottomType4": "Велика шафа",
+   "sectionUpperType1": "Звичайна шафа",
+   "sectionUpperType2": "Шафа з витяжкою",
+   "sectionUpperType3": "Кутова шафа з фальш-панелю",
+   "sectionUpperType4": "Кутова шафа",
+
+   "materialType1": "ДСП",
+   "materialType2": "МДФ",
+
+   "firstDetail": "Left",
+   "secondDetail": "Right",
+   "thirdDetail": "Bottom",
+   "fourthDetail": "Top",
+   "fifthDetail": "Shelve",
+   "sixthDetail": "Visible side",
+   "seventhDetail": "False",
+   "firstFront": "First front",
+   "secondFront": "Second front",
+
+   "drawerFirstDetail": "side",
+   "drawerSecondDetail": "back",
+   "drawerThirdDetail": "drawerBottom",
+
+   "thinEdge": "Thin edge",
+   "boldEdge": "Bold edge",
+   "withoutEdge": "No edge"
+
+}

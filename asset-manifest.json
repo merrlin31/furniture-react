@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/furniture-react/static/css/main.b9e4bfe8.css",
+    "main.js": "/furniture-react/static/js/main.19edcd41.js",
+    "static/media/pencil-solid.svg": "/furniture-react/static/media/pencil-solid.d029b8872ea0e6995e0a352bc3eb5ead.svg",
+    "index.html": "/furniture-react/index.html",
+    "static/media/plus-solid.svg": "/furniture-react/static/media/plus-solid.24ed2c96db9a87f1b993e83ce84df4e5.svg",
+    "static/media/chevron-down-solid.svg": "/furniture-react/static/media/chevron-down-solid.9e298e0c2cf75e100ee1e021cdb2da46.svg",
+    "static/media/chevron-right-solid.svg": "/furniture-react/static/media/chevron-right-solid.1aa22aecb3ede5e29bed468125be3112.svg",
+    "static/media/getFetch.cjs": "/furniture-react/static/media/getFetch.40f37ddea2378391108f.cjs",
+    "static/media/xmark-solid.svg": "/furniture-react/static/media/xmark-solid.4dcd864226f76ebbe28eb634b335fd3e.svg",
+    "static/media/trash-solid.svg": "/furniture-react/static/media/trash-solid.a353f940dfd78c1efdacd1f0eaaae066.svg",
+    "static/media/circle-check-solid.svg": "/furniture-react/static/media/circle-check-solid.73cee16d43fc649b657cd8d92a7b9323.svg",
+    "main.b9e4bfe8.css.map": "/furniture-react/static/css/main.b9e4bfe8.css.map",
+    "main.19edcd41.js.map": "/furniture-react/static/js/main.19edcd41.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b9e4bfe8.css",
+    "static/js/main.19edcd41.js"
+  ]
+}
