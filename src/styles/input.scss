@@ -1,0 +1,215 @@
+@import "variable.scss";
+
+.input {
+   background-color: $input-bg;
+   color: $dark-color;
+   padding: 10px 15px;
+   font-size: 1rem;
+   width: 50%;
+
+   @media (max-width: 1080px) {
+         width: 100%;
+         // justify-content: space-around;
+      }
+
+   &__container {
+      max-width: 512px;
+      margin: 0px auto;
+   }
+
+   &__title {
+      text-align: center;
+      padding-bottom: 10px;
+      font-size: 1.3rem;
+   }
+
+   &__form {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+   }
+
+   &__type {
+      display: flex;
+      text-align: center;
+      width: 100%;
+      flex-wrap: wrap;
+      // justify-content: flex-start;
+      align-items: flex-end;
+      padding-bottom: 10px;
+      column-gap: 10px;
+   }
+
+   .type__top, .type__bottom, .type__level {
+      margin: 0 auto;
+      margin-bottom: 5px;
+      width: 49%;
+
+      @media (max-width: 768px) {
+         width: 30%;
+      }
+
+      @media (max-width: 480px) {
+         width: 48%;
+      }
+   }
+
+   .type__amount {
+      margin: 0 auto;
+      margin-bottom: 5px;
+      width: 100%;
+
+      @media (max-width: 768px) {
+         width: 30%;
+      }
+
+      @media (max-width: 480px) {
+         width: 100%;
+      }
+   }
+
+   &__option {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      padding-bottom: 10px;
+      align-items: center;
+      column-gap: 10px;
+
+      .option__item {
+         width: 48%;
+         display: flex;
+         flex-direction: column;
+
+         @media (max-width: 480px) {
+            width: 100%;
+         }
+         
+         input {
+            width: 1rem;
+            height: 0.8rem;
+            
+         }
+   
+         label {
+            text-align: right;
+
+            @media (max-width: 480px) {
+               padding-right: 80px;
+            }
+         }
+      }
+   }
+
+   &__side {
+      width: 25%;
+      align-self: center;
+      text-align: center;
+
+      label {
+         text-align: center;
+         padding-bottom: 2px;
+      }
+   }
+
+   &__button {
+      align-self: center;
+   }
+}
+
+.global {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   align-items: flex-end;
+   padding-bottom: 10px;
+   column-gap: 10px;
+
+   label {
+      text-align: center;
+      padding-bottom: 2px;
+   }
+
+   &__item {
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+
+      @media (max-width: 768px) {
+         width: 30%;
+      }
+
+      @media (max-width: 550px) {
+         width: 48%;
+      }
+   }
+}
+
+.local {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: flex-end;
+   padding-bottom: 10px;
+   column-gap: 10px;
+
+   label {
+      text-align: center;
+      padding-bottom: 2px;
+   }
+
+   &__item, .option__item {
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+
+      @media (max-width: 768px) {
+         width: 30%;
+      }
+
+      @media (max-width: 550px) {
+         width: 48%;
+      }
+   }
+
+   // .option__item{
+   //    width: 49%;
+   //    // text-align: center;
+   // }
+}
+
+.dishwasher-select {
+   width: 25%;
+   line-height: 1.2;
+   font-size: 0.8rem;
+   border-radius: 5px;
+   padding: 0px 5px;
+   border: 1px solid grey;
+   appearance: none;
+   margin-left: 5px;
+}
+
+.items {
+   display: flex;
+   flex-direction: column;
+   margin: 0 auto;
+   align-items: center;
+   width: 40%;
+
+   @media (max-width: 480px) {
+      width: 50%;
+   }
+
+   @media (max-width: 350px) {
+      width: 60%;
+   }
+   
+   &__table {
+      width: 80%;
+      text-align: left;
+
+      td {
+         padding: 0px 3px;
+      }
+   }
+}

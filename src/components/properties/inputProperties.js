@@ -5,7 +5,7 @@ import { drawerType2, frontOpeningType1, frontOpeningType2, frontOpeningType4, l
    sectionBottomType3, sectionBottomType4, sectionUpperType1, sectionUpperType2, sectionUpperType3, sectionUpperType4, sideType1 } from "../../utils/description"
 
 export const section1 = 'global'
-export const section2 = 'level'
+export const section2 = 'type'
 export const section3 = 'local'
 export const section4 = 'option'
 export const section5 = 'items'
