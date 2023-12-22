@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/furniture-react/static/css/main.46e2648c.css",
+    "main.css": "/furniture-react/static/css/main.b00fc4eb.css",
     "main.js": "/furniture-react/static/js/main.d4d14ec7.js",
     "static/media/pencil-solid.svg": "/furniture-react/static/media/pencil-solid.d029b8872ea0e6995e0a352bc3eb5ead.svg",
     "index.html": "/furniture-react/index.html",
@@ -11,11 +11,11 @@
     "static/media/xmark-solid.svg": "/furniture-react/static/media/xmark-solid.4dcd864226f76ebbe28eb634b335fd3e.svg",
     "static/media/trash-solid.svg": "/furniture-react/static/media/trash-solid.a353f940dfd78c1efdacd1f0eaaae066.svg",
     "static/media/circle-check-solid.svg": "/furniture-react/static/media/circle-check-solid.73cee16d43fc649b657cd8d92a7b9323.svg",
-    "main.46e2648c.css.map": "/furniture-react/static/css/main.46e2648c.css.map",
+    "main.b00fc4eb.css.map": "/furniture-react/static/css/main.b00fc4eb.css.map",
     "main.d4d14ec7.js.map": "/furniture-react/static/js/main.d4d14ec7.js.map"
   },
   "entrypoints": [
-    "static/css/main.46e2648c.css",
+    "static/css/main.b00fc4eb.css",
     "static/js/main.d4d14ec7.js"
   ]
 }
