@@ -1,9 +1,19 @@
 {
   "files": {
-    "main.css": "/furniture-react/static/css/main.850b7ecb.css",
-    "main.js": "/furniture-react/static/js/main.7b2d617d.js",
+    "main.css": "/furniture-react/static/css/main.7654102e.css",
+    "main.js": "/furniture-react/static/js/main.b758e5ad.js",
+    "static/media/indent2.webp": "/furniture-react/static/media/indent2.acc6c4fb3dacd2d98d28.webp",
+    "static/media/indent8.webp": "/furniture-react/static/media/indent8.afb65b8fb742697300a7.webp",
+    "static/media/indent5.webp": "/furniture-react/static/media/indent5.a66a63570cf176c6210e.webp",
+    "static/media/indent3.webp": "/furniture-react/static/media/indent3.70dbd0d837378a47e9f4.webp",
+    "static/media/indent7.webp": "/furniture-react/static/media/indent7.a1daf230b1cc23203cb1.webp",
+    "static/media/indent10.webp": "/furniture-react/static/media/indent10.3300393dc27a0b1e16c7.webp",
+    "static/media/indent6.webp": "/furniture-react/static/media/indent6.4ceca2e3aca3bc1bc56a.webp",
+    "static/media/indent9.webp": "/furniture-react/static/media/indent9.9a117e08923cbf2b40c6.webp",
     "static/media/indent1.webp": "/furniture-react/static/media/indent1.c52b6ffd87e425cdb2b9.webp",
+    "static/media/indent4.webp": "/furniture-react/static/media/indent4.9aaed0d0a6367d17e0d6.webp",
     "static/media/pencil-solid.svg": "/furniture-react/static/media/pencil-solid.d029b8872ea0e6995e0a352bc3eb5ead.svg",
+    "static/media/circle-question-regular.svg": "/furniture-react/static/media/circle-question-regular.3815d0cdff1291891a9c88d1151d1fd0.svg",
     "index.html": "/furniture-react/index.html",
     "static/media/plus-solid.svg": "/furniture-react/static/media/plus-solid.24ed2c96db9a87f1b993e83ce84df4e5.svg",
     "static/media/chevron-down-solid.svg": "/furniture-react/static/media/chevron-down-solid.9e298e0c2cf75e100ee1e021cdb2da46.svg",
@@ -12,11 +22,11 @@
     "static/media/xmark-solid.svg": "/furniture-react/static/media/xmark-solid.4dcd864226f76ebbe28eb634b335fd3e.svg",
     "static/media/trash-solid.svg": "/furniture-react/static/media/trash-solid.a353f940dfd78c1efdacd1f0eaaae066.svg",
     "static/media/circle-check-solid.svg": "/furniture-react/static/media/circle-check-solid.73cee16d43fc649b657cd8d92a7b9323.svg",
-    "main.850b7ecb.css.map": "/furniture-react/static/css/main.850b7ecb.css.map",
-    "main.7b2d617d.js.map": "/furniture-react/static/js/main.7b2d617d.js.map"
+    "main.7654102e.css.map": "/furniture-react/static/css/main.7654102e.css.map",
+    "main.b758e5ad.js.map": "/furniture-react/static/js/main.b758e5ad.js.map"
   },
   "entrypoints": [
-    "static/css/main.850b7ecb.css",
-    "static/js/main.7b2d617d.js"
+    "static/css/main.7654102e.css",
+    "static/js/main.b758e5ad.js"
   ]
 }
