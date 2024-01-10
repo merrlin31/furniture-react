@@ -339,7 +339,11 @@
       "section4Title1": "Перелік матеріалів:",
       "section4Title2": "Перелік фурнітури:",
       "section4Title3": "Загальна вартість:",
-      "section5Title1": "Налаштування відступів:"
+      "section5Title1": "Налаштування відступів:",
+      "sections": "Секції",
+      "detailing": "Деталювання",
+      "specification": "Розрахунок",
+      "settings": "Налаштування"
    },
 
    "totalSum": {

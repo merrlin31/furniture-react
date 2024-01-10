@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/furniture-react/static/css/main.991deccc.css",
-    "main.js": "/furniture-react/static/js/main.e256484f.js",
+    "main.css": "/furniture-react/static/css/main.1cbfd89d.css",
+    "main.js": "/furniture-react/static/js/main.f0ac61bd.js",
     "static/media/indent2.webp": "/furniture-react/static/media/indent2.acc6c4fb3dacd2d98d28.webp",
     "static/media/indent8.webp": "/furniture-react/static/media/indent8.afb65b8fb742697300a7.webp",
     "static/media/indent5.webp": "/furniture-react/static/media/indent5.a66a63570cf176c6210e.webp",
@@ -35,11 +35,11 @@
     "static/media/plus-solid.svg": "/furniture-react/static/media/plus-solid.74e6e61c843b5695c3699a80d9bd8866.svg",
     "static/media/chevron-down-solid.svg": "/furniture-react/static/media/chevron-down-solid.8d6ddc4c1a136c200867b34c3a3e837f.svg",
     "static/media/chevron-right-solid.svg": "/furniture-react/static/media/chevron-right-solid.da405e4d469cc55008e54ba16ccefbf3.svg",
-    "main.991deccc.css.map": "/furniture-react/static/css/main.991deccc.css.map",
-    "main.e256484f.js.map": "/furniture-react/static/js/main.e256484f.js.map"
+    "main.1cbfd89d.css.map": "/furniture-react/static/css/main.1cbfd89d.css.map",
+    "main.f0ac61bd.js.map": "/furniture-react/static/js/main.f0ac61bd.js.map"
   },
   "entrypoints": [
-    "static/css/main.991deccc.css",
-    "static/js/main.e256484f.js"
+    "static/css/main.1cbfd89d.css",
+    "static/js/main.f0ac61bd.js"
   ]
 }
