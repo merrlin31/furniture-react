@@ -6,9 +6,9 @@ import { SpecificationItem } from "./SpecificationItem";
 
 export const SpecificationMaterials = ({materials, setContent}) => {
 
+   const materialClass = 'material'
    const edgeDiscount = 7
    const {servicesPrice} = useContext(MyContext)
-   
 
    const changeItem = (item) => {
       let index = item.name
@@ -43,7 +43,7 @@ export const SpecificationMaterials = ({materials, setContent}) => {
    return (
       <>
          {materials.map(material => 
-            <tbody key={material.materialCode}>
+            <tbody key={material.materialCode} className={materialClass}>
                {material.area > 0 &&
                   <SpecificationItem name={material.materialCode} description={t(material.material)} code={material.materialCode}  amount={setAmount(material)} 
                      price={material.price} material={material.material} discount={material.discountValue} change={changeItem} />

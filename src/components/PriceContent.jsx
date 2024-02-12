@@ -12,7 +12,7 @@ import { MySelect } from './UI/MySelect/MySelect';
 import { ReactComponent as RightChevron } from "../img/chevron-right-solid.svg";
 import { ReactComponent as DownChevron } from "../img/chevron-down-solid.svg";
 import { useTranslation } from 'react-i18next';
-import { headClass, inputClass, itemClass, listClass, materialsClass, section2Form1Class, section2Form2Class, section2FormClass, titleClass } from '../utils/description';
+import { headClass, inputClass, itemClass, listClass, materialsClass, oneMaterialClass, section2Form1Class, section2Form2Class, section2FormClass, titleClass } from '../utils/description';
 import { Title } from './Title';
 import { notPrice, price1, price2, price3 } from './properties/detailingProperties';
 
@@ -65,7 +65,7 @@ export const PriceContent = (props) => {
             </div>   
             {visibleList && <div className={`${props.class}${inputClass} ${materialsClass}`}>
                {materials.length > 0 && materials.map((material) =>
-                  <div key={material.materialCode}>
+                  <div key={material.materialCode} className={oneMaterialClass}>
                      <h3 className={materialsClass + titleClass}>{t(materialItem) + ' ' + material.materialCode}</h3>
                      <div className={materialsClass} key={material.materialCode}>
                         <MyMaterialInput name={materialItem} className={priceSection1 + itemClass} value={material.price} 

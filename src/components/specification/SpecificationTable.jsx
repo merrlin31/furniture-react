@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import { useRef } from "react"
-import { btnContainerClass, section4BtnClass, TblClass, titleClass } from "../../utils/description"
+import { btnContainerClass, detailingTableResponsive, section4BtnClass, TblClass, titleClass } from "../../utils/description"
 import { discount } from "../../utils/furniture"
 import { Title } from "../Title"
 import { SpecificationMaterials } from "./SpecificationMaterials"
@@ -63,14 +63,16 @@ export const SpecificationTable = (props) => {
    return (
       <div className={props.class + TblClass}>
          <Title className={props.class + titleClass} title={props.title} />
-         <table ref={table} className={props.class + props.tableClass}>
-            <SpecificationThead />
-            {props.materials && 
-               <SpecificationMaterials materials={props.materials} setContent={props.setMaterials} />}
-            <SpecificationTbody content={props.content} setContent={props.setContent} object={props.object} 
-               price={props.price} discount={discount} setPrice={props.setPrice} translate={props.translate} />
-            <SpecificationTfoot sum={props.sum} />
-         </table>
+         <div className={props.class + detailingTableResponsive}>
+            <table ref={table} className={props.class + props.tableClass}>
+               <SpecificationThead />
+               {props.materials && 
+                  <SpecificationMaterials materials={props.materials} setContent={props.setMaterials} />}
+               <SpecificationTbody content={props.content} setContent={props.setContent} object={props.object} 
+                  price={props.price} discount={discount} setPrice={props.setPrice} translate={props.translate} />
+               <SpecificationTfoot sum={props.sum} />
+            </table>
+         </div>   
          <div className={btnContainerClass}><AddLogo className={props.class + section4BtnClass} onClick={addItem} /></div>
          <MyModal visible={modal} setVisible={setModal}>
             <AddFurniture addFurniture={addFurniture} materials={props.materials} />

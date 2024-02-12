@@ -13,7 +13,7 @@ export const SettingsContent = (props) => {
    return (
       <>
          <SettingsForm className={props.class + section1FormClass} parent={props.class} title={props.title} 
-            optionsClass={settingsSection1} options={indentOptions} state={indentValues} setState={setIndentValues} translate={translate}/>
+            optionsClass={settingsSection1} options={indentOptions} state={indentValues} setState={setIndentValues} translate={translate} hint={true}/>
       </>
    );
 }

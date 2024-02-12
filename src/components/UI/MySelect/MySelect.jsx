@@ -8,7 +8,7 @@ export const MySelect = ({options, value, onChange, className, translate}) => {
    return (
       <div className={className}>
          <label>
-            {options.name && t(name)}
+         <div className={style.label}>{options.name && t(name)}</div>
             <select className={style.select} value={value} onChange={e => onChange(e.target.value)} id={options.id}>
                <option disabled value=''>{t(options.defaulValue)}</option>
                {options.options.map((option, index) =>

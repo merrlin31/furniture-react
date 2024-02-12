@@ -6,18 +6,24 @@
    padding: 10px 15px;
    width: 50%;
 
+   @media (max-width: 1080px) {
+      width: 100%;
+   }
+
    &__container {
-      max-width: 512px;
+      max-width: 1080px;
       margin: 0px auto;
       // display: flex;
       // justify-content: space-between;
       // flex-wrap: wrap;
       // align-items: flex-start;
+      
    }
 
    &__form, &__form1, &__form2 {
       width: 100%;
       text-align: center;
+      margin: 0px auto;
    }
 
    &__head {
@@ -51,22 +57,53 @@
    }
 
    &__item {
-      width: 30%;
+      width: 48%;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+
+      @media (max-width: 1080px) {
+         width: 24%;
+      }
+
+      @media (max-width: 768px) {
+         width: 30%;
+      }
+
+      @media (max-width: 768px) {
+         width: 48%;
+      }
    }
 
    &__title {
       padding: 7px 0;
    }
-} 
+}
+
+.material {
+   width: 100%;
+}
+
+
 .services, .furniture {
    
    &__item {
       width: 45%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+
+      @media (max-width: 1080px) {
+         width: 24%;
+      }
+
+      @media (max-width: 768px) {
+         width: 30%;
+      }
+
+      @media (max-width: 600px) {
+         width: 47%;
+      }
+
+      @media (max-width: 360px) {
+         width: 80%;
+      }
    }
 }

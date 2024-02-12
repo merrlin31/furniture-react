@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TblClass, titleClass } from "../../utils/description";
+import { detailingTableResponsive, TblClass, titleClass } from "../../utils/description";
 import { serviceItem13, serviceItem16 } from "../../utils/services";
 import { initialPercentage } from "../properties/settingsProperties";
 import { Title } from "../Title";
@@ -26,48 +26,49 @@ export const SpecificationTotalSum = (props) => {
    return (
       <div className={props.class + TblClass}>
          <Title className={props.class + titleClass} title={props.title} />
-         <table ref={table} className={props.class + props.tableClass}>
-            <thead>
-               <tr>
-                  <td>{t('table.title')}</td>
-                  <td>{t('table.totalPrice')}</td>
-                  <td>{t('table.discount')}</td>
-                  <td>{t('table.discountPrice')}</td>
-               </tr>
-            </thead>
-            <tbody>
-               <SpecificationTotalSumItem name={item1} sum={props.serviceSum.totalSum} 
-                  discount={props.serviceSum.totalDiscount} sumWithDiscount={props.serviceSum.totalSumWithDiscount} />
-               <SpecificationTotalSumItem name={item2} sum={props.furnitureSum.totalSum} 
-                  discount={props.furnitureSum.totalDiscount} sumWithDiscount={props.furnitureSum.totalSumWithDiscount} />
-               <SpecificationTotalSumItem name={item3} sum={props.serviceSum.totalSum + props.furnitureSum.totalSum} 
-                  discount={props.serviceSum.totalDiscount + props.furnitureSum.totalDiscount} sumWithDiscount={totalSumWithDiscount} />
-               <SpecificationTotalSumItem name={item4} sum={null} 
-                  sumWithDiscount={totalSumWithDiscount / 100 * percentage.mounting} 
-                  value={percentage.mounting} onChange={updatePercentage} editable={true} />
-               <SpecificationTotalSumItem name={item5} sum={null} 
-                  sumWithDiscount={totalSumWithDiscount / 100 * percentage.promout} 
-                  value={percentage.promout} onChange={updatePercentage} editable={true} />
-               <SpecificationTotalSumItem name={item6} sum={null} 
-                  sumWithDiscount={totalSumWithDiscount / 100 * percentage.design} 
-                  value={percentage.design} onChange={updatePercentage} editable={true} />
-               <SpecificationTotalSumItem name={item7} sum={null} 
-                  sumWithDiscount={totalSumWithDiscount / 100 * percentage.profit} 
-                  value={percentage.profit} onChange={updatePercentage} editable={true} />
-               <SpecificationTotalSumItem name={serviceItem13} sum={props.servicesPrice[serviceItem13]} 
-                  discount={null} sumWithDiscount={props.servicesPrice[serviceItem13]} />
-               <SpecificationTotalSumItem name={serviceItem16} sum={props.servicesPrice[serviceItem16]} 
-                  discount={null} sumWithDiscount={props.servicesPrice[serviceItem16]} />
-            </tbody>
-            <tfoot>
-               <SpecificationTotalSumItem name={item3} sum={null} 
-                  discount={null} sumWithDiscount={totalSumWithDiscount + 
-                     totalSumWithDiscount / 100 * 
-                     (percentage.mounting + percentage.promout + percentage.design + percentage.profit) + 
-                     props.servicesPrice[serviceItem13] + props.servicesPrice[serviceItem16]} />
-            </tfoot>
-            
-         </table>         
+         <div className={props.class + detailingTableResponsive}>
+            <table ref={table} className={props.class + props.tableClass}>
+               <thead>
+                  <tr>
+                     <th>{t('table.title')}</th>
+                     <th>{t('table.totalPrice')}</th>
+                     <th>{t('table.discount')}</th>
+                     <th>{t('table.discountPrice')}</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <SpecificationTotalSumItem name={item1} sum={props.serviceSum.totalSum} 
+                     discount={props.serviceSum.totalDiscount} sumWithDiscount={props.serviceSum.totalSumWithDiscount} />
+                  <SpecificationTotalSumItem name={item2} sum={props.furnitureSum.totalSum} 
+                     discount={props.furnitureSum.totalDiscount} sumWithDiscount={props.furnitureSum.totalSumWithDiscount} />
+                  <SpecificationTotalSumItem name={item3} sum={props.serviceSum.totalSum + props.furnitureSum.totalSum} 
+                     discount={props.serviceSum.totalDiscount + props.furnitureSum.totalDiscount} sumWithDiscount={totalSumWithDiscount} />
+                  <SpecificationTotalSumItem name={item4} sum={null} 
+                     sumWithDiscount={totalSumWithDiscount / 100 * percentage.mounting} 
+                     value={percentage.mounting} onChange={updatePercentage} editable={true} />
+                  <SpecificationTotalSumItem name={item5} sum={null} 
+                     sumWithDiscount={totalSumWithDiscount / 100 * percentage.promout} 
+                     value={percentage.promout} onChange={updatePercentage} editable={true} />
+                  <SpecificationTotalSumItem name={item6} sum={null} 
+                     sumWithDiscount={totalSumWithDiscount / 100 * percentage.design} 
+                     value={percentage.design} onChange={updatePercentage} editable={true} />
+                  <SpecificationTotalSumItem name={item7} sum={null} 
+                     sumWithDiscount={totalSumWithDiscount / 100 * percentage.profit} 
+                     value={percentage.profit} onChange={updatePercentage} editable={true} />
+                  <SpecificationTotalSumItem name={serviceItem13} sum={props.servicesPrice[serviceItem13]} 
+                     discount={null} sumWithDiscount={props.servicesPrice[serviceItem13]} />
+                  <SpecificationTotalSumItem name={serviceItem16} sum={props.servicesPrice[serviceItem16]} 
+                     discount={null} sumWithDiscount={props.servicesPrice[serviceItem16]} />
+               </tbody>
+               <tfoot>
+                  <SpecificationTotalSumItem name={item3} sum={null} 
+                     discount={null} sumWithDiscount={totalSumWithDiscount + 
+                        totalSumWithDiscount / 100 * 
+                        (percentage.mounting + percentage.promout + percentage.design + percentage.profit) + 
+                        props.servicesPrice[serviceItem13] + props.servicesPrice[serviceItem16]} />
+               </tfoot> 
+            </table>
+         </div>         
       </div>
    );
 }

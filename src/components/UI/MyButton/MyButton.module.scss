@@ -9,10 +9,16 @@
    border-radius: 5px;
    border: none;
    transition: 0.3s;
+   box-shadow: 1px 4px 0px rgb(126, 96, 13);
 
    @media (max-width: 360px) {
       width: 120px;
    }
+}
+
+.button:hover {
+   box-shadow: 1px 2px 0px rgb(126, 96, 13);
+   transform: translateY(2px);
 }
 
 .green {
@@ -20,7 +26,7 @@
    color: white;
 
    &:hover {
-      background-color: lighten($color: $green-btn, $amount: 5%);
+      background-color: lighten($color: $green-btn, $amount: 7%);
    }
 }
 
@@ -29,7 +35,7 @@
    color: white;
 
    &:hover {
-      background-color: lighten($color: $brown-btn, $amount: 5%);
+      background-color: lighten($color: $brown-btn, $amount: 7%);
    }
 }
 
@@ -38,6 +44,15 @@
    color: white;
 
    &:hover {
-      background-color: lighten($color: $dark-blue-btn, $amount: 5%);
+      background-color: lighten($color: $dark-blue-btn, $amount: 7%);
+   }
+}
+
+.red {
+   background-color: $red-btn;
+   color: white;
+
+   &:hover {
+      background-color: lighten($color: $red-btn, $amount: 7%);
    }
 }

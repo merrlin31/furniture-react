@@ -64,7 +64,6 @@ export const DetailingItem = ({detail, edge, edit, delete1}) => {
       name = id[0] + ". " + t(details + id[1])
    }
 
-   // console.log(detail)
    return (
       <>
       {!editeble
@@ -89,7 +88,7 @@ export const DetailingItem = ({detail, edge, edit, delete1}) => {
                   <DeleteLogo onClick={deleteItem} />
                </div>
             }
-         </td>  
+         </td>
       </tr>
 
          : <tr>

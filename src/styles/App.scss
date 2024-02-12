@@ -48,11 +48,12 @@ body, html {
 
 .content {
    flex: 1 1 auto;
+	// flex-grow: 1;
+	padding-top: 2.5rem;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
 	background-color: $input-bg;
-   // padding-top: 3.125rem;
 }
 

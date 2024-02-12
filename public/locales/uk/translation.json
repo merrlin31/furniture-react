@@ -100,19 +100,19 @@
 
    "width": "Ширина секції",
    "depth": "Глибина секції",
-   "frontAmount": "Кіл-ть розпашних фасадів",
-   "drawers": "Кіл-ть висувних ящиків",
+   "frontAmount": "Кіл-ть фасадів",
+   "drawers": "Кіл-ть ящиків",
    "drawersType": "Тип направляючих",
    "shelves": "Кіл-ть поличок",
    "neighboringWidth": "Глибина сусідньої секції",
-   "frontOpening": "Відкривання фасадів",
+   "frontOpening": "Тип відкривання",
    "liftType": "Тип підйомників",
 
    "body": "Код корпуса",
    "front": "Код фасаду",
    "frontMaterial": "Матеріал фасаду",
-   "materialDvp": "Матеріал ДВП",
-   "materialTabletop": "Матеріал стільниці",
+   "materialDvp": "Код ДВП",
+   "materialTabletop": "Код стільниці",
    "tabletopThickness": "Товщина стільниці",
    "heightKitchen": "Висота кухні",
    "heightDownSection": "Висота нижніх шаф",
@@ -123,10 +123,10 @@
    "sink": "Мийка",
    "visibleSide": "Видима боковина",
    "kargo": "Карго",
-   "oven": "Вбудована духова шафа",
-   "microwave": "Вбудована мікрохвильова пічь",
+   "oven": "Вбуд. духова шафа",
+   "microwave": "Вбуд. мікрохвильова пічь",
    "hob": "Варильна поверхня",
-   "fridge": "Вбудований холодильник",
+   "fridge": "Вбуд. холодильник",
    "simpleFridge": "Холодильник у шафі",
    "dish": "Сушка",
    "backlight": "Підсвічування",
@@ -186,7 +186,7 @@
    },
 
    "detailingTable": {
-      "material": "Матеріал",
+      "material": "Матер.",
       "height": "Довж.",
       "width": "Шир.",
       "amount": "Кіл-ть"
@@ -339,7 +339,11 @@
       "section4Title1": "Перелік матеріалів:",
       "section4Title2": "Перелік фурнітури:",
       "section4Title3": "Загальна вартість:",
-      "section5Title1": "Налаштування відступів:"
+      "section5Title1": "Налаштування відступів:",
+      "sections": "Секції",
+      "detailing": "Деталювання",
+      "specification": "Розрахунок",
+      "settings": "Налаштування"
    },
 
    "totalSum": {

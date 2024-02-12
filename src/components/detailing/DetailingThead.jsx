@@ -1,25 +1,35 @@
 import { useTranslation } from "react-i18next";
 import { bottomEdgeClass, leftEdgeClass, rightEdgeClass, topEdgeClass } from "../../utils/description";
 
-export const DetailingThead = ({edge}) => {
+export const sort1 = 'name'
+   const sort2 = 'materialCode'
+   const sort3 = 'height'
+   const sort4 = 'width'
+
+export const DetailingThead = ({edge, sort}) => {
    const {t} = useTranslation()
+   
+   const sortTable = (e) => {
+      sort(e.target.id)
+   }
+
    return (
       <thead>
          <tr>
-            <td>№</td>
-            <td>{t('detailingTable.material')}</td>
-            <td>{t('detailingTable.height')}</td>
-            <td>{t('detailingTable.width')}</td>
-            <td>{t('detailingTable.amount')}</td>
+            <th id={sort1} onClick={sortTable} >№</th>
+            <th id={sort2} onClick={sortTable} >{t('detailingTable.material')}</th>
+            <th id={sort3} onClick={sortTable} >{t('detailingTable.height')}</th>
+            <th id={sort4} onClick={sortTable} >{t('detailingTable.width')}</th>
+            <th>{t('detailingTable.amount')}</th>
             {!edge &&
                <>
-                  <td><div className={topEdgeClass}></div></td>
-                  <td><div className={bottomEdgeClass}></div></td>
-                  <td><div className={leftEdgeClass}></div></td>
-                  <td><div className={rightEdgeClass}></div></td>
+                  <th><div className={topEdgeClass}></div></th>
+                  <th><div className={bottomEdgeClass}></div></th>
+                  <th><div className={leftEdgeClass}></div></th>
+                  <th><div className={rightEdgeClass}></div></th>
                </>
             }
-            <td></td>
+            <th></th>
          </tr>
       </thead>
    );

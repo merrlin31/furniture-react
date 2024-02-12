@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { btnContainerClass, detailClass, detailInputClass, detailType4, edge1, edge2, section3BtnClass, titleClass } from "../../utils/description";
+import { btnContainerClass, detailClass, detailingTableResponsive, detailInputClass, detailType4, edge1, edge2, section3BtnClass, titleClass } from "../../utils/description";
 import { DetailingItem } from ".././detailing/DetailingItem";
 import { Title } from "../Title";
 import { AddDetail } from "../UI/AddDetail";
 import { MyModal } from "../UI/MyModal/MyModal";
-import { DetailingThead } from "./DetailingThead";
+import { DetailingThead, sort1 } from "./DetailingThead";
 import { ReactComponent as AddLogo } from "../../img/plus-solid.svg";
 import { Detail } from "../../utils/Detail";
 import { detailId } from "../properties/inputProperties";
+import { useMemo } from "react";
 
 export const DetailingTable = ({className, title, parent, details, sections, editSection, type, edge, addedDetails = [], setAddedDetails}) => {
 
    const [modal, setModal] = useState(false)
+   const [selectedSort, setSelectedSort] = useState('')
 
    const editItem = (detail) => {
       let index = detail.id.split('.')
@@ -66,21 +68,34 @@ export const DetailingTable = ({className, title, parent, details, sections, edi
    const addItem = () => {
       setModal(true)
    }
+
+   const sort = useMemo(() => {
+      const sortArray = [...details]
+
+      if(selectedSort === sort1) return details
+      if(selectedSort) {
+         return sortArray.sort((a,b) => a[selectedSort] > b[selectedSort] ? -1 : 1)
+      }
+      return details
+
+   }, [selectedSort, details])
    
    return (
       <div className={className}>
          <Title className={parent + titleClass} title={title} />
-         <table className={parent + detailClass}>
-            <DetailingThead edge={edge}/>
-            <tbody className={parent + detailInputClass}>
-               {details.map((detail) =>
-                  <DetailingItem detail={detail} key={detail.id} edge={edge} edit={editItem} delete1={deleteItem} />
-               )}
-               {addedDetails.map((detail) =>
-                  <DetailingItem detail={detail} key={detail.id} edge={edge} edit={editNewItem} delete1={deleteNewItem} />
-               )}
-            </tbody>
-         </table>
+         <div className={parent + detailingTableResponsive}>
+            <table className={parent + detailClass}>
+               <DetailingThead edge={edge} sort={setSelectedSort} />
+               <tbody className={parent + detailInputClass}>
+                  {sort.map((detail) =>
+                     <DetailingItem detail={detail} key={detail.id} edge={edge} edit={editItem} delete1={deleteItem} />
+                  )}
+                  {addedDetails.map((detail) =>
+                     <DetailingItem detail={detail} key={detail.id} edge={edge} edit={editNewItem} delete1={deleteNewItem} />
+                  )}
+               </tbody>  
+            </table>
+         </div>
          { type !== detailType4 && 
             <div className={btnContainerClass}><AddLogo className={parent + section3BtnClass} onClick={addItem} /></div>}
          <MyModal visible={modal} setVisible={setModal}>

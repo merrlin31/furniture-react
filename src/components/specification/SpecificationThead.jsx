@@ -6,13 +6,14 @@ export const SpecificationThead = () => {
    return (
       <thead>
          <tr>
-            <td>{t('table.title')}</td>
-            <td>{t('table.code')}</td>
-            <td>{t('table.amount')}</td>
-            <td>{t('table.price')}</td>
-            <td>{t('table.totalPrice')}</td>
-            <td>{t('table.discount')}</td>
-            <td>{t('table.discountPrice')}</td>
+            <th>{t('table.title')}</th>
+            <th>{t('table.code')}</th>
+            <th>{t('table.amount')}</th>
+            <th>{t('table.price')}</th>
+            <th>{t('table.totalPrice')}</th>
+            <th>{t('table.discount')}</th>
+            <th>{t('table.discountPrice')}</th>
+            <th></th>
          </tr>
       </thead>
    );
