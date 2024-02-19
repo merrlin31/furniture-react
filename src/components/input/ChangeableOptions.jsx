@@ -1,9 +1,12 @@
+import { useDispatch } from "react-redux";
+import { changeValues } from "../../reducers/productReducer";
 import { bigDishwasher, changeableOption1, changeableOption10, changeableOption11, changeableOption12, changeableOption13, changeableOption14, changeableOption2, changeableOption3, changeableOption4, changeableOption5, changeableOption6, changeableOption7, changeableOption8, changeableOption9, dishwasherClass, itemClass, smallDishwasher } from "../../utils/description";
 import { section4 } from "../properties/inputProperties";
 import { MyInput, MyInputWithSelect } from "../UI/MyInput/MyInput";
 
-export const ChangeableOptions = ({className, value, onChange, selectChange, hides, checkboxes}) => {
+export const ChangeableOptions = ({className, value, setCheckboxes, hides, checkboxes}) => {
 
+   const dispatch = useDispatch()
    const inputType = 'checkbox'
    const changeableOptions = [
       {name: changeableOption1, type: inputType, id: changeableOption1, hide: hides[changeableOption1], attribute: {checked: checkboxes[changeableOption1]}},
@@ -25,13 +28,21 @@ export const ChangeableOptions = ({className, value, onChange, selectChange, hid
       {name: changeableOption14, type: inputType, id: changeableOption14, hide: hides[changeableOption14], attribute: {checked: checkboxes[changeableOption14]}},  
    ]
 
+   const change = (e) => {
+      setCheckboxes({...checkboxes, [e.target.id]: e.target.checked})
+   }
+
+   const changeDish = (e) => {
+      dispatch(changeValues({dishwasherSize: e.target.value, width: e.target.value}))
+   }
+
    return (
       <div className={`${className}__${section4}`}>
       {changeableOptions.map((option) => {
          if (!option.hide && option.bind) {
-            return <MyInputWithSelect option={option} key={option.id} value={value} onChange={onChange} selectChange={selectChange} className={section4 + itemClass} />
+            return <MyInputWithSelect option={option} key={option.id} value={value} onChange={change} selectChange={changeDish} className={section4 + itemClass} />
          } else if (!option.hide && !option.bind) {
-            return <MyInput option={option} key={option.id} onChange={onChange} className={section4 + itemClass} />
+            return <MyInput option={option} key={option.id} onChange={change} className={section4 + itemClass} />
          } else {
             return ''
          }

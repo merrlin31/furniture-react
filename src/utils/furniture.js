@@ -14,151 +14,151 @@ export class FurnitureItem {
    }
 }
 
-export const furnitureItem1 = 'kargo'
-export const furnitureItem2 = 'sink'
-export const furnitureItem3 = 'dish'
-export const furnitureItem4 = 'legs'
-export const furnitureItem5 = 'legsClips'
-export const furnitureItem6 = 'push'
-export const furnitureItem7 = 'pushBar'
-export const furnitureItem8 = 'plinthSeal'
-export const furnitureItem9 = 'hooksRight'
-export const furnitureItem10 = 'hooksLeft'
-export const furnitureItem11 = 'rail'
-export const furnitureItem12 = 'openingLimiter'
-export const furnitureItem13 = 'lattice'
-export const furnitureItem14 = 'absorber'
-export const furnitureItem15 = 'connectionBar'
-export const furnitureItem16 = 'confirmats'
-export const furnitureItem17 = 'shelfHolder'
-export const furnitureItem18 = 'selfTapping15'
-export const furnitureItem19 = 'selfTapping30'
-export const furnitureItem20 = 'screw40'
-export const furnitureItem21 = 'minifix'
-export const furnitureItem22 = 'minifixDowel'
-export const furnitureItem23 = 'ledProfile'
-export const furnitureItem24 = 'ledDiffuser'
-export const furnitureItem25 = 'ledStrip'
-export const furnitureItem26 = 'powerUnit'
-export const furnitureItem27 = 'switch'
-export const furnitureItem28 = 'handle'
-export const furnitureItem29 = 'golaL'
-export const furnitureItem30 = 'golaC'
-export const furnitureItem31 = 'lift'
-export const furnitureItem32 = 'tabletopConnector'
-export const furnitureItem33 = 'hooksRightCup'
-export const furnitureItem34 = 'hooksLeftCup'
+export const KARGO = 'kargo'
+export const SINK = 'sink'
+export const DISH = 'dish'
+export const LEGS = 'legs'
+export const LEGS_CLIPS = 'legsClips'
+export const PUSH = 'push'
+export const PUSH_BAR = 'pushBar'
+export const PLINTH_SEAL = 'plinthSeal'
+export const HOOKS_RIGHT = 'hooksRight'
+export const HOOKS_LEFT = 'hooksLeft'
+export const RAIL = 'rail'
+export const OPENING_LIMITER = 'openingLimiter'
+export const LATTICE = 'lattice'
+export const ABSORBER = 'absorber'
+export const CONNECTION_BAR = 'connectionBar'
+export const CONFIRMATS = 'confirmats'
+export const SHELF_HOLDER = 'shelfHolder'
+export const SELF_TAPPING_15 = 'selfTapping15'
+export const SELF_TAPPING_30 = 'selfTapping30'
+export const SCREW_40 = 'screw40'
+export const MINIFIX = 'minifix'
+export const MINIFIX_DOWEL = 'minifixDowel'
+export const LED_PROFILE = 'ledProfile'
+export const LED_DIFFUSER = 'ledDiffuser'
+export const LED_STRIP = 'ledStrip'
+export const POWER_UNIT = 'powerUnit'
+export const SWITCH = 'switch'
+export const HANDLE = 'handle'
+export const GOLA_L = 'golaL'
+export const GOLA_C = 'golaC'
+export const LIFT = 'lift'
+export const TABLETOP_CONNECTOR = 'tabletopConnector'
+export const HOOKS_RIGHT_CUP = 'hooksRightCup'
+export const HOOKS_LEFT_CUP = 'hooksLeftCup'
 
 export const initialFurniturePrice = {
-   [furnitureItem1]: 1800,
-   [furnitureItem2]: 5000,
-   [furnitureItem3]: 498.84,
-   [furnitureItem4]: 10.80,
-   [furnitureItem5]: 5.82,
-   [furnitureItem6]: 148.8,
-   [furnitureItem7]: 15.96,
-   [furnitureItem8]: 75.42,
-   [furnitureItem9]: 35.1,
-   [furnitureItem10]: 35.1,
-   [furnitureItem11]: 141.96,
-   [furnitureItem12]: 30.0,
-   [furnitureItem13]: 164.52,
-   [furnitureItem14]: 17.4,
-   [furnitureItem15]: 48.06,
-   [furnitureItem16]: 1.02,
-   [furnitureItem17]: 0.42,
-   [furnitureItem18]: 0.36,
-   [furnitureItem19]: 0.54,
-   [furnitureItem20]: 0.9,
-   [furnitureItem21]: 2.4,
-   [furnitureItem22]: 1.8,
-   [furnitureItem23]: 211.98,
-   [furnitureItem24]: 118.84,
-   [furnitureItem25]: 153.24,
-   [furnitureItem26]: 370.56,
-   [furnitureItem27]: 29.58,
-   [furnitureItem28]: 150.0,
-   [furnitureItem29]: 900,
-   [furnitureItem30]: 900,
-   [furnitureItem31]: 150,
-   [furnitureItem32]: 23.04,
-   [furnitureItem33]: 6.96,
-   [furnitureItem34]: 6.96
+   [KARGO]: 1800,
+   [SINK]: 5000,
+   [DISH]: 498.84,
+   [LEGS]: 10.80,
+   [LEGS_CLIPS]: 5.82,
+   [PUSH]: 148.8,
+   [PUSH_BAR]: 15.96,
+   [PLINTH_SEAL]: 75.42,
+   [HOOKS_RIGHT]: 35.1,
+   [HOOKS_LEFT]: 35.1,
+   [RAIL]: 141.96,
+   [OPENING_LIMITER]: 30.0,
+   [LATTICE]: 164.52,
+   [ABSORBER]: 17.4,
+   [CONNECTION_BAR]: 48.06,
+   [CONFIRMATS]: 1.02,
+   [SHELF_HOLDER]: 0.42,
+   [SELF_TAPPING_15]: 0.36,
+   [SELF_TAPPING_30]: 0.54,
+   [SCREW_40]: 0.9,
+   [MINIFIX]: 2.4,
+   [MINIFIX_DOWEL]: 1.8,
+   [LED_PROFILE]: 211.98,
+   [LED_DIFFUSER]: 118.84,
+   [LED_STRIP]: 153.24,
+   [POWER_UNIT]: 370.56,
+   [SWITCH]: 29.58,
+   [HANDLE]: 150.0,
+   [GOLA_L]: 900,
+   [GOLA_C]: 900,
+   [LIFT]: 150,
+   [TABLETOP_CONNECTOR]: 23.04,
+   [HOOKS_RIGHT_CUP]: 6.96,
+   [HOOKS_LEFT_CUP]: 6.96
 }
 
 export let furniture = {
-   [furnitureItem1]: new FurnitureItem(furnitureItem1, 98833, furnitureManufacturer2),
-   [furnitureItem2]: new FurnitureItem(furnitureItem2, '', ''),
-   [furnitureItem3]: new FurnitureItem(furnitureItem3, 60765, furnitureManufacturer8),
-   [furnitureItem4]: new FurnitureItem(furnitureItem4, 57412, furnitureManufacturer4),
-   [furnitureItem5]: new FurnitureItem(furnitureItem5, 87322, furnitureManufacturer4),
-   [furnitureItem6]: new FurnitureItem(furnitureItem6, 13592, furnitureManufacturer2),
-   [furnitureItem7]: new FurnitureItem(furnitureItem7, 13596, furnitureManufacturer2),
-   [furnitureItem8]: new FurnitureItem(furnitureItem8, 81885, furnitureManufacturer5, 3),
-   [furnitureItem9]: new FurnitureItem(furnitureItem9, 59642, furnitureManufacturer6),
-   [furnitureItem10]: new FurnitureItem(furnitureItem10, 59640, furnitureManufacturer6),
-   [furnitureItem11]: new FurnitureItem(furnitureItem11, 52680, furnitureManufacturer2, 2),
-   [furnitureItem12]: new FurnitureItem(furnitureItem12, 31837, furnitureManufacturer7),
-   [furnitureItem13]: new FurnitureItem(furnitureItem13, 87377, furnitureManufacturer9),
-   [furnitureItem14]: new FurnitureItem(furnitureItem14, 80399, furnitureManufacturer8),
-   [furnitureItem15]: new FurnitureItem(furnitureItem15, 82308, furnitureManufacturer8),
-   [furnitureItem16]: new FurnitureItem(furnitureItem16, 52559, furnitureManufacturer8),
-   [furnitureItem17]: new FurnitureItem(furnitureItem17, 52636, furnitureManufacturer8),
-   [furnitureItem18]: new FurnitureItem(furnitureItem18, 11358, furnitureManufacturer2),
-   [furnitureItem19]: new FurnitureItem(furnitureItem19, 11360, furnitureManufacturer2),
-   [furnitureItem20]: new FurnitureItem(furnitureItem20, 52600, furnitureManufacturer8),
-   [furnitureItem21]: new FurnitureItem(furnitureItem21, 61281, furnitureManufacturer1),
-   [furnitureItem22]: new FurnitureItem(furnitureItem22, 57722, furnitureManufacturer1),
-   [furnitureItem23]: new FurnitureItem(furnitureItem23, '', furnitureManufacturer11, 2),
-   [furnitureItem24]: new FurnitureItem(furnitureItem24, '', furnitureManufacturer11, 2),
-   [furnitureItem25]: new FurnitureItem(furnitureItem25, '', furnitureManufacturer10),
-   [furnitureItem26]: new FurnitureItem(furnitureItem26, '', furnitureManufacturer12),
-   [furnitureItem27]: new FurnitureItem(furnitureItem27, 86470, furnitureManufacturer10),
-   [furnitureItem28]: new FurnitureItem(furnitureItem28, '', ''),
-   [furnitureItem29]: new FurnitureItem(furnitureItem29, '', furnitureManufacturer4, 4),
-   [furnitureItem30]: new FurnitureItem(furnitureItem30, '', furnitureManufacturer4, 4),
-   [furnitureItem31]: new FurnitureItem(furnitureItem31, 12365, furnitureManufacturer2),
-   [furnitureItem32]: new FurnitureItem(furnitureItem32, 52667, furnitureManufacturer8),
-   [furnitureItem33]: new FurnitureItem(furnitureItem33, 59649, furnitureManufacturer6),
-   [furnitureItem34]: new FurnitureItem(furnitureItem34, 59647, furnitureManufacturer6),
+   [KARGO]: new FurnitureItem(KARGO, 98833, furnitureManufacturer2),
+   [SINK]: new FurnitureItem(SINK, '', ''),
+   [DISH]: new FurnitureItem(DISH, 60765, furnitureManufacturer8),
+   [LEGS]: new FurnitureItem(LEGS, 57412, furnitureManufacturer4),
+   [LEGS_CLIPS]: new FurnitureItem(LEGS_CLIPS, 87322, furnitureManufacturer4),
+   [PUSH]: new FurnitureItem(PUSH, 13592, furnitureManufacturer2),
+   [PUSH_BAR]: new FurnitureItem(PUSH_BAR, 13596, furnitureManufacturer2),
+   [PLINTH_SEAL]: new FurnitureItem(PLINTH_SEAL, 81885, furnitureManufacturer5, 3),
+   [HOOKS_RIGHT]: new FurnitureItem(HOOKS_RIGHT, 59642, furnitureManufacturer6),
+   [HOOKS_LEFT]: new FurnitureItem(HOOKS_LEFT, 59640, furnitureManufacturer6),
+   [RAIL]: new FurnitureItem(RAIL, 52680, furnitureManufacturer2, 2),
+   [OPENING_LIMITER]: new FurnitureItem(OPENING_LIMITER, 31837, furnitureManufacturer7),
+   [LATTICE]: new FurnitureItem(LATTICE, 87377, furnitureManufacturer9),
+   [ABSORBER]: new FurnitureItem(ABSORBER, 80399, furnitureManufacturer8),
+   [CONNECTION_BAR]: new FurnitureItem(CONNECTION_BAR, 82308, furnitureManufacturer8),
+   [CONFIRMATS]: new FurnitureItem(CONFIRMATS, 52559, furnitureManufacturer8),
+   [SHELF_HOLDER]: new FurnitureItem(SHELF_HOLDER, 52636, furnitureManufacturer8),
+   [SELF_TAPPING_15]: new FurnitureItem(SELF_TAPPING_15, 11358, furnitureManufacturer2),
+   [SELF_TAPPING_30]: new FurnitureItem(SELF_TAPPING_30, 11360, furnitureManufacturer2),
+   [SCREW_40]: new FurnitureItem(SCREW_40, 52600, furnitureManufacturer8),
+   [MINIFIX]: new FurnitureItem(MINIFIX, 61281, furnitureManufacturer1),
+   [MINIFIX_DOWEL]: new FurnitureItem(MINIFIX_DOWEL, 57722, furnitureManufacturer1),
+   [LED_PROFILE]: new FurnitureItem(LED_PROFILE, '', furnitureManufacturer11, 2),
+   [LED_DIFFUSER]: new FurnitureItem(LED_DIFFUSER, '', furnitureManufacturer11, 2),
+   [LED_STRIP]: new FurnitureItem(LED_STRIP, '', furnitureManufacturer10),
+   [POWER_UNIT]: new FurnitureItem(POWER_UNIT, '', furnitureManufacturer12),
+   [SWITCH]: new FurnitureItem(SWITCH, 86470, furnitureManufacturer10),
+   [HANDLE]: new FurnitureItem(HANDLE, '', ''),
+   [GOLA_L]: new FurnitureItem(GOLA_L, '', furnitureManufacturer4, 4),
+   [GOLA_C]: new FurnitureItem(GOLA_C, '', furnitureManufacturer4, 4),
+   [LIFT]: new FurnitureItem(LIFT, 12365, furnitureManufacturer2),
+   [TABLETOP_CONNECTOR]: new FurnitureItem(TABLETOP_CONNECTOR, 52667, furnitureManufacturer8),
+   [HOOKS_RIGHT_CUP]: new FurnitureItem(HOOKS_RIGHT_CUP, 59649, furnitureManufacturer6),
+   [HOOKS_LEFT_CUP]: new FurnitureItem(HOOKS_LEFT_CUP, 59647, furnitureManufacturer6),
 }
 
 export class Furniture {
    constructor() {
-      this[furnitureItem1] = 0;
-      this[furnitureItem2] = 0;
-      this[furnitureItem3] = 0;
-      this[furnitureItem4] = 0;
-      this[furnitureItem5] = 0;
-      this[furnitureItem6] = 0;
-      this[furnitureItem7] = 0;
-      this[furnitureItem8] = 0;
-      this[furnitureItem9] = 0;
-      this[furnitureItem10] = 0;
-      this[furnitureItem11] = 0;
-      this[furnitureItem12] = 0;
-      this[furnitureItem13] = 0;
-      this[furnitureItem14] = 0;
-      this[furnitureItem15] = 0;
-      this[furnitureItem16] = 0;
-      this[furnitureItem17] = 0;
-      this[furnitureItem18] = 0;
-      this[furnitureItem19] = 0;
-      this[furnitureItem20] = 0;
-      this[furnitureItem21] = 0;
-      this[furnitureItem22] = 0;
-      this[furnitureItem23] = 0;
-      this[furnitureItem24] = 0;
-      this[furnitureItem25] = 0;
-      this[furnitureItem26] = 0;
-      this[furnitureItem27] = 0;
-      this[furnitureItem28] = 0;
-      this[furnitureItem29] = 0;
-      this[furnitureItem30] = 0;
-      this[furnitureItem31] = 0;
-      this[furnitureItem32] = 0;
-      this[furnitureItem33] = 0;
-      this[furnitureItem34] = 0;
+      this[KARGO] = 0;
+      this[SINK] = 0;
+      this[DISH] = 0;
+      this[LEGS] = 0;
+      this[LEGS_CLIPS] = 0;
+      this[PUSH] = 0;
+      this[PUSH_BAR] = 0;
+      this[PLINTH_SEAL] = 0;
+      this[HOOKS_RIGHT] = 0;
+      this[HOOKS_LEFT] = 0;
+      this[RAIL] = 0;
+      this[OPENING_LIMITER] = 0;
+      this[LATTICE] = 0;
+      this[ABSORBER] = 0;
+      this[CONNECTION_BAR] = 0;
+      this[CONFIRMATS] = 0;
+      this[SHELF_HOLDER] = 0;
+      this[SELF_TAPPING_15] = 0;
+      this[SELF_TAPPING_30] = 0;
+      this[SCREW_40] = 0;
+      this[MINIFIX] = 0;
+      this[MINIFIX_DOWEL] = 0;
+      this[LED_PROFILE] = 0;
+      this[LED_DIFFUSER] = 0;
+      this[LED_STRIP] = 0;
+      this[POWER_UNIT] = 0;
+      this[SWITCH] = 0;
+      this[HANDLE] = 0;
+      this[GOLA_L] = 0;
+      this[GOLA_C] = 0;
+      this[LIFT] = 0;
+      this[TABLETOP_CONNECTOR] = 0;
+      this[HOOKS_RIGHT_CUP] = 0;
+      this[HOOKS_LEFT_CUP] = 0;
    }
 }
 

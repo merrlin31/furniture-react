@@ -8,7 +8,7 @@ import { iconsClass } from "../../utils/description";
 import { useTranslation } from "react-i18next";
 import { MyEditableInput } from "../UI/MyInput/MyInput";
 
-export const DetailingItem = ({detail, edge, edit, delete1}) => {
+export const DetailingItem = ({detail, edge, edit, deleteDetail}) => {
 
    const {t} = useTranslation()
    const [editeble, setEditeble] = useState(false)
@@ -27,23 +27,18 @@ export const DetailingItem = ({detail, edge, edit, delete1}) => {
    
    const editItem = () => {
       setEditeble(true)
-      
    }
-
    const deleteItem = () => {
-      delete1(updateDetail)
+      deleteDetail(updateDetail)
    }
-
    const update = () => {
       setEditeble(false)
       edit(updateDetail)
    }
-
    const cancel = () => {
       setEditeble(false)
       setUpdateDetail(detail)
    }
-
    const change = (e) => {
       let name = e.target.id.split('.')
       if (name[0] !== searchItem) {
@@ -52,6 +47,7 @@ export const DetailingItem = ({detail, edge, edit, delete1}) => {
          setUpdateDetail({...updateDetail, [name[0]]: {...updateDetail.edge, [name[1]]: +e.target.value}})
       }
    }
+
    let id = detail.id.split('.')
    let name
    if (detail.added) {

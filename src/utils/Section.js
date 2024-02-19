@@ -39,8 +39,8 @@ export class Section {
          [secondSideDetail]: {},
          [thirdSideDetail]: {},
       };
-      this.furnitures = {};
-      this.services = {};
+      this.furnitures = {}
+      this.services = {}
       this.initialValues = {}
    }
 }

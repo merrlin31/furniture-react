@@ -74,6 +74,7 @@ export const frontOpeningType1 = 'handle'
 export const frontOpeningType2 = 'push'
 export const frontOpeningType3 = 'longerFront'
 export const frontOpeningType4 = 'gola'
+export const frontOpeningType5 = 'shortBottom'
 
 export const hingesType1 = 'corner'
 export const hingesType2 = 'inset'
@@ -276,3 +277,4 @@ export const numberSelfTapping15Lift = 5
 export const numberSelfTapping30Drawer = 4
 export const numberSelfTapping30Hook = 2
 export const numberSelfTapping30JoinSection = 6
+export const minCut = 0.4

@@ -9,41 +9,29 @@ import { ReactComponent as AddLogo } from "../../img/plus-solid.svg";
 import { Detail } from "../../utils/Detail";
 import { detailId } from "../properties/inputProperties";
 import { useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { editSectionObject } from "../../reducers/productReducer";
+import { addToAddedDetail, deleteAddedDetail, editAddedDetail } from "../../reducers/detailReducer";
 
-export const DetailingTable = ({className, title, parent, details, sections, editSection, type, edge, addedDetails = [], setAddedDetails}) => {
+export const DetailingTable = ({className, title, parent, details, type, edge, addedDetails = [], typeAddedDetails}) => {
 
    const [modal, setModal] = useState(false)
    const [selectedSort, setSelectedSort] = useState('')
+   const dispatch = useDispatch()
 
    const editItem = (detail) => {
       let index = detail.id.split('.')
-      let section = Object.assign({}, sections.find(obj => obj.id === +index[0]))
-      for (let item in detail) {
-         if (detail[item] !== section[type][index[1]][item])
-         section[type][index[1]][item] = detail[item]
-      }
-      editSection(section, +index[0])
+      dispatch(editSectionObject(type, +index[0], index[1], detail))
    }
    const editNewItem = (detail) => {
-      let adeedDetail = addedDetails.find(obj => obj.id === detail.id)
-      for (let item in detail) {
-         if (detail[item] !== adeedDetail[item])
-         adeedDetail[item] = detail[item]
-      }
-      let result = addedDetails.map(item => 
-         item.id !== detail.id
-         ? item
-         : adeedDetail)
-      setAddedDetails(result)
+      dispatch(editAddedDetail(typeAddedDetails, detail))
    }
    const deleteItem = (detail) => {
       let index = detail.id.split('.')
-      let section = Object.assign({}, sections.find(obj => obj.id === +index[0]))
-      section[type][index[1]] = {}
-      editSection(section, +index[0])
+      dispatch(editSectionObject(type, +index[0], index[1]))
    }
    const deleteNewItem = (detail) => {
-      setAddedDetails(addedDetails.filter(obj => obj.id !== detail.id))
+      dispatch(deleteAddedDetail(typeAddedDetails, detail))
    }
    function edgeSelector(edge) {
       switch(edge) {
@@ -59,10 +47,9 @@ export const DetailingTable = ({className, title, parent, details, sections, edi
       let newDetail = new Detail(detail.name, detail.height, detail.width, detail.amount, 
          [edgeSelector(detail.topEdge), edgeSelector(detail.bottomEdge), edgeSelector(detail.leftEdge), edgeSelector(detail.rightEdge)], 
          detail.materialCode, detail.materialType)
-
-      newDetail.id = (detailId.next().value) + '.' + detail.name
+      newDetail.id = typeAddedDetails + (detailId.next().value) + '.' + detail.name
       newDetail.added = true
-      setAddedDetails([...addedDetails, newDetail])
+      dispatch(addToAddedDetail(typeAddedDetails, newDetail))
       setModal(false)   
    }
    const addItem = () => {
@@ -70,15 +57,14 @@ export const DetailingTable = ({className, title, parent, details, sections, edi
    }
 
    const sort = useMemo(() => {
-      const sortArray = [...details]
-
-      if(selectedSort === sort1) return details
+      const sortArray = [...details, ...addedDetails]
+      if(selectedSort === sort1) return sortArray
       if(selectedSort) {
-         return sortArray.sort((a,b) => a[selectedSort] > b[selectedSort] ? -1 : 1)
+         return sortArray.sort((a,b) => b[selectedSort] - a[selectedSort])
       }
-      return details
+      return sortArray
 
-   }, [selectedSort, details])
+   }, [selectedSort, details, addedDetails])
    
    return (
       <div className={className}>
@@ -87,11 +73,10 @@ export const DetailingTable = ({className, title, parent, details, sections, edi
             <table className={parent + detailClass}>
                <DetailingThead edge={edge} sort={setSelectedSort} />
                <tbody className={parent + detailInputClass}>
-                  {sort.map((detail) =>
-                     <DetailingItem detail={detail} key={detail.id} edge={edge} edit={editItem} delete1={deleteItem} />
-                  )}
-                  {addedDetails.map((detail) =>
-                     <DetailingItem detail={detail} key={detail.id} edge={edge} edit={editNewItem} delete1={deleteNewItem} />
+                  {sort.map((detail) => 
+                     !detail.added 
+                        ? <DetailingItem detail={detail} key={detail.id} edge={edge} edit={editItem} deleteDetail={deleteItem} /> 
+                        : <DetailingItem detail={detail} key={detail.id} edge={edge} edit={editNewItem} deleteDetail={deleteNewItem} />
                   )}
                </tbody>  
             </table>

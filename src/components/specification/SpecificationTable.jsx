@@ -11,6 +11,8 @@ import { SpecificationThead } from "./SpecificationThead"
 import { ReactComponent as AddLogo } from "../../img/plus-solid.svg";
 import { MyModal } from "../UI/MyModal/MyModal"
 import { AddFurniture } from "../UI/AddFurniture"
+import { useDispatch } from "react-redux"
+import { editValue, setKey } from "../../reducers/settingReducer"
 
 
 export const SpecificationTable = (props) => {
@@ -19,6 +21,8 @@ export const SpecificationTable = (props) => {
    const [modal, setModal] = useState(false)
    const sumColumn = 4
    const addedFurniture = 'addedFurniture'
+   const dispatch = useDispatch()
+   let key = setKey(props.price.id)
 
    useEffect(() => {
       if (table.current) {
@@ -42,20 +46,13 @@ export const SpecificationTable = (props) => {
 
    const addFurniture = (furnitureItem) => {
       let searchItem = props.content.find((item) => item.code === furnitureItem.code)
-      if (searchItem) {
-         searchItem.value += furnitureItem.value
-
-         let result = props.content.map(obj => 
-            obj.code === furnitureItem.code
-            ? searchItem
-            : obj)
-            props.setContent(result)
-
-      } else {
-         furnitureItem.name = addedFurniture + props.content.length
-         props.setContent([...props.content, furnitureItem])
+      if (!searchItem) {
+         furnitureItem.name = addedFurniture + Object.keys(props.object).length
          props.object[furnitureItem.name] = furnitureItem
-         props.setPrice({...props.price, [furnitureItem.name]: furnitureItem.price})
+         dispatch(props.addContent(furnitureItem))
+         dispatch(editValue(key, furnitureItem.name, furnitureItem.price))
+      } else {
+         return alert('Such item has already existed')
       } 
       setModal(false)     
    }
@@ -67,9 +64,9 @@ export const SpecificationTable = (props) => {
             <table ref={table} className={props.class + props.tableClass}>
                <SpecificationThead />
                {props.materials && 
-                  <SpecificationMaterials materials={props.materials} setContent={props.setMaterials} />}
-               <SpecificationTbody content={props.content} setContent={props.setContent} object={props.object} 
-                  price={props.price} discount={discount} setPrice={props.setPrice} translate={props.translate} />
+                  <SpecificationMaterials materials={props.materials} />}
+               <SpecificationTbody content={props.content} editContent={props.editContent}
+                  price={props.price} discount={discount} translate={props.translate} />
                <SpecificationTfoot sum={props.sum} />
             </table>
          </div>   

@@ -83,9 +83,9 @@ export const initialItemAmount = {
    leftBottomItem: 0,
    leftCentralItem: 0,
    leftUpperItem: 0,
-   centralBottomItem: 0,
-   centralCentralItem: 0,
-   centralUpperItem: 0,
+   centerBottomItem: 0,
+   centerCentralItem: 0,
+   centerUpperItem: 0,
    rightBottomItem: 0,
    rightCentralItem: 0,
    rightUpperItem: 0,
@@ -138,11 +138,11 @@ options: [
    ]
 }
 
-export function createFrontOpeningList(value, item) {
+export function createFrontOpeningList(frontOpening) {
    let opening = [
       {value: frontOpeningType1, name: frontOpeningType1},
       {value: frontOpeningType2, name: frontOpeningType2},
-      {value: value, name: item}
+      ...frontOpening
    ]
    return opening
 }
@@ -165,7 +165,7 @@ export const initialInputAtributes = [
    {id: localOption6, max: 6, min: 1, step: 1, readOnly:false},
    {id: localOption7, max: 600, readOnly:false},
    {id: localOption4, max: 6, min: 0, step: 1, readOnly:false},
-   {id: localOption8, options: createFrontOpeningList(frontOpeningType4, frontOpeningType4)},
+   {id: localOption8, options: createFrontOpeningList([{value:frontOpeningType4, name:frontOpeningType4}])},
    {id: localOption9, options: liftOptions},
    {id: localOption5, options: drawersOptions},
 ]
@@ -176,3 +176,11 @@ function* idIterator() {
 }
 
 export const detailId = idIterator() 
+
+export function determineType(level, side) {
+   let levelName = 'Upper'
+   const item = 'Item'
+   if (level === levelType1) levelName = 'Bottom'
+   if (level === levelType2) levelName = 'Central'
+   return `${side}${levelName}${item}`
+}

@@ -23,7 +23,7 @@ export const ItemTable = ({className, itemAmount, level, title}) => {
                <tr>
                   <td>{t('itemBottom')}</td>
                   <td>{itemAmount.leftBottomItem}</td>
-                  <td>{itemAmount.centralBottomItem}</td>
+                  <td>{itemAmount.centerBottomItem}</td>
                   <td>{itemAmount.rightBottomItem}</td>
                </tr>
                <tr>
@@ -32,14 +32,14 @@ export const ItemTable = ({className, itemAmount, level, title}) => {
                      : <td>{t('itemUpper')}</td>
                   }
                   <td>{itemAmount.leftCentralItem}</td>
-                  <td>{itemAmount.centralCentralItem}</td>
+                  <td>{itemAmount.centerCentralItem}</td>
                   <td>{itemAmount.rightCentralItem}</td>
                </tr>
                {level === levelAmount2 && 
                   <tr>
                      <td>{t('itemUpper')}</td>
                      <td>{itemAmount.leftUpperItem}</td>
-                     <td>{itemAmount.centralUpperItem}</td>
+                     <td>{itemAmount.centerUpperItem}</td>
                      <td>{itemAmount.rightUpperItem}</td>
                   </tr>
                }

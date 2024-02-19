@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+import { changeValues } from "../../reducers/productReducer";
 import { dimensionClass, globalOption1, globalOption10, globalOption11, globalOption2, globalOption3, globalOption4, 
    globalOption5, globalOption6, globalOption7, globalOption8, globalOption9, itemClass, materialType1, materialType2, titleClass } from "../../utils/description";
 import { section1 } from "../properties/inputProperties";
@@ -5,8 +7,9 @@ import { Title } from "../Title";
 import { MyInput } from "../UI/MyInput/MyInput";
 import { MySelect } from "../UI/MySelect/MySelect";
 
-export const GlobalOptions = ({className, value, setValue, title}) => {
+export const GlobalOptions = ({className, value, title}) => {
 
+   const dispatch = useDispatch()
    const globalOptions = [
       {name: globalOption1, id: globalOption1},
       {name: globalOption2, id: globalOption2},
@@ -32,9 +35,9 @@ export const GlobalOptions = ({className, value, setValue, title}) => {
             {globalOptions.map((option, index) => 
                !option.select 
                ? <MyInput option={option} className={section1 + itemClass}  
-                  key={index} value={value[option.id]} onChange={e => setValue({...value, [option.id]: +e.target.value})} />
+                  key={index} value={value[option.id]} onChange={e => dispatch(changeValues({[option.id]: +e.target.value}))} />
                : <MySelect options={option} className={section1 + itemClass}
-                  key={index} value={value[option.select]} onChange={(item) => setValue({...value, [option.select]: item})} />   
+                  key={index} value={value[option.select]} onChange={(item) => dispatch(changeValues({[option.select]: item}))} />   
             )}
          </div>
       </>

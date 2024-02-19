@@ -1,19 +1,15 @@
 import { t } from "i18next";
-import { SpecificationItem } from "./SpecificationItem";
+import { useDispatch } from "react-redux";
+import { SpecificationRow } from "./SpecificationRow";
 
-export const SpecificationTbody = ({content, setContent, object, price, discount, setPrice, translate}) => {
+export const SpecificationTbody = ({content, editContent, price, discount, translate}) => {
 
+   const dispatch = useDispatch()
    const changeItem = (item) => {
-      let index = item.name
-      let searchItem = content.find(obj => obj.name === index)
+      let searchItem = content.find(obj => obj.name === item.name)
       searchItem.value = item.amount
       searchItem.code = item.code
-      let result = content.map(obj => 
-         obj.name !== index
-         ? obj
-         : searchItem)
-      setContent(result)
-      object[item.name].value = item.amount
+      dispatch(editContent(searchItem))
    }
 
    const setAmount = (item) => {
@@ -29,7 +25,6 @@ export const SpecificationTbody = ({content, setContent, object, price, discount
          : 0
       return itemDiscount
    }
-   
    const setDescription = (item) => {
       let itemDescription
       if (item.description) {
@@ -49,9 +44,9 @@ export const SpecificationTbody = ({content, setContent, object, price, discount
       <tbody>
          {content.map((item) => 
          item.value > 0 && 
-            <SpecificationItem key={item.name} code={item.code} name={item.name} description={setDescription(item)}
+            <SpecificationRow key={item.name} code={item.code} name={item.name} description={setDescription(item)}
                amount={setAmount(item)} price={price[item.name]} discount={setDiscount(item)} change={changeItem} 
-               allPrice={price} setPrice={setPrice} />  
+               allPrice={price} />  
          )}
       </tbody>
    );

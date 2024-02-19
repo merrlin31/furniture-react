@@ -1,15 +1,17 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { changeValues } from "../../reducers/productReducer";
 import { dimensionClass, itemClass, liftType3, localOption1, localOption2, localOption3, localOption4, localOption5, localOption6, 
    localOption7, localOption8, localOption9, sectionBottomType2, sectionBottomType3, sectionUpperType3 } from "../../utils/description";
 import { section3, section4 } from "../properties/inputProperties";
 import { MyInput } from "../UI/MyInput/MyInput";
 import { MySelect } from "../UI/MySelect/MySelect";
 
-export const LocalOptions = ({className, value, setValue, inputAtributes, hides, checkboxes}) => {
+export const LocalOptions = ({className, value, inputAtributes, hides, checkboxes}) => {
 
+   const dispatch = useDispatch()
    const findObj = (id, attribute, array = inputAtributes) => { 
-      let target = array.find(obj => obj.id === id)[attribute]
-      return target
+      return array.find(obj => obj.id === id)[attribute]
    }
 
    const localOptions = [
@@ -28,9 +30,9 @@ export const LocalOptions = ({className, value, setValue, inputAtributes, hides,
       if (value.bottomType === sectionBottomType2 || value.bottomType === sectionBottomType3 || value.upperType === sectionUpperType3) {
       } else {
          if (value.width > 650 && !checkboxes.lift) {
-            setValue({...value, frontAmount: 2})
+            dispatch(changeValues({frontAmount: 2}))
          } else if (value.width > 600 && !checkboxes.lift && checkboxes.simpleFridge) {
-            setValue({...value, frontAmount: 1})
+            dispatch(changeValues({frontAmount: 1}))
          }
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,10 +41,10 @@ export const LocalOptions = ({className, value, setValue, inputAtributes, hides,
    useEffect(() => {
       if (value.liftType === liftType3) {
          inputAtributes.find(obj => obj.id === localOption3).readOnly = true
-         setValue({...value, frontAmount: 2})
+         dispatch(changeValues({frontAmount: 2}))
       } else {
          inputAtributes.find(obj => obj.id === localOption3).readOnly = false
-         setValue({...value, frontAmount: 1})
+         dispatch(changeValues({frontAmount: 1}))
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [value.liftType])
@@ -53,14 +55,14 @@ export const LocalOptions = ({className, value, setValue, inputAtributes, hides,
             let optionClass = (option.className) ? section4 : section3
             if (!option.hide && !option.select) {
                return <MyInput option={option} className={optionClass + itemClass}
-               key={index} value={value[option.id]} onChange={e => setValue({...value, [option.id]: +e.target.value})} />
+               key={index} value={value[option.id]} onChange={e => dispatch(changeValues({[option.id]: +e.target.value}))} />
             } else if (!option.hide && option.select) {
                return <MySelect options={option} className={optionClass + itemClass}
-               key={index} value={value[option.select]} onChange={(item) => setValue({...value, [option.select]: item})} />
+               key={index} value={value[option.select]} onChange={(item) => dispatch(changeValues({[option.select]: item}))} />
             } else {
                return ''
             }
          })}
       </div>
-   );
+   )
 }

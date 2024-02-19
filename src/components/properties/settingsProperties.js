@@ -55,6 +55,7 @@ const indentType22 = 'dvpGrooveDepth'
 const indentType23 = 'fridgeHeight'
 const indentType24 = 'indentDvp'
 const indentType25 = 'indentPlinth'
+const indentType26 = 'shorterBottom'
 
 export const indentOptions = [
    {name: indentType1, id: indentType1, img: indent1},
@@ -82,6 +83,7 @@ export const indentOptions = [
    {name: indentType23, id: indentType23, img: indent23},
    {name: indentType24, id: indentType24, img: indent24},
    {name: indentType25, id: indentType25, img: indent25},
+   {name: indentType26, id: indentType26, img: indent25},
 ]
 
 export const servicesOptions = [
@@ -120,7 +122,7 @@ export const initialIndentValues = {
    [indentType11]: 27,
    [indentType12]: 10,
    [indentType13]: 20,
-   [indentType14]: 100,
+   [indentType14]: 0,
    [indentType15]: 20,
    [indentType16]: 70,
    [indentType17]: 3,
@@ -132,6 +134,7 @@ export const initialIndentValues = {
    [indentType23]: 2000,
    [indentType24]: 2,
    [indentType25]: 5,
+   [indentType26]: 20,
 }
 
 export const initialSum = {totalSum: 0, totalDiscount: 0, totalSumWithDiscount: 0}

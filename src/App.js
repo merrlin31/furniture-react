@@ -1,6 +1,8 @@
 import './styles/App.scss';
 import { Main } from './components/Main';
 import { Header } from './components/header/Header';
+import { Provider } from 'react-redux';
+import { store } from './reducers';
 
 function App() {
   
@@ -8,7 +10,9 @@ function App() {
   return (
     <div className="App wraper">
       <Header />
-      <Main />
+      <Provider store={store}>
+        <Main />
+      </Provider>
       <footer>hh</footer>
     </div>
   );

@@ -14,36 +14,37 @@ export const tabletopName = 'tabletops'
 
 function searchOption(materials, detail, item) {
    let material = materials.find(item => item.materialCode === detail.materialCode)
-   let defaultPrice
-   if (detail.materialType === materialType1) {
-      if (item === price1) {
-         defaultPrice = materialType1Price
-      } else if (item === price2) {
-         defaultPrice = materialType1BoldEdgePrice
-      } else if (item === price3) {
-         defaultPrice = materialType1ThinEdgePrice
-      }
-   } else if (detail.materialType === materialType3) {
-      if (item === price1) {
-         defaultPrice = materialType3Price
-      } else {
-         defaultPrice = 0
-      }
-   } else if (detail.materialType === materialType2) {
-      if (item === price1) {
-         defaultPrice = materialType2Price
-      } else {
-         defaultPrice = 0
-      }
-   } else if (detail.materialType === materialType4) {
-      if (item === price1) {
-         defaultPrice = materialType4Price
-      } else if (item === price2) {
-         defaultPrice = materialType4BoldEdgePrice
-      } else if (item === price3) {
-         defaultPrice = materialType4ThinEdgePrice
-      }
+   let defaultPrice = 0
+   switch (detail.materialType) {
+      case materialType1:
+         if (item === price1) {
+            defaultPrice = materialType1Price
+         } else if (item === price2) {
+            defaultPrice = materialType1BoldEdgePrice
+         } else if (item === price3) {
+            defaultPrice = materialType1ThinEdgePrice
+         }
+         break;
+      case materialType2:
+         if (item === price1) defaultPrice = materialType2Price;
+         break;
+      case materialType3:
+         if (item === price1) defaultPrice = materialType3Price;
+         break;
+      case materialType4:
+         if (item === price1) {
+            defaultPrice = materialType4Price
+         } else if (item === price2) {
+            defaultPrice = materialType4BoldEdgePrice
+         } else if (item === price3) {
+            defaultPrice = materialType4ThinEdgePrice
+         }
+         break;
+      default:
+         console.log('wrong materialType')
+         break;
    }
+   
    let manufacturer = (item === notPrice) ? materialManufacturer1 : defaultPrice
    let option = (material) 
       ? material[item]
@@ -105,21 +106,21 @@ export const fillArr = (arr, obj, section = {}) => {
 }
 
 export const addToArr = (detail, arr, maxHeight) => {
-   let bottomEdge = 1
-   let topEdge = 0
-   let leftEdge = 1
-   let rightEdge = 1
-   let name, newDetail
+   let name, newDetail, bottomEdge, topEdge, leftEdge, rightEdge
    if (detail.materialType === materialType1) {
+      bottomEdge = 1
       topEdge = 1
+      leftEdge = 1
+      rightEdge = 1
       name = plinthName
    }
-   if (detail.materialType === materialType4 && detail.width === 600) {
+   if (detail.materialType === materialType4) {
       bottomEdge = 0
       leftEdge = 2
       rightEdge = 2
-      topEdge = 2
+      topEdge = 0
       name = tabletopName
+      if (detail.width !== 600) bottomEdge = 2;
    }
    if (Object.keys(detail).length) {
       if (!arr.length) {

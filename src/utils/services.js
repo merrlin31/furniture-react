@@ -24,6 +24,7 @@ export const servicesItem14Value1 = 3050
 export const servicesItem14Value2 = 4100
 export const servicesItem15 = 'tabletopEdgeLenght'
 export const serviceItem16 = 'gasoline'
+export const serviceItem17 = 'handlingMillingCut'
 
 export let allService = {
    [serviceItem1]: new ServiceItem(serviceItem1, 19026),
@@ -35,6 +36,7 @@ export let allService = {
    [serviceItem7]: new ServiceItem(serviceItem7, 19016),
    [serviceItem8]: new ServiceItem(serviceItem8, 19049),
    [serviceItem9]: new ServiceItem(serviceItem9, 93808),
+   [serviceItem17]: new ServiceItem(serviceItem17, 48296),
    [serviceItem10]: new ServiceItem(serviceItem10, 98035),
    [serviceItem11]: new ServiceItem(serviceItem11, '00011'),
    [serviceItem12]: new ServiceItem(serviceItem12, 51203),
@@ -57,6 +59,7 @@ export const initialServicesPrice = {
       [serviceItem12]: 9.9,
       [serviceItem13]: 500,
       [serviceItem16]: 300,
+      [serviceItem17]: 35.46,
 }
 
 export class Services {
@@ -73,5 +76,6 @@ export class Services {
       this[serviceItem10] = 0;
       this[serviceItem11] = 0;
       this[serviceItem12] = 0;
+      this[serviceItem17] = 0;
    }
 }
