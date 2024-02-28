@@ -41,9 +41,12 @@
       "firstDvp": "ДВП(1)",
       "secondDvp": "ДВП(2)",
 
-      "leftSection": "Перша",
-      "centralSection": "Друга",
-      "rightSection": "Третя",
+      "leftPlinthSection": "Ліва",
+      "centralPlinthSection": "Центральна",
+      "rightPlinthSection": "Права",
+      "leftTabletopSection": "Ліва",
+      "centralTabletopSection": "Центральна",
+      "rightTabletopSection": "Права",
       "plinth": "Цоколь",
       "tabletops": "Стільниця",
 
@@ -157,6 +160,7 @@
    "ricci": "RICCI",
    "pfleiderer": "Pfleiderer",
    "materialDefaultValue": "Оберіть матеріал",
+   "rehau": "Rehau",
 
    "hettich": "Hettich",
    "muller": "Muller",
@@ -171,14 +175,18 @@
    "lumineProf": "Lumine профілі",
    "luminePower": "Lumine живлення",
    "ukraine": "Україна",
-   "furnitureManufacturerDefaultValue": "Оберіть виробника",
+   "viyar": "Віяр",
+   "manufacturerDefaultValue": "Оберіть виробника",
 
    "servicesManufacturer": "Віяр",
+
+   "addItem": "Додати",
 
    "table": {
       "total": "Всього:",
       "title": "Назва",
       "code": "Код",
+      "manufacturer": "Виробник",
       "amount": "Кіл-ть",
       "price": "Ціна",
       "totalPrice": "Загальна ціна",

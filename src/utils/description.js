@@ -43,9 +43,12 @@ export const secondFront = 'secondFront'
 export const firstDvp = 'firstDvp'
 export const secondDvp = 'secondDvp'
 
-export const firstSideDetail = 'leftSection'
-export const secondSideDetail = 'centralSection'
-export const thirdSideDetail = 'rightSection'
+export const firstPlinthDetail = 'leftPlinthSection'
+export const secondPlinthDetail = 'centralPlinthSection'
+export const thirdPlinthDetail = 'rightPlinthSection'
+export const firstTabletopDetail = 'leftTabletopSection'
+export const secondTabletopDetail = 'centralTabletopSection'
+export const thirdTabletopDetail = 'rightTabletopSection'
 
 export const drawerFirstDetail = 'side'
 export const drawerSecondDetail = 'back'
@@ -225,6 +228,7 @@ export const furnitureManufacturer10 = 'lumine'
 export const furnitureManufacturer11 = 'lumineProf'
 export const furnitureManufacturer12 = 'luminePower'
 export const furnitureManufacturer13 = 'ukraine'
+export const serviceManufacturer = 'viyar'
 
 export const bodyManufacturer = 'bodyManufacturer'
 export const frontManufacturer = 'frontManufacturer'
@@ -243,7 +247,6 @@ export const materialManufacturer9 = 'arpa'
 export const materialManufacturer10 = 'fenix'
 export const materialManufacturer11 = 'ricci'
 export const materialManufacturer12 = 'pfleiderer'
-
 
 export const numberLiftDrill = 8
 export const numbershelfHolderDrill1 = 5

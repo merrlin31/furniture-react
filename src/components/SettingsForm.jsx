@@ -11,7 +11,6 @@ import { editValue, setKey } from '../reducers/settingReducer';
 export const SettingsForm = ({className, title, parent, optionsClass, options, state, translate, hint}) => {
    const [visibleList, setVisibleList] = useState(false)
    const dispatch = useDispatch()
-
    let key = setKey(state.id)
 
    return (

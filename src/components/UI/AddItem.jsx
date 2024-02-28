@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { useState } from "react";
 import { addFurnitureBtnColor } from "../../utils/description";
 import { furnitureManufacturerList } from "../../utils/furniture";
@@ -5,7 +6,9 @@ import { MyButton } from "./MyButton/MyButton";
 import { MyInput } from "./MyInput/MyInput";
 import { MySelect } from "./MySelect/MySelect";
 
-export const AddFurniture = (props) => {
+export const servicesManufacturer = 'servicesManufacturer'
+
+export const AddItem = (props) => {
    
    const translate = 'addFurniture.'
    const inputType = 'text'
@@ -15,7 +18,7 @@ export const AddFurniture = (props) => {
    const option4 = 'price'
    const option5 = 'manufacturer'
    const option6 = 'multiplicity'
-   const servicesManufacturer = 'servicesManufacturer'
+   
    const inputClass = 'addFurnitureItem'
    const furnitureModalContainerClass = 'furnitureModalContainer'
    let initialFurnitureItem = {
@@ -28,8 +31,8 @@ export const AddFurniture = (props) => {
    }
    if (props.materials) initialFurnitureItem[option5] = servicesManufacturer
    const [funitureItem, setFurnitureItem] = useState(initialFurnitureItem)
-   const addFurniture = () => {
-      props.addFurniture(funitureItem)
+   const addNewItem = () => {
+      props.addItem(funitureItem)
    }
    const changeValue = (e) => {
       if (e.target.id !== option1) {
@@ -45,8 +48,8 @@ export const AddFurniture = (props) => {
       {name: option3, id: option3,},
       {name: option4, id: option4,},
       {name: option5, select: option5, 
-         options: furnitureManufacturerList.map(item => ({value: item, name: item}))
-         , defaulValue: 'furnitureManufacturerDefaultValue'},
+         options: furnitureManufacturerList.map(item => ({value: item, name: item})), 
+         defaulValue: 'manufacturerDefaultValue'},
       {name: option6, id: option6,},
    ]
    if (props.materials) {
@@ -68,7 +71,7 @@ export const AddFurniture = (props) => {
                      onChange={(item) => setFurnitureItem({...funitureItem, [option.select]: item})} translate={translate} />
             )}
          </div>
-         <MyButton color={addFurnitureBtnColor} onClick={addFurniture}>Додати</MyButton>
+         <MyButton color={addFurnitureBtnColor} onClick={addNewItem}>{t('addItem')}</MyButton>
       </div>
    );
 }

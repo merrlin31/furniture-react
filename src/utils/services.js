@@ -6,76 +6,76 @@ export class ServiceItem {
    }
 }
 
-export const serviceItem1 = 'cutting'
-export const serviceItem2 = 'edging'
-export const serviceItem3 = 'dvpCutting'
-export const serviceItem4 = 'tabletopCutting'
-export const serviceItem5 = 'tabletopEdging'
-export const serviceItem6 = "tabletopLock"
-export const serviceItem7 = 'groove'
-export const serviceItem8 = 'millingCut'
-export const serviceItem9 = 'millingCutMin'
-export const serviceItem10 = 'millingCutTabletop'
-export const serviceItem11 = 'drilling'
-export const serviceItem12 = 'drillingHinges'
-export const serviceItem13 = 'delivery'
-export const servicesItem14 = 'tabletopLength'
-export const servicesItem14Value1 = 3050
-export const servicesItem14Value2 = 4100
-export const servicesItem15 = 'tabletopEdgeLenght'
-export const serviceItem16 = 'gasoline'
-export const serviceItem17 = 'handlingMillingCut'
+export const CUTTING = 'cutting'
+export const EDGING = 'edging'
+export const DVP_CUTTING = 'dvpCutting'
+export const TABLETOP_CUTTING = 'tabletopCutting'
+export const TABLETOP_EDGING = 'tabletopEdging'
+export const TABLETOP_LOCK = "tabletopLock"
+export const GROOVE = 'groove'
+export const MILLING_CUT = 'millingCut'
+export const MILLING_CUT_MIN = 'millingCutMin'
+export const MILLING_CUT_TABLETOP = 'millingCutTabletop'
+export const DRILLING = 'drilling'
+export const DRILLING_HINGES = 'drillingHinges'
+export const DELIVERY = 'delivery'
+export const TABLETOP_LENGTH = 'tabletopLength'
+export const TABLETOP_LENGTH_VALUE_1 = 3050
+export const TABLETOP_LENGTH_VALUE_2 = 4100
+export const TABLETOP_EDGE_LENGHT = 'tabletopEdgeLenght'
+export const GASOLINE = 'gasoline'
+export const HANDLING_MILLING_CUT = 'handlingMillingCut'
 
 export let allService = {
-   [serviceItem1]: new ServiceItem(serviceItem1, 19026),
-   [serviceItem2]: new ServiceItem(serviceItem2, 61768),
-   [serviceItem3]: new ServiceItem(serviceItem3, 19025),
-   [serviceItem4]: new ServiceItem(serviceItem4, 19031),
-   [serviceItem5]: new ServiceItem(serviceItem5, 19005),
-   [serviceItem6]: new ServiceItem(serviceItem6, 19033),
-   [serviceItem7]: new ServiceItem(serviceItem7, 19016),
-   [serviceItem8]: new ServiceItem(serviceItem8, 19049),
-   [serviceItem9]: new ServiceItem(serviceItem9, 93808),
-   [serviceItem17]: new ServiceItem(serviceItem17, 48296),
-   [serviceItem10]: new ServiceItem(serviceItem10, 98035),
-   [serviceItem11]: new ServiceItem(serviceItem11, '00011'),
-   [serviceItem12]: new ServiceItem(serviceItem12, 51203),
+   [CUTTING]: new ServiceItem(CUTTING, 19026),
+   [EDGING]: new ServiceItem(EDGING, 61768),
+   [DVP_CUTTING]: new ServiceItem(DVP_CUTTING, 19025),
+   [TABLETOP_CUTTING]: new ServiceItem(TABLETOP_CUTTING, 19031),
+   [TABLETOP_EDGING]: new ServiceItem(TABLETOP_EDGING, 19005),
+   [TABLETOP_LOCK]: new ServiceItem(TABLETOP_LOCK, 19033),
+   [GROOVE]: new ServiceItem(GROOVE, 19016),
+   [MILLING_CUT]: new ServiceItem(MILLING_CUT, 19049),
+   [MILLING_CUT_MIN]: new ServiceItem(MILLING_CUT_MIN, 93808),
+   [HANDLING_MILLING_CUT]: new ServiceItem(HANDLING_MILLING_CUT, 48296),
+   [MILLING_CUT_TABLETOP]: new ServiceItem(MILLING_CUT_TABLETOP, 98035),
+   [DRILLING]: new ServiceItem(DRILLING, '00011'),
+   [DRILLING_HINGES]: new ServiceItem(DRILLING_HINGES, 51203),
 }
 
 export const initialServicesPrice = {
-      [servicesItem14]: 3050,
-      [servicesItem15]: 4.2,
-      [serviceItem1]: 13.02,
-      [serviceItem3]: 7.08,
-      [serviceItem4]: 44.94,
-      [serviceItem2]: 27.72,
-      [serviceItem5]: 117.06,
-      [serviceItem6]: 540.36,
-      [serviceItem7]: 28.92,
-      [serviceItem8]: 69.06,
-      [serviceItem9]: 36.9,
-      [serviceItem10]: 92.7,
-      [serviceItem11]: 4.02,
-      [serviceItem12]: 9.9,
-      [serviceItem13]: 500,
-      [serviceItem16]: 300,
-      [serviceItem17]: 35.46,
+      [TABLETOP_LENGTH]: 3050,
+      [TABLETOP_EDGE_LENGHT]: 4.2,
+      [CUTTING]: 13.02,
+      [DVP_CUTTING]: 7.08,
+      [TABLETOP_CUTTING]: 44.94,
+      [EDGING]: 27.72,
+      [TABLETOP_EDGING]: 117.06,
+      [TABLETOP_LOCK]: 540.36,
+      [GROOVE]: 28.92,
+      [MILLING_CUT]: 69.06,
+      [MILLING_CUT_MIN]: 36.9,
+      [MILLING_CUT_TABLETOP]: 92.7,
+      [DRILLING]: 4.02,
+      [DRILLING_HINGES]: 9.9,
+      [DELIVERY]: 500,
+      [GASOLINE]: 300,
+      [HANDLING_MILLING_CUT]: 35.46,
 }
 
 export class Services {
    constructor() {
-      this[serviceItem1] = 0;
-      this[serviceItem2] = 0;
-      this[serviceItem3] = 0;
-      this[serviceItem4] = 0;
-      this[serviceItem5] = 0;
-      this[serviceItem6] = 0;
-      this[serviceItem7] = 0;
-      this[serviceItem8] = 0;
-      this[serviceItem9] = 0;
-      this[serviceItem10] = 0;
-      this[serviceItem11] = 0;
-      this[serviceItem12] = 0;
-      this[serviceItem17] = 0;
+      this[CUTTING] = 0;
+      this[EDGING] = 0;
+      this[DVP_CUTTING] = 0;
+      this[TABLETOP_CUTTING] = 0;
+      this[TABLETOP_EDGING] = 0;
+      this[TABLETOP_LOCK] = 0;
+      this[GROOVE] = 0;
+      this[MILLING_CUT] = 0;
+      this[MILLING_CUT_MIN] = 0;
+      this[MILLING_CUT_TABLETOP] = 0;
+      this[DRILLING] = 0;
+      this[DRILLING_HINGES] = 0;
+      this[HANDLING_MILLING_CUT] = 0;
    }
 }

@@ -63,7 +63,6 @@ export const DetailingTable = ({className, title, parent, details, type, edge, a
          return sortArray.sort((a,b) => b[selectedSort] - a[selectedSort])
       }
       return sortArray
-
    }, [selectedSort, details, addedDetails])
    
    return (

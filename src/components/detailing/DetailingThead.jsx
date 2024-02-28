@@ -8,7 +8,6 @@ export const sort1 = 'name'
 
 export const DetailingThead = ({edge, sort}) => {
    const {t} = useTranslation()
-   
    const sortTable = (e) => {
       sort(e.target.id)
    }

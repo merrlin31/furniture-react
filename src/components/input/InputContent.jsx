@@ -516,17 +516,12 @@ export const InputContent = (props) => {
       let sectionDimensions = new SectionDimensions(values, checkboxes, indentValues, prevDepth.current, sectionId)
       let section = sectionDimensions.createSection();
       dispatch(addSectionObject(section))
-
-      for (let key in section.furnitures) {
-         if (furniture[key]) {
-            furniture[key].value += section.furnitures[key].value
-         } else {
-            furniture[key] = section.furnitures[key]
-         }
-      }
-      for (let key in section.services) {
-         allService[key].value += section.services[key].value
-      }
+      section.furnitures.forEach(item => {
+         furniture[item.name]
+            ? furniture[item.name].value += item.value
+            : furniture[item.name] = item;
+      })
+      section.services.forEach(item => allService[item.name].value += item.value)
 
       for (let key in furniture) {
          if (furniture[key].value > 0) dispatch(addFurnitureItem(furniture[key]));
@@ -543,14 +538,8 @@ export const InputContent = (props) => {
    const deleteLastSection = (e) => {
       e.preventDefault()
       let section = product[product.length - 1]
-      
-      for (let key in section.furnitures) {
-            furniture[key].value -= section.furnitures[key].value
-      }
-      for (let key in section.services) {
-         allService[key].value -= section.services[key].value
-      }
-
+      section.furnitures.forEach(item => furniture[item.name].value -= item.value)
+      section.services.forEach(item => allService[item.name].value -= item.value)
       for (let key in furniture) {
          if (furniture[key].value > 0) dispatch(addFurnitureItem(furniture[key]));
       }

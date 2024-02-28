@@ -8,8 +8,8 @@ import { frontOpeningType2, furnitureManufacturer1, furnitureManufacturer2, furn
    hingesType1, hingesType2, hingesType3, hingesType4, hingesType5, legsAmount1, legsAmount2, 
    levelType1, liftType1, liftType2, liftType3, openingType1, openingType2, sectionBottomType2, 
    sectionBottomType3, sectionUpperType3, sectionUpperType4, sectionBottomType1, ninthDetail, tenthDetail, 
-   frontOpeningType1, fifthDetail, numberLiftDrill, sixthDetail, numberConfirmatsDetail, fourthDetail, 
-   seventhDetail, numberConnectors1, numberConnectors2, hingesType6, openingType3, numbershelfHolderDrill1, 
+   frontOpeningType1, fifthDetail, numberLiftDrill, numberConfirmatsDetail, fourthDetail, 
+   numberConnectors1, numberConnectors2, hingesType6, openingType3, numbershelfHolderDrill1, 
    numbershelfHolderDrill2, sectionBottomType4, drawerScale, drawerType4, 
    drawerFirstDetail, drawerThirdDetail, drawerType2, drawerType3, drawerType1, numberConfirmatsTelescopicBox, numberTelescopicBoxDrill, 
    numberConfirmatsHiddenBox, numberHiddenBoxDrill, numberTandemBoxDrill, numberFalseDrill, numberConfirmatsFalse, eighthDetail, 
@@ -20,7 +20,7 @@ import { frontOpeningType2, furnitureManufacturer1, furnitureManufacturer2, furn
    numberSelfTapping30Hook, 
    frontOpeningType5,
    minCut} from "./description";
-import { allService, serviceItem10, serviceItem11, serviceItem12, serviceItem17, serviceItem6, serviceItem7, serviceItem8, serviceItem9 } from "./services";
+import { allService, MILLING_CUT_TABLETOP, DRILLING, DRILLING_HINGES, HANDLING_MILLING_CUT, TABLETOP_LOCK, GROOVE, MILLING_CUT, MILLING_CUT_MIN } from "./services";
 
 export class CreateSection {
    constructor(section) {
@@ -32,8 +32,8 @@ export class CreateSection {
       let scale = 1000
       let section = new Section(this.section.sectionId)
       section.initialValues = this.section
-      let furnitures = section.furnitures
-      let services = section.services
+      let furnitures = []
+      let services = []
       let length = this.section.values.sectionWidth / scale
       let numberHinges = 0
       let opening = (this.section.values.frontOpening === frontOpeningType2) ? openingType1 : openingType2
@@ -43,29 +43,32 @@ export class CreateSection {
       let hooks = 0
       let absorber = 0
       let numberLift = 0
+
       for (let key in allService) {
-         services[key] = Object.assign({}, allService[key])  
-         services[key].value = 0
+         let item = {...allService[key]}
+         item.value = 0 
+         services.push(item)
       }
+      const changeFurniture = (itemName) => furnitures.find(item => item.name === itemName)
+      const changeService = (itemName) => services.find(item => item.name === itemName)
       
       if (this.section.values.level === levelType1) {
-         furnitures[LEGS] = Object.assign({}, furniture[LEGS])
+         furnitures = [...furnitures, {...furniture[LEGS]}]
          legs = (this.section.values.sectionWidth <= 600) ? legsAmount1 : legsAmount2;
-         furnitures[LEGS].value = legs
-         furnitures[LEGS_CLIPS] = Object.assign({}, furniture[LEGS_CLIPS])
-         furnitures[LEGS_CLIPS].value = legs / 2
+         changeFurniture(LEGS).value = legs
+         furnitures = [...furnitures, {...furniture[LEGS_CLIPS]}]
+         changeFurniture(LEGS_CLIPS).value = legs / 2
+         section.plinth = [...this.section.getPlinthDimensions()]
+         section.tabletops = [...this.section.getTabletopDimension()]
       }
       let sectionFronts = this.section.getFrontDimensions();
-      for (let key in sectionFronts) {
-         if (section.fronts[key]) {
-            section.fronts[key] = sectionFronts[key]
-         }
+      if (sectionFronts.fronts.length) {
+         section.fronts = [...sectionFronts.fronts]
       }
-      for (let key in section.fronts) {
-         if (Object.keys(section.fronts[key]).length) { 
-            numberFront += section.fronts[key].amount;
-         }
-      }
+      section.fronts.forEach(detail => {
+         if (detail) numberFront += detail.amount;
+      })
+      
       if (sectionFronts.numberHinges > 0) {
          let numberHingesName
          
@@ -90,11 +93,11 @@ export class CreateSection {
             }
             numberHingesName = opening + hingesType
             numberHinges = sectionFronts.numberHinges / hingesAmount
-            furnitures[numberHingesName] = new FurnitureItem(numberHingesName, hinges[opening][hingesType], hinges.manufacturer, 1, numberHinges)
+            furnitures = [...furnitures, new FurnitureItem(numberHingesName, hinges[opening][hingesType], hinges.manufacturer, 1, numberHinges)]
             if (this.section.values.sectionType === sectionBottomType3) {
                let numberHingesNameSecond = opening + hingesType5
                let manufacturer = (this.section.values.frontOpening === frontOpeningType2) ? furnitureManufacturer1 : furnitureManufacturer2
-               furnitures[numberHingesNameSecond] = new FurnitureItem(numberHingesNameSecond, hinges[opening][hingesType5], manufacturer, 1, numberHinges)
+               furnitures = [...furnitures, new FurnitureItem(numberHingesNameSecond, hinges[opening][hingesType5], manufacturer, 1, numberHinges)]
                numberHinges *= hingesAmount
             }
          } else {
@@ -106,49 +109,49 @@ export class CreateSection {
                numberLift = 2
                let code = (this.section.values.frontOpening === frontOpeningType2) ? hinges[opening][hingesType4] : hinges[opening][hingesType4]
                numberHingesName = opening + hingesType4
-               furnitures[numberHingesName] = new FurnitureItem(numberHingesName, code, furnitureManufacturer2, 1, numberHinges / numberFront)
+               furnitures = [...furnitures, new FurnitureItem(numberHingesName, code, furnitureManufacturer2, 1, numberHinges / numberFront)]
                if (numberFront > 1) {
                   numberHingesName = opening + hingesType6
                   code = (this.section.values.frontOpening === frontOpeningType2) ? hinges[opening][hingesType6] : hinges[opening][hingesType6]
-                  furnitures[numberHingesName] = new FurnitureItem(numberHingesName, code, furnitureManufacturer2, 1, numberHinges - numberHinges / numberFront)
+                  furnitures = [...furnitures, new FurnitureItem(numberHingesName, code, furnitureManufacturer2, 1, numberHinges - numberHinges / numberFront)]
                } 
 
             } else if (this.section.values.liftType === liftType2) {
                numberLift = 1
-               services[serviceItem11].value += numberLiftDrill;
+               changeService(DRILLING).value += numberLiftDrill;
             } else if (this.section.values.liftType === liftType3) {
                numberLift = 1 / 2
-               services[serviceItem11].value += numberLiftDrill;
+               changeService(DRILLING).value += numberLiftDrill;
             }
             
-            furnitures[LIFT] = Object.assign({}, furniture[LIFT])
-            furnitures[LIFT].value = numberFront * numberLift
-            furnitures[LIFT].manufacturer = (this.section.values.liftType === liftType1) ? furnitureManufacturer2 : furnitureManufacturer3
+            furnitures = [...furnitures, {...furniture[LIFT]}]
+            changeFurniture(LIFT).value = numberFront * numberLift
+            changeFurniture(LIFT).manufacturer = (this.section.values.liftType === liftType1) ? furnitureManufacturer2 : furnitureManufacturer3
          }   
-         services[serviceItem11].value += sectionFronts.numberHinges * 2
+         changeService(DRILLING).value += sectionFronts.numberHinges * 2
       }
       if (this.section.checkboxes.visibleSide) {
-         section.details[sixthDetail] = this.section.getVisibleSideDimensions();
+         section.details = [...section.details, this.section.getVisibleSideDimensions()];
       }
       if (!this.section.checkboxes.dishwasher) {
          let sectionDetails = this.section.getSectionDimensions()
-         furnitures[CONFIRMATS] = Object.assign({}, furniture[CONFIRMATS])
-         furnitures[CONFIRMATS].value = 0
-         for (let key in sectionDetails) {
-            section.details[key] = sectionDetails[key];
-            services[serviceItem11].value += numberConfirmatsDetail * 2;
-            furnitures[CONFIRMATS].value += numberConfirmatsDetail;
-         }
+         furnitures = [...furnitures, {...furniture[CONFIRMATS]}]
+         changeFurniture(CONFIRMATS).value = 0
+         sectionDetails.forEach(() => {
+            changeService(DRILLING).value += numberConfirmatsDetail * 2;
+            changeFurniture(CONFIRMATS).value += numberConfirmatsDetail;
+         })
+         section.details = [...section.details, ...sectionDetails];
          if (this.section.values.sectionType === sectionBottomType1 || this.section.values.sectionType === sectionBottomType2) {
             const edgePartition = {
                top: 1, bottom: 1, left: 0, right: 0
             };
             let partitionDetail;
             if (!this.section.checkboxes.oven) {
-               partitionDetail = this.section.getSectionDimensions()[fourthDetail];
+               partitionDetail = this.section.getSectionDimensions().find(detail => detail.name === fourthDetail);
                partitionDetail.name = ninthDetail;
                if (!this.section.checkboxes.sink) partitionDetail.edge = edgePartition;
-               section.details[ninthDetail] = partitionDetail
+               section.details = [...section.details, partitionDetail]
             }
          }
          if (this.section.values.sectionType === sectionBottomType2) {
@@ -156,122 +159,109 @@ export class CreateSection {
             connectorDetail.name = tenthDetail;
             connectorDetail.width = this.section.constants.partition;
             connectorDetail.amount = (this.section.values.frontOpening === frontOpeningType1) ? numberConnectors1 : numberConnectors2;
-            section.details[tenthDetail] = connectorDetail
+            section.details = [...section.details, connectorDetail]
          }
          if (this.section.values.shelves > 0) {
-            section.details[fifthDetail] = this.section.getShelvesDimensions();
-            furnitures[SHELF_HOLDER] = Object.assign({}, furniture[SHELF_HOLDER]);
+            section.details = [...section.details, this.section.getShelvesDimensions()];
+            furnitures = [...furnitures, {...furniture[SHELF_HOLDER]}];
             (this.section.values.sectionType === sectionBottomType2 || this.section.values.sectionType === sectionUpperType3) 
-               ? furnitures[SHELF_HOLDER].value = this.section.values[fifthDetail] * numbershelfHolderDrill1 
-               : furnitures[SHELF_HOLDER].value = this.section.values[fifthDetail] * numbershelfHolderDrill2;
-               services[serviceItem11].value += furnitures.shelfHolder.value;
+               ? changeFurniture(SHELF_HOLDER).value = this.section.values[fifthDetail] * numbershelfHolderDrill1 
+               : changeFurniture(SHELF_HOLDER).value = this.section.values[fifthDetail] * numbershelfHolderDrill2;
+            changeService(DRILLING).value += changeFurniture(SHELF_HOLDER).value;
          }
          if (this.section.values.drawers > 0) {
             let drawersDetails = this.section.getDrawersDimensions();
             let drawersLenght = (this.section.values.drawersType !== drawerType4) 
-               ? Math.round(drawersDetails[drawerFirstDetail].height / drawerScale) * drawerScale
-               : Math.round(drawersDetails[drawerThirdDetail].height / drawerScale) * drawerScale
+               ? Math.round(drawersDetails.find(detail => detail.name === drawerFirstDetail).height / drawerScale) * drawerScale
+               : Math.round(drawersDetails.find(detail => detail.name === drawerThirdDetail).height / drawerScale) * drawerScale  
             let drawersName = opening + this.section.values.drawersType + '_' + drawersLenght
             let code = (this.section.values.drawersType !== drawerType4) 
                ? drawers[this.section.values.drawersType][opening][drawersLenght]
                : '' 
-            furnitures[drawersName] = new FurnitureItem(drawersName, code, drawers[this.section.values.drawersType].manufacturer)
-            furnitures[drawersName].value = this.section.values.drawers
-            furnitures[drawersName].drawer = true
-            for (let key in drawersDetails) {
-                  section.details[key] = drawersDetails[key];    
-            }
+            furnitures = [...furnitures, new FurnitureItem(drawersName, code, drawers[this.section.values.drawersType].manufacturer)]
+            changeFurniture(drawersName).value = this.section.values.drawers
+            changeFurniture(drawersName).drawer = true
+            section.details = [...section.details, ...drawersDetails]
             if (this.section.values.drawersType === drawerType2 || this.section.values.drawersType === drawerType3) {
-                     services[serviceItem11].value += this.section.values.drawers * numberHiddenBoxDrill;
-                     furnitures[CONFIRMATS].value += this.section.values.drawers * numberConfirmatsHiddenBox;
-                  } else if (this.section.values.drawersType === drawerType1) {
-                     services[serviceItem11].value += this.section.values.drawers * numberTelescopicBoxDrill;
-                     furnitures[CONFIRMATS].value += this.section.values.drawers * numberConfirmatsTelescopicBox;
-                  } else {
-                     services[serviceItem11].value += this.section.values.drawers * numberTandemBoxDrill;
-                  }
+               changeService(DRILLING).value += this.section.values.drawers * numberHiddenBoxDrill;
+               changeFurniture(CONFIRMATS).value += this.section.values.drawers * numberConfirmatsHiddenBox;
+            } else if (this.section.values.drawersType === drawerType1) {
+               changeService(DRILLING).value += this.section.values.drawers * numberTelescopicBoxDrill;
+               changeFurniture(CONFIRMATS).value += this.section.values.drawers * numberConfirmatsTelescopicBox;
+            } else {
+               changeService(DRILLING).value += this.section.values.drawers * numberTandemBoxDrill;
+            }
          }
          if (this.section.values.sectionType === sectionBottomType2 || this.section.values.sectionType === sectionUpperType3) {
-            section.details[seventhDetail] = this.section.getFalseDimensions();
-            services[serviceItem11].value += numberFalseDrill;
-            furnitures[CONFIRMATS].value += numberConfirmatsFalse;
+            section.details = [...section.details, this.section.getFalseDimensions()]
+            changeService(DRILLING).value += numberFalseDrill;
+            changeFurniture(CONFIRMATS).value += numberConfirmatsFalse;
          }
          if (this.section.values.sectionType === sectionBottomType3) {
-            let connectorDetail = this.section.getSectionDimensions()[fourthDetail];
+            let connectorDetail = this.section.getSectionDimensions().find(detail => detail.name === fourthDetail);
             let height = this.section.values.sectionDepth - (this.section.prevDepth - this.section.constants.indentFrontBody) 
             - this.section.constants.materialWidth;
             connectorDetail.name = tenthDetail;
             connectorDetail.height = height
             connectorDetail.amount = 1;
-            section.details[tenthDetail] = connectorDetail
-            connectorDetail = this.section.getSectionDimensions()[fourthDetail];
+            section.details = [...section.details, connectorDetail]
+            connectorDetail = this.section.getSectionDimensions().find(detail => detail.name === fourthDetail);
             connectorDetail.name = ninthDetail;
             connectorDetail.height = height
                connectorDetail.amount = 1;
             connectorDetail.edge.bottom = 1;
-            section.details[ninthDetail] = connectorDetail
-            services[serviceItem11].value += numberCornerBotDrill;
-            furnitures[CONFIRMATS].value += numberConfirmatsCornerBot;
+            section.details = [...section.details, connectorDetail]
+            changeService(DRILLING).value += numberCornerBotDrill;
+            changeFurniture(CONFIRMATS).value += numberConfirmatsCornerBot;
          }
          if (this.section.values.sectionType === sectionBottomType4) {
-            section.details[eighthDetail] = this.section.getCupboardPlinth();
-            services[serviceItem7].value += this.section.values.kitchenHeight * 2 / scale
+            section.details = [...section.details, this.section.getCupboardPlinth()]
+            changeService(GROOVE).value += this.section.values.kitchenHeight * 2 / scale
             if (this.section.checkboxes.oven || this.section.checkboxes.fridge) {
-               furnitures[LATTICE] = Object.assign({}, furniture[LATTICE]);
-               furnitures[LATTICE].value = 1
-               services[serviceItem8].value += latticeMillLenght;
+               furnitures = [...furnitures, {...furniture[LATTICE]}]
+               changeFurniture(LATTICE).value = 1
+               changeService(MILLING_CUT).value += latticeMillLenght;
             }
          }
       }
       if (this.section.checkboxes.backlight) {
-         furnitures[LED_PROFILE] = Object.assign({}, furniture[LED_PROFILE])
-         furnitures[LED_DIFFUSER] = Object.assign({}, furniture[LED_DIFFUSER])
-         furnitures[LED_STRIP] = Object.assign({}, furniture[LED_STRIP])
-         furnitures[POWER_UNIT] = Object.assign({}, furniture[POWER_UNIT])
-         furnitures[SWITCH] = Object.assign({}, furniture[SWITCH])
-         furnitures[LED_PROFILE].value = length
-         furnitures[LED_DIFFUSER].value = length
-         furnitures[LED_STRIP].value = length
-         furnitures[POWER_UNIT].value = 1
-         furnitures[SWITCH].value = 1
-         services[serviceItem7].value += length * 6;
-         services[serviceItem9].value += 2
+         furnitures = [...furnitures, {...furniture[LED_PROFILE]}]
+         furnitures = [...furnitures, {...furniture[LED_DIFFUSER]}]
+         furnitures = [...furnitures, {...furniture[LED_STRIP]}]
+         furnitures = [...furnitures, {...furniture[POWER_UNIT]}]
+         furnitures = [...furnitures, {...furniture[SWITCH]}]
+         changeFurniture(LED_PROFILE).value = length
+         changeFurniture(LED_DIFFUSER).value = length
+         changeFurniture(LED_STRIP).value = length
+         changeFurniture(POWER_UNIT).value = 1
+         changeFurniture(SWITCH).value = 1
+         changeService(GROOVE).value += length * 6;
+         changeService(MILLING_CUT_MIN).value += 2
       }
       if (this.section.values.level !== levelType1) {
          hooks = 2
-         furnitures[HOOKS_RIGHT] = Object.assign({}, furniture[HOOKS_RIGHT]);
-         furnitures[HOOKS_LEFT] = Object.assign({}, furniture[HOOKS_LEFT]);
-         furnitures[HOOKS_RIGHT_CUP] = Object.assign({}, furniture[HOOKS_RIGHT_CUP]);
-         furnitures[HOOKS_LEFT_CUP] = Object.assign({}, furniture[HOOKS_LEFT_CUP]);
-         furnitures[HOOKS_RIGHT].value = hooks / 2;
-         furnitures[HOOKS_LEFT].value = hooks / 2;
-         furnitures[HOOKS_RIGHT_CUP].value = hooks / 2;
-         furnitures[HOOKS_LEFT_CUP].value = hooks / 2;
-         services[serviceItem9].value += hooks
+         furnitures = [...furnitures, {...furniture[HOOKS_RIGHT]}]
+         furnitures = [...furnitures, {...furniture[HOOKS_LEFT]}]
+         furnitures = [...furnitures, {...furniture[HOOKS_RIGHT_CUP]}]
+         furnitures = [...furnitures, {...furniture[HOOKS_LEFT_CUP]}]
+         changeFurniture(HOOKS_RIGHT).value = hooks / 2;
+         changeFurniture(HOOKS_LEFT).value = hooks / 2;
+         changeFurniture(HOOKS_RIGHT_CUP).value = hooks / 2;
+         changeFurniture(HOOKS_LEFT_CUP).value = hooks / 2;
+         changeService(MILLING_CUT_MIN).value += hooks
 
-         furnitures[RAIL] = Object.assign({}, furniture[RAIL]);
-         furnitures[RAIL].value = length;
+         furnitures = [...furnitures, {...furniture[RAIL]}]
+         changeFurniture(RAIL).value = length;
          (this.section.values.level === levelType2)
-            ? services[serviceItem7].value += ((this.section.values.sectionUpHeight * 2 + this.section.values.sectionWidth)) / scale
-            : services[serviceItem7].value += ((this.section.values.heightMezzanineSection * 2)) / scale
+            ? changeService(GROOVE).value += ((this.section.values.sectionUpHeight * 2 + this.section.values.sectionWidth)) / scale
+            : changeService(GROOVE).value += ((this.section.values.heightMezzanineSection * 2)) / scale
       }
       if (this.section.values.sectionType === sectionUpperType2) {
          if (this.section.values.level === levelType2) {
-            services[serviceItem8].value += hoodMillLenght + (this.section.values.shelves + 1) * hoodShelvesMillLenght
-            services[serviceItem17].value += 4
+            changeService(MILLING_CUT).value += hoodMillLenght + (this.section.values.shelves + 1) * hoodShelvesMillLenght
+            changeService(HANDLING_MILLING_CUT).value += 4
          } else {
-            services[serviceItem8].value += (this.section.values.shelves + 2) * hoodShelvesMillLenght
-         }
-      }
-      
-      if (this.section.values.level === levelType1) {
-         let plinth = this.section.getPlinthDimensions();
-         for (let key in plinth) {
-            if (Object.keys(plinth[key]).length && plinth[key].height !== 0) section.plinth[key] = plinth[key]
-         }
-         let tabletop = this.section.getTabletopDimension();
-         for (let key in tabletop) {
-            if (Object.keys(tabletop[key]).length && tabletop[key].height !== 0) section.tabletops[key] = tabletop[key];
+            changeService(MILLING_CUT).value += (this.section.values.shelves + 2) * hoodShelvesMillLenght
          }
       }
       
@@ -279,74 +269,75 @@ export class CreateSection {
       for (let key in section.plinth) {
          if (Object.keys(section.plinth[key]).length) plinthSeal += section.plinth[key].height / scale
       }
-      if (Object.keys(section.details[eighthDetail]).length) plinthSeal += section.details[eighthDetail].height / scale
+      let cupboardPlinth = section.details.find(detail => detail.name === eighthDetail)
+      if (cupboardPlinth) plinthSeal += cupboardPlinth.height / scale
       if (plinthSeal > 0) {
-         furnitures[PLINTH_SEAL] = Object.assign({}, furniture[PLINTH_SEAL]);
-         furnitures[PLINTH_SEAL].value = plinthSeal
+         furnitures = [...furnitures, {...furniture[PLINTH_SEAL]}]
+         changeFurniture(PLINTH_SEAL).value = plinthSeal
       }
-      if (this.section.checkboxes.hob) services[serviceItem10].value += hobMillLenght;
+      if (this.section.checkboxes.hob) changeService(MILLING_CUT_TABLETOP).value += hobMillLenght;
       if (this.section.values.frontOpening === frontOpeningType4) {
-         services[serviceItem9].value += numberGolaMillMin;
-         services[serviceItem17].value += (this.section.values.sectionType === sectionBottomType4) ? numberGolaMillMin * 2 : numberGolaMillMin;
-         furnitures[GOLA_L] = Object.assign({}, furniture[GOLA_L]);
-         furnitures[GOLA_L].value = length;
+         changeService(MILLING_CUT_MIN).value += numberGolaMillMin;
+         changeService(HANDLING_MILLING_CUT).value += (this.section.values.sectionType === sectionBottomType4) ? numberGolaMillMin * 2 : numberGolaMillMin;
+         furnitures = [...furnitures, {...furniture[GOLA_L]}]
+         changeFurniture(GOLA_L).value = length;
       }
       if (this.section.values.frontOpening === frontOpeningType4 && this.section.values.drawers > 0) {
-         services[serviceItem9].value += numberGolaMillMin * (this.section.values.drawers - 1);
-         services[serviceItem17].value += numberGolaMillMin * (this.section.values.drawers - 1) * 2;
-         furnitures[GOLA_C] = Object.assign({}, furniture[GOLA_C]);
-         furnitures[GOLA_C].value = length * (this.section.values.drawers - 1);
+         changeService(MILLING_CUT_MIN).value += numberGolaMillMin * (this.section.values.drawers - 1);
+         changeService(HANDLING_MILLING_CUT).value += numberGolaMillMin * (this.section.values.drawers - 1) * 2;
+         furnitures = [...furnitures, {...furniture[GOLA_C]}]
+         changeFurniture(GOLA_C).value = length * (this.section.values.drawers - 1);
       }
       if (this.section.checkboxes.dishwasher) {
-         services[serviceItem8].value += length + dishHeightMillLenght
+         changeService(MILLING_CUT).value += length + dishHeightMillLenght
          numberHinges = 0;
          legs = 0
-         furnitures[LEGS].value = legs;
-         services[serviceItem9].value = 0;
-         services[serviceItem17].value = 0;
+         changeFurniture(LEGS).value = legs;
+         changeService(MILLING_CUT_MIN).value = 0;
+         changeService(HANDLING_MILLING_CUT).value = 0;
       }
-      services[serviceItem12].value = numberHinges
+      changeService(DRILLING_HINGES).value = numberHinges
       if (this.section.checkboxes.kargo) {
-         furnitures[KARGO] = Object.assign({}, furniture[KARGO]);
-         furnitures[KARGO].value = 1
+         furnitures = [...furnitures, {...furniture[KARGO]}]
+         changeFurniture(KARGO).value = 1
       }
       if (this.section.checkboxes.sink) {
-         furnitures[SINK] = Object.assign({}, furniture[SINK]);
-         furnitures[SINK].value = 1
-         services[serviceItem10].value += sinkMillLenght;
+         furnitures = [...furnitures, {...furniture[SINK]}]
+         changeFurniture(SINK).value = 1
+         changeService(MILLING_CUT_TABLETOP).value += sinkMillLenght;
       }
       if (this.section.checkboxes.dish) {
-         furnitures[DISH] = Object.assign({}, furniture[DISH]);
-         furnitures[DISH].value = 1
+         furnitures = [...furnitures, {...furniture[DISH]}]
+         changeFurniture(DISH).value = 1
       }
       if (this.section.values.frontOpening === frontOpeningType1) {
          let divider = (this.section.values.liftType === liftType3) ? 2 : 1
-         furnitures[HANDLE] = Object.assign({}, furniture[HANDLE]);
-         furnitures[HANDLE].value = numberFront / divider
+         furnitures = [...furnitures, {...furniture[HANDLE]}]
+         changeFurniture(HANDLE).value = numberFront / divider
          let drill = numberFront * 2 / divider
-         furnitures[SCREW_40] = Object.assign({}, furniture[SCREW_40]);
-         furnitures[SCREW_40].value = drill
-         services[serviceItem11].value += drill;
+         furnitures = [...furnitures, {...furniture[SCREW_40]}]
+         changeFurniture(SCREW_40).value = drill
+         changeService(DRILLING).value += drill;
       }
       if (this.section.values.frontOpening === frontOpeningType2) {
          push = numberFront - this.section.values.drawers
-         furnitures[PUSH] = Object.assign({}, furniture[PUSH]);
-         furnitures[PUSH_BAR] = Object.assign({}, furniture[PUSH_BAR]);
-         furnitures[PUSH].value = push;
-         furnitures[PUSH_BAR].value = push;
+         furnitures = [...furnitures, {...furniture[PUSH]}]
+         furnitures = [...furnitures, {...furniture[PUSH_BAR]}]
+         changeFurniture(PUSH).value = push;
+         changeFurniture(PUSH_BAR).value = push;
       }
       if (this.section.values.frontOpening === frontOpeningType5 && this.section.values.sectionType === sectionUpperType3) {
          const cut = (this.section.values.sectionWidth - (this.section.values.neighboringSectionWidth - 
             this.section.constants.indentUpFalseBack + this.section.constants.indentUpFalseFront) - 
             this.section.constants.materialWidth + this.section.constants.shorterBottom) / scale;
          (cut > minCut)
-            ? services[serviceItem8].value += cut
-            : services[serviceItem9].value += 1
+            ? changeService(MILLING_CUT).value += cut
+            : changeService(MILLING_CUT_MIN).value += 1
       }
       if (this.section.values.sectionType === sectionBottomType2 || this.section.values.sectionType === sectionBottomType3) {
-         furnitures[TABLETOP_CONNECTOR] = Object.assign({}, furniture[TABLETOP_CONNECTOR]);
-         furnitures[TABLETOP_CONNECTOR].value = 3;
-         services[serviceItem6].value = 1;
+         furnitures = [...furnitures, {...furniture[TABLETOP_CONNECTOR]}]
+         changeFurniture(TABLETOP_CONNECTOR).value = 3;
+         changeService(TABLETOP_LOCK).value = 1;
       }
       let kargo = (this.section.checkboxes.kargo) ? 1 : 0
       let clips = legs / 2
@@ -354,24 +345,22 @@ export class CreateSection {
       kargo * numberSelfTapping15Kargo + legs * numberSelfTapping15Legs + clips * numberSelfTapping15Clips + 
       push * numberSelfTapping15Push + numberLift * numberSelfTapping15Lift
       if (selfTapping15 > 0) {
-         furnitures[SELF_TAPPING_15] = Object.assign({}, furniture[SELF_TAPPING_15]);
-         furnitures[SELF_TAPPING_15].value = selfTapping15
+         furnitures = [...furnitures, {...furniture[SELF_TAPPING_15]}]
+         changeFurniture(SELF_TAPPING_15).value = selfTapping15
       }
       let selfTapping30 = this.section.values.drawers * numberSelfTapping30Drawer + hooks * numberSelfTapping30Hook + numberSelfTapping30JoinSection
       if (selfTapping30 > 0) {
-         furnitures[SELF_TAPPING_30] = Object.assign({}, furniture[SELF_TAPPING_30]);
-         furnitures[SELF_TAPPING_30].value = selfTapping30
+         furnitures = [...furnitures, {...furniture[SELF_TAPPING_30]}]
+         changeFurniture(SELF_TAPPING_30).value = selfTapping30
       }
-
       if (absorber > 0) {
-         furnitures[ABSORBER] = Object.assign({}, furniture[ABSORBER]);
-         furnitures[ABSORBER].value = absorber
+         furnitures = [...furnitures, {...furniture[ABSORBER]}]
+         changeFurniture(ABSORBER).value = absorber
       }
 
-      let sectionDvps = this.section.getDvpDimension();
-      for (let key in sectionDvps) {
-         section.dvps[key] = sectionDvps[key]
-      }
+      section.dvps = [...this.section.getDvpDimension()]
+      section.furnitures = [...furnitures]
+      section.services = [...services]
       console.log(section)
       return section
    }

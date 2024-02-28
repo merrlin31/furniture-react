@@ -42,7 +42,6 @@ export class Material {
       let discount = option[this.manufacturer]
       return discount
    }
-
 }
 
 export const bodyManufacturerName = {name: bodyManufacturer, id: bodyManufacturer, select: bodyManufacturer, options: [

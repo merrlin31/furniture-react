@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { MyEditableInput } from "../UI/MyInput/MyInput";
 
-export const SpecificationTotalSumItem = (props) => {
+export const SpecificationTotalSumRow = (props) => {
    const {t} = useTranslation()
    const translate = 'totalSum.'
 

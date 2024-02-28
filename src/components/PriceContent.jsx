@@ -43,6 +43,7 @@ export const PriceContent = (props) => {
             item.name = furniture[key].name
             item.id = furniture[key].name
             item.className = priceSection2 + itemClass
+            if (furniture[key].description) item.description = furniture[key].description
             furnitureArr.push(item)
          } 
       }

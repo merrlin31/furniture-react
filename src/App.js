@@ -9,8 +9,8 @@ function App() {
 
   return (
     <div className="App wraper">
-      <Header />
       <Provider store={store}>
+        <Header />
         <Main />
       </Provider>
       <footer>hh</footer>

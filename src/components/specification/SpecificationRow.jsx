@@ -8,57 +8,69 @@ import { iconsClass } from "../../utils/description";
 import { MyEditableInput } from "../UI/MyInput/MyInput";
 import { useDispatch } from "react-redux";
 import { editValue, setKey } from "../../reducers/settingReducer";
+import { MyEditableSelect } from "../UI/MySelect/MySelect";
+import { useTranslation } from "react-i18next";
+import { selectMaterialType } from "../properties/detailingProperties";
 
-export const SpecificationRow = ({name, description, code, amount, price = 0, material, discount, change, allPrice}) => {
+export const SpecificationRow = ({material, change, allPrice, multiplicity, deleteFunc, manufacturer, manufacturerOptions, 
+   name, description, code, amount, price = 0, totalPrice, discount, totalSum}) => {
 
    const dispatch = useDispatch()
    const [editeble, setEditeble] = useState(false)
+   const {t} = useTranslation()
    let key = setKey(allPrice?.id)
    const id1 = 'amount'
    const id2 = 'price'
    const id3 = 'code'
+   const id4 = 'manufacturer'
+   const id5 = 'material'
 
-   let initialItem = {name, code, amount, material, description}
+   let initialItem = {name, code, amount, material, description, price, manufacturer}
    const [item, setItem] = useState(initialItem)
-   const totalPrice = amount * price
-   
+
    const editItem = () => {
       setEditeble(true) 
    }
-
    const deleteItem = () => {
-      change({...item, amount: 0})
+      deleteFunc({...item, amount: 0})
    }
-
    const update = () => {
-      change(item)
+      change(item, {difference: item.amount - amount, code, multiplicity, material})
       setEditeble(false)
    }
-
    const cancel = () => {
       setItem(initialItem)
       setEditeble(false)
    }
-
    const updatePrice = (e) => {
-      dispatch(editValue(key, item.name, +e.target.value))
+      setItem({...item, [e.target.id]: +e.target.value})
+      if (!material) dispatch(editValue(key, item.name, +e.target.value));
    }
-   
    const onChange = (e) => {
       setItem({...item, [e.target.id]: +e.target.value})
    }
-
    useEffect(() => {
       setItem(initialItem)
       // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [amount])
+   }, [amount, manufacturer, price, code, material, description])
 
    return (
       <tr>
-         <td>{description}</td>
+         {!editeble
+            ? <td>{description}</td>
+            : code && material
+               ? <td><MyEditableSelect id={id5} options={selectMaterialType} value={item.material} onChange={v => setItem({...item, material: v, description: v})} /></td>
+               : <td>{description}</td>
+         }  
+         {!editeble
+            ? <td>{t(manufacturer)}</td>
+            : !code && material
+               ? <td>{t(manufacturer)}</td>
+               : <td><MyEditableSelect id={id4} options={manufacturerOptions} value={item.manufacturer} onChange={v => setItem({...item, manufacturer: v})} /></td>
+         }
          {!editeble
             ? <td>{code}</td>
-            : material
+            : !code && material
                ? <td>{code}</td>
                : <td><MyEditableInput id={id3} value={item.code} onChange={onChange} /></td>
          }
@@ -68,14 +80,11 @@ export const SpecificationRow = ({name, description, code, amount, price = 0, ma
          }
          {!editeble
             ? <td>{+price.toFixed(2)}</td>
-            : material
-               ? <td>{+price.toFixed(2)}</td>
-               : <td><MyEditableInput id={id2} value={price} 
-                  onChange={updatePrice} /></td>
+            : <td><MyEditableInput id={id2} value={item.price} onChange={updatePrice} /></td>
          }
          <td>{+(totalPrice).toFixed(2)}</td>
-         <td>{+(totalPrice * discount / 100).toFixed(2)}</td>
-         <td>{+(totalPrice - totalPrice * discount / 100).toFixed(2)}</td>
+         <td>{+(discount).toFixed(2)}</td>
+         <td>{+(totalSum).toFixed(2)}</td>
          <td>
             {!editeble
                ? <div className={iconsClass}>

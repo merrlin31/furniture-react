@@ -5,7 +5,6 @@ import detailReducer from "./detailReducer";
 import settingReducer from "./settingReducer";
 import productReducer from "./productReducer";
 
-
 const rootReducer = combineReducers({
    product: productReducer,
    setting: settingReducer,
@@ -14,3 +13,5 @@ const rootReducer = combineReducers({
 export const store = createStore(
    rootReducer, composeWithDevTools(applyMiddleware(thunk))
 )
+
+

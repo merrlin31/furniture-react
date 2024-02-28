@@ -1,4 +1,6 @@
-import { serviceItem1, serviceItem10, serviceItem11, serviceItem12, serviceItem13, serviceItem16, serviceItem2, serviceItem3, serviceItem4, serviceItem5, serviceItem6, serviceItem7, serviceItem8, serviceItem9, servicesItem14, servicesItem14Value1, servicesItem14Value2, servicesItem15 } from "../../utils/services"
+import { CUTTING, MILLING_CUT_TABLETOP, DRILLING, DRILLING_HINGES, DELIVERY, GASOLINE, EDGING, 
+   DVP_CUTTING, TABLETOP_CUTTING, TABLETOP_EDGING, TABLETOP_LOCK, GROOVE, MILLING_CUT, MILLING_CUT_MIN, 
+   TABLETOP_LENGTH, TABLETOP_LENGTH_VALUE_1, TABLETOP_LENGTH_VALUE_2, TABLETOP_EDGE_LENGHT } from "../../utils/services"
 import indent1 from './../../img/indent/indent1.webp'
 import indent2 from './../../img/indent/indent2.webp'
 import indent3 from './../../img/indent/indent3.webp'
@@ -87,25 +89,25 @@ export const indentOptions = [
 ]
 
 export const servicesOptions = [
-   {name: servicesItem14, id: servicesItem14, select: servicesItem14, options: [
-      {value: servicesItem14Value1, name: servicesItem14Value1},
-      {value: servicesItem14Value2, name: servicesItem14Value2},
+   {name: TABLETOP_LENGTH, id: TABLETOP_LENGTH, select: TABLETOP_LENGTH, options: [
+      {value: TABLETOP_LENGTH_VALUE_1, name: TABLETOP_LENGTH_VALUE_1},
+      {value: TABLETOP_LENGTH_VALUE_2, name: TABLETOP_LENGTH_VALUE_2},
    ], defaulValue: 'servicesType1DefaultValue'},
-   {name: servicesItem15, id: servicesItem15},
-   {name: serviceItem1, id: serviceItem1},
-   {name: serviceItem3, id: serviceItem3},
-   {name: serviceItem4, id: serviceItem4},
-   {name: serviceItem2, id: serviceItem2},
-   {name: serviceItem5, id: serviceItem5},
-   {name: serviceItem6, id: serviceItem6},
-   {name: serviceItem7, id: serviceItem7},
-   {name: serviceItem8, id: serviceItem8},
-   {name: serviceItem9, id: serviceItem9},
-   {name: serviceItem10, id: serviceItem10},
-   {name: serviceItem11, id: serviceItem11},
-   {name: serviceItem12, id: serviceItem12},
-   {name: serviceItem13, id: serviceItem13},
-   {name: serviceItem16, id: serviceItem16},
+   {name: TABLETOP_EDGE_LENGHT, id: TABLETOP_EDGE_LENGHT},
+   {name: CUTTING, id: CUTTING},
+   {name: DVP_CUTTING, id: DVP_CUTTING},
+   {name: TABLETOP_CUTTING, id: TABLETOP_CUTTING},
+   {name: EDGING, id: EDGING},
+   {name: TABLETOP_EDGING, id: TABLETOP_EDGING},
+   {name: TABLETOP_LOCK, id: TABLETOP_LOCK},
+   {name: GROOVE, id: GROOVE},
+   {name: MILLING_CUT, id: MILLING_CUT},
+   {name: MILLING_CUT_MIN, id: MILLING_CUT_MIN},
+   {name: MILLING_CUT_TABLETOP, id: MILLING_CUT_TABLETOP},
+   {name: DRILLING, id: DRILLING},
+   {name: DRILLING_HINGES, id: DRILLING_HINGES},
+   {name: DELIVERY, id: DELIVERY},
+   {name: GASOLINE, id: GASOLINE},
 ]
 
 export const initialIndentValues = {

@@ -1,33 +1,68 @@
-import { useRef, useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { setTotalSum } from "../../reducers/productReducer";
+import { editPercentage, setCodes } from "../../reducers/settingReducer";
+import { saveStore } from "../../reducers/utils";
 import { detailingTableResponsive, TblClass, titleClass } from "../../utils/description";
-import { serviceItem13, serviceItem16 } from "../../utils/services";
-import { initialPercentage } from "../properties/settingsProperties";
+import { DELIVERY, GASOLINE } from "../../utils/services";
 import { Title } from "../Title";
-import { SpecificationTotalSumItem } from "./SpecificationTotalSumItem";
+import { SpecificationTotalSumRow } from "./SpecificationTotalSumRow";
 
 export const SpecificationTotalSum = (props) => {
-   const item1 = 'servicesAndMaterials'
-   const item2 = 'furniture'
-   const item3 = 'total'
-   const item4 = 'mounting'
-   const item5 = 'promout'
-   const item6 = 'design'
-   const item7 = 'profit'
-   const totalSumWithDiscount = props.serviceSum.totalSumWithDiscount + props.furnitureSum.totalSumWithDiscount
-   const [percentage, setPercentage] = useState(initialPercentage)
-   const {t} = useTranslation()
-   const table = useRef(null)
 
-   const updatePercentage = (e) => {
-      setPercentage({...percentage, [e.target.id]: +e.target.value})
+   const {t} = useTranslation()
+   const dispatch = useDispatch()
+   const percentage = useSelector(state => state.setting.percentage)
+   const furnitures = useSelector(state => state.product.furnitures)
+   const services = useSelector(state => state.product.services)
+   const materials = useSelector(state => state.detail.materials)
+   const SERVICES_MATERIALS = 'servicesAndMaterials'
+   const FURNITURE = 'furniture'
+   const TOTAL = 'total'
+   const MOUNTING = 'mounting'
+   const PROMOUT = 'promout'
+   const DESIGN = 'design'
+   const PROFIT = 'profit'
+   const totalSumWithDiscount = props.serviceSum.totalSumWithDiscount + props.furnitureSum.totalSumWithDiscount
+   const productSum = totalSumWithDiscount + totalSumWithDiscount / 100 * 
+      (percentage.mounting + percentage.promout + percentage.design + percentage.profit) + 
+      props.servicesPrice[DELIVERY] + props.servicesPrice[GASOLINE]
+   
+   const updatePercentage = (e) => dispatch(editPercentage(e.target.id, +e.target.value))
+   const rows = [
+      {name: SERVICES_MATERIALS, sum: props.serviceSum.totalSum, discount: props.serviceSum.totalDiscount, sumWithDiscount: props.serviceSum.totalSumWithDiscount},
+      {name: FURNITURE, sum: props.furnitureSum.totalSum, discount: props.furnitureSum.totalDiscount, sumWithDiscount: props.furnitureSum.totalSumWithDiscount},
+      {name: TOTAL, sum: props.serviceSum.totalSum + props.furnitureSum.totalSum, discount: props.serviceSum.totalDiscount + props.furnitureSum.totalDiscount, sumWithDiscount: totalSumWithDiscount},
+      {name: MOUNTING, sumWithDiscount: totalSumWithDiscount / 100 * percentage.mounting, editable: true, value: percentage.mounting, onChange: updatePercentage}, 
+      {name: PROMOUT, sumWithDiscount: totalSumWithDiscount / 100 * percentage.promout, editable: true, value: percentage.promout, onChange: updatePercentage},
+      {name: DESIGN, sumWithDiscount: totalSumWithDiscount / 100 * percentage.design, editable: true, value: percentage.design, onChange: updatePercentage},
+      {name: PROFIT, sumWithDiscount: totalSumWithDiscount / 100 * percentage.profit, editable: true, value: percentage.profit, onChange: updatePercentage},
+      {name: DELIVERY, sum: props.servicesPrice[DELIVERY], sumWithDiscount: props.servicesPrice[DELIVERY]},
+      {name: GASOLINE, sum: props.servicesPrice[GASOLINE], sumWithDiscount: props.servicesPrice[GASOLINE]},
+   ]
+   const updateCodes = () => {
+      let newCodes = [];
+      [...furnitures, ...services].forEach(item => {
+         if (!newCodes.includes(item.code) && item.code && item.value !== 0) newCodes.push(item.code)
+      })
+      materials.forEach(item => {
+         if (!newCodes.includes(item.materialCode) && item.materialCode) newCodes.push(item.materialCode)
+      })
+      dispatch(setCodes(newCodes))
    }
+   useEffect(() => {
+      dispatch(setTotalSum(productSum))
+      updateCodes()
+      saveStore()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [productSum])
 
    return (
       <div className={props.class + TblClass}>
          <Title className={props.class + titleClass} title={props.title} />
          <div className={props.class + detailingTableResponsive}>
-            <table ref={table} className={props.class + props.tableClass}>
+            <table className={props.class + props.tableClass}>
                <thead>
                   <tr>
                      <th>{t('table.title')}</th>
@@ -37,38 +72,13 @@ export const SpecificationTotalSum = (props) => {
                   </tr>
                </thead>
                <tbody>
-                  <SpecificationTotalSumItem name={item1} sum={props.serviceSum.totalSum} 
-                     discount={props.serviceSum.totalDiscount} sumWithDiscount={props.serviceSum.totalSumWithDiscount} />
-                  <SpecificationTotalSumItem name={item2} sum={props.furnitureSum.totalSum} 
-                     discount={props.furnitureSum.totalDiscount} sumWithDiscount={props.furnitureSum.totalSumWithDiscount} />
-                  <SpecificationTotalSumItem name={item3} sum={props.serviceSum.totalSum + props.furnitureSum.totalSum} 
-                     discount={props.serviceSum.totalDiscount + props.furnitureSum.totalDiscount} sumWithDiscount={totalSumWithDiscount} />
-                  <SpecificationTotalSumItem name={item4} sum={null} 
-                     sumWithDiscount={totalSumWithDiscount / 100 * percentage.mounting} 
-                     value={percentage.mounting} onChange={updatePercentage} editable={true} />
-                  <SpecificationTotalSumItem name={item5} sum={null} 
-                     sumWithDiscount={totalSumWithDiscount / 100 * percentage.promout} 
-                     value={percentage.promout} onChange={updatePercentage} editable={true} />
-                  <SpecificationTotalSumItem name={item6} sum={null} 
-                     sumWithDiscount={totalSumWithDiscount / 100 * percentage.design} 
-                     value={percentage.design} onChange={updatePercentage} editable={true} />
-                  <SpecificationTotalSumItem name={item7} sum={null} 
-                     sumWithDiscount={totalSumWithDiscount / 100 * percentage.profit} 
-                     value={percentage.profit} onChange={updatePercentage} editable={true} />
-                  <SpecificationTotalSumItem name={serviceItem13} sum={props.servicesPrice[serviceItem13]} 
-                     discount={null} sumWithDiscount={props.servicesPrice[serviceItem13]} />
-                  <SpecificationTotalSumItem name={serviceItem16} sum={props.servicesPrice[serviceItem16]} 
-                     discount={null} sumWithDiscount={props.servicesPrice[serviceItem16]} />
+                  {rows.map(row => <SpecificationTotalSumRow key={row.name} {...row} />)}
                </tbody>
                <tfoot>
-                  <SpecificationTotalSumItem name={item3} sum={null} 
-                     discount={null} sumWithDiscount={totalSumWithDiscount + 
-                        totalSumWithDiscount / 100 * 
-                        (percentage.mounting + percentage.promout + percentage.design + percentage.profit) + 
-                        props.servicesPrice[serviceItem13] + props.servicesPrice[serviceItem16]} />
+                  <SpecificationTotalSumRow name={TOTAL} sumWithDiscount={productSum} />
                </tfoot> 
             </table>
-         </div>         
+         </div>
       </div>
    );
 }

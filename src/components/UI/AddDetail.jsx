@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { useState } from "react";
 import { addDetailBtnColor, detailType1, detailType3, edge1, edge2, edge3, 
    materialType1, materialType2, materialType3 } from "../../utils/description";
@@ -88,7 +89,7 @@ export const AddDetail = (props) => {
                      onChange={(item) => setDetail({...detail, [option.select]: item})} translate={translate} />
             )}
          </div>
-         <MyButton color={addDetailBtnColor} onClick={addDetail}>Додати</MyButton>
+         <MyButton color={addDetailBtnColor} onClick={addDetail}>{t('addItem')}</MyButton>
       </div>
    );
 }

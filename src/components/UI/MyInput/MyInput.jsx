@@ -11,13 +11,13 @@ export const MyInput = ({option, value, onChange, className, translate, hint}) =
    const [isHint, setIsHint] = useState(false)
 
    let name = (translate) ? translate + option.name : option.name
+   if (option.description) name = option.description
    let type = (option.type) ? option.type : defaultInputTipe
    let inputClass = (option.type === inputType1) ? style.checbox : style.input
 
    const showHint = () => {
       setIsHint(true)
    }
-
    const hideHint = () => {
       setIsHint(false)
    }

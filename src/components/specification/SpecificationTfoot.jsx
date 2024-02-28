@@ -10,6 +10,7 @@ export const SpecificationTfoot = ({sum}) => {
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
             <td>{+sum.totalSum.toFixed(2)}</td>
             <td>{+sum.totalDiscount.toFixed(2)}</td>
             <td>{+sum.totalSumWithDiscount.toFixed(2)}</td>

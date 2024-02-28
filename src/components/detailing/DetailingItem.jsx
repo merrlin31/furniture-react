@@ -47,7 +47,7 @@ export const DetailingItem = ({detail, edge, edit, deleteDetail}) => {
          setUpdateDetail({...updateDetail, [name[0]]: {...updateDetail.edge, [name[1]]: +e.target.value}})
       }
    }
-
+   
    let id = detail.id.split('.')
    let name
    if (detail.added) {
@@ -64,51 +64,50 @@ export const DetailingItem = ({detail, edge, edit, deleteDetail}) => {
       <>
       {!editeble
          ? <tr>
-         <td>{name}</td>
-         <td>{detail[detailKey1]}</td>
-         <td>{detail[detailKey2]}</td>
-         <td>{detail[detailKey3]}</td>
-         <td>{detail[detailKey4]}</td>
-         {!edge &&
-            <>
-               <td>{detail.edge.top}</td>
-               <td>{detail.edge.bottom}</td>
-               <td>{detail.edge.left}</td>
-               <td>{detail.edge.right}</td>
-            </>
-         }
-         <td>
-            {visibleIcons &&
-               <div className={iconsClass}>
-                  <EditLogo onClick={editItem} />
-                  <DeleteLogo onClick={deleteItem} />
-               </div>
+            <td>{name}</td>
+            <td>{detail[detailKey1]}</td>
+            <td>{detail[detailKey2]}</td>
+            <td>{detail[detailKey3]}</td>
+            <td>{detail[detailKey4]}</td>
+            {!edge &&
+               <>
+                  <td>{detail.edge.top}</td>
+                  <td>{detail.edge.bottom}</td>
+                  <td>{detail.edge.left}</td>
+                  <td>{detail.edge.right}</td>
+               </>
             }
-         </td>
-      </tr>
+            <td>
+               {visibleIcons &&
+                  <div className={iconsClass}>
+                     <EditLogo onClick={editItem} />
+                     <DeleteLogo onClick={deleteItem} />
+                  </div>
+               }
+            </td>
+         </tr>
 
          : <tr>
-         <td>{name}</td>
-         <td><MyEditableInput id={detailKey1} value={updateDetail[detailKey1]} onChange={change} /></td>
-         <td><MyEditableInput id={detailKey2} value={updateDetail[detailKey2]} onChange={change} /></td>
-         <td><MyEditableInput id={detailKey3} value={updateDetail[detailKey3]} onChange={change} /></td>
-         <td><MyEditableInput id={detailKey4} value={updateDetail[detailKey4]} onChange={change} /></td>
-         {!edge &&
-            <>
-               <td><MyEditableInput id={edgeId1} value={updateDetail.edge.top} onChange={change} /></td>
-               <td><MyEditableInput id={edgeId2} value={updateDetail.edge.bottom} onChange={change} /></td>
-               <td><MyEditableInput id={edgeId3} value={updateDetail.edge.left} onChange={change} /></td>
-               <td><MyEditableInput id={edgeId4} value={updateDetail.edge.right} onChange={change} /></td>
-            </>
-         }     
-         <td>
-            <div className={iconsClass}>
-               <CheckLogo onClick={update} />
-               <CancelLogo onClick={cancel} />
-            </div>
-         </td>  
-      </tr>
-      
+            <td>{name}</td>
+            <td><MyEditableInput id={detailKey1} value={updateDetail[detailKey1]} onChange={change} /></td>
+            <td><MyEditableInput id={detailKey2} value={updateDetail[detailKey2]} onChange={change} /></td>
+            <td><MyEditableInput id={detailKey3} value={updateDetail[detailKey3]} onChange={change} /></td>
+            <td><MyEditableInput id={detailKey4} value={updateDetail[detailKey4]} onChange={change} /></td>
+            {!edge &&
+               <>
+                  <td><MyEditableInput id={edgeId1} value={updateDetail.edge.top} onChange={change} /></td>
+                  <td><MyEditableInput id={edgeId2} value={updateDetail.edge.bottom} onChange={change} /></td>
+                  <td><MyEditableInput id={edgeId3} value={updateDetail.edge.left} onChange={change} /></td>
+                  <td><MyEditableInput id={edgeId4} value={updateDetail.edge.right} onChange={change} /></td>
+               </>
+            }     
+            <td>
+               <div className={iconsClass}>
+                  <CheckLogo onClick={update} />
+                  <CancelLogo onClick={cancel} />
+               </div>
+            </td>  
+         </tr>
       }
       </>
    );

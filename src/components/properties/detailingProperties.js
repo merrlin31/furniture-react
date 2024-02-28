@@ -1,9 +1,9 @@
-import { materialManufacturer1, materialType1, materialType2, materialType3, materialType4 } from "../../utils/description"
+import { firstPlinthDetail, materialManufacturer1, materialType1, materialType2, materialType3, materialType4, secondPlinthDetail, thirdPlinthDetail } from "../../utils/description"
 import { Detail } from "../../utils/Detail"
 import { bodyManufacturerDiscount, choiceOption, dvpManufacturerDiscount, frontManufacturerDiscount, Material, 
    materialType1BoldEdgePrice, materialType1Price, materialType1ThinEdgePrice, materialType2Price, materialType3Price, 
    materialType4BoldEdgePrice, materialType4Price, materialType4ThinEdgePrice, tabletopManufacturerDiscount } from "../../utils/Material"
-import { serviceItem1, serviceItem2, serviceItem3, serviceItem4, serviceItem5 } from "../../utils/services"
+import { CUTTING, EDGING, DVP_CUTTING, TABLETOP_CUTTING, TABLETOP_EDGING } from "../../utils/services"
 
 export const price1 = 'price'
 export const price2 = 'boldEdgePrice'
@@ -13,7 +13,7 @@ export const plinthName = 'plinth'
 export const tabletopName = 'tabletops'
 
 function searchOption(materials, detail, item) {
-   let material = materials.find(item => item.materialCode === detail.materialCode)
+   let material = materials.find(material => material.materialCode === detail.materialCode)
    let defaultPrice = 0
    switch (detail.materialType) {
       case materialType1:
@@ -63,6 +63,8 @@ export function addMaterial(detail, allMaterials, service, materials) {
 
    let amount = detail.area
    if (detail.materialType === materialType4) amount = detail.height
+
+   
    let material = new Material(detail.materialCode, amount, detail.boldEdge(), detail.thinEdge(), 
       detail.edging(), detail.materialType, materialPrice, boldEdgePrice, thinEdgePrice, manufacturer, discount)
    
@@ -82,17 +84,17 @@ const addServices = (detail, service, material) => {
    let cutting = material.cutting
    if (detail.materialType === materialType2 || detail.materialType === materialType4) cutting = 0
    if (detail.materialType === materialType3) {
-      service[serviceItem3] += cutting
+      service[DVP_CUTTING] += cutting
    }
    if (detail.materialType === materialType1) {
-      service[serviceItem1] += cutting
+      service[CUTTING] += cutting
    }   
    if (detail.materialType === materialType4) {
-      service[serviceItem4] += detail.scaleWidth
-      if (detail.edge.bottom !== 0) service[serviceItem4] += detail.scaleHeight;
-      service[serviceItem5] += material.edging
+      service[TABLETOP_CUTTING] += detail.scaleWidth
+      if (detail.edge.bottom !== 0) service[TABLETOP_CUTTING] += detail.scaleHeight;
+      service[TABLETOP_EDGING] += material.edging
    } else {
-      service[serviceItem2] += material.edging;
+      service[EDGING] += material.edging;
    }
 } 
 
@@ -106,35 +108,48 @@ export const fillArr = (arr, obj, section = {}) => {
 }
 
 export const addToArr = (detail, arr, maxHeight) => {
-   let name, newDetail, bottomEdge, topEdge, leftEdge, rightEdge
+   if (!detail) return
+   if (detail.height === 0) return;
+   let newDetail
+   let [bottomEdge, topEdge, leftEdge, rightEdge] = [0, 0, 0, 0]
+   let name = ([firstPlinthDetail, secondPlinthDetail, thirdPlinthDetail].includes(detail.name)) 
+      ? plinthName
+      : tabletopName
    if (detail.materialType === materialType1) {
       bottomEdge = 1
       topEdge = 1
       leftEdge = 1
       rightEdge = 1
-      name = plinthName
    }
    if (detail.materialType === materialType4) {
       bottomEdge = 0
       leftEdge = 2
       rightEdge = 2
       topEdge = 0
-      name = tabletopName
       if (detail.width !== 600) bottomEdge = 2;
    }
    if (Object.keys(detail).length) {
       if (!arr.length) {
          newDetail = new Detail(detail.name, detail.height, detail.width, detail.amount, [topEdge, bottomEdge, leftEdge, rightEdge], detail.materialCode, detail.materialType)
-         newDetail.id = name + '.' + detail.name
+         newDetail.id = name + '.' + detail.name + '.' + (arr.length + 1)
          arr.push(newDetail)
       } else {
          if (detail.height + arr[arr.length - 1].height > maxHeight || detail.materialCode !== arr[arr.length - 1].materialCode) {
             newDetail = new Detail(detail.name, detail.height, detail.width, detail.amount, [topEdge, bottomEdge, 1, 1], detail.materialCode, detail.materialType)
-            newDetail.id = name + '.' + detail.name
+            newDetail.id = name + '.' + detail.name + '.' + (arr.length + 1)
             arr.push(newDetail)
          } else {
             arr[arr.length - 1].height += detail.height
          }
       }
    }   
+}
+
+export const selectMaterialType = {defaulValue: 'materialTypeDefaultValue',
+options: [
+   {value: materialType1, name: materialType1},
+   {value: materialType2, name: materialType2},
+   {value: materialType3, name: materialType3},
+   {value: materialType4, name: materialType4},
+]
 }
