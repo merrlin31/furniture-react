@@ -1,7 +1,7 @@
 import style from './header.module.scss'
+// import { Language } from './Language';
 
 import { Nav } from './Nav';
-import Profile from '../profile/Profile';
 
 export const Header = () => {
    
@@ -10,7 +10,7 @@ export const Header = () => {
       <header>
          <div className={style.title}>Кухні</div>
          <Nav style={style} />
-         <Profile style={style} />
+         {/* <Language /> */}
       </header>
    );
 }

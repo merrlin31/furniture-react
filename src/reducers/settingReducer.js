@@ -1,4 +1,6 @@
-import { initialPercentage } from "../components/properties/settingsProperties";
+import { initialIndentValues, initialPercentage } from "../components/properties/settingsProperties";
+import { initialFurniturePrice } from "../utils/furniture";
+import { initialServicesPrice } from "../utils/services";
 
 const EDIT_VALUE = 'EDIT_VALUE'
 const SET_ALL_PRICE = 'SET_ALL_PRICE'
@@ -13,9 +15,9 @@ export const SERVICES = 'servicePrices'
 export const INDENTS = 'indentValues'
 
 const defaultState = {
-   furniturePrices: {id: FURNITURES},
-   servicePrices: {id: SERVICES},
-   indentValues: {id: INDENTS},
+   furniturePrices: {...initialFurniturePrice, id: FURNITURES},
+   servicePrices: {...initialServicesPrice, id: SERVICES},
+   indentValues: {...initialIndentValues, id: INDENTS},
    percentage: initialPercentage,
    codes: []
 }
