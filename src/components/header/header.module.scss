@@ -1,14 +1,29 @@
 @import "../../styles/variable.scss";
 
 header {
-   
-   background-color: rgb(68, 68, 67);
+   background: linear-gradient(to top, rgb(68, 68, 67), 75%, rgb(88, 88, 87));
    display: flex;
    justify-content: space-between;
    padding: 0px 5px;
    position: fixed;
    width: 100%;
    box-shadow: 0px 0px 5px #fff;
+
+   .title {
+      width: 200px;
+      align-self: center;
+      text-align: center;
+      font-weight: bold;
+      color: $input-bg;
+
+      @media (max-width: 769px) {
+         width: 100px;
+      }
+
+      @media (max-width: 689px) {
+         width: 70px;
+      }
+   }
 }
 
 nav {
@@ -35,54 +50,73 @@ nav {
    @media (max-width: 600px) {
       width: 10%;
    }
-}
 
-.navList {
-   height: 2.5rem;
-   display: flex;
-   align-items: center;
-   gap: 4px;
+   .navList {
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
 
-}
+      .navItem {
+         line-height: 2.5rem;
+         color: $light-color;
+         width: 25%;
+         flex-grow: 1;
+         text-align: center;
+         cursor: pointer;
 
-.navItem {
-   line-height: 2.5rem;
-   color: $light-color;
-   width: 25%;
-   flex-grow: 1;
-   text-align: center;
-   cursor: pointer;
-
-   .section1Color {
-      color: $input-bg;
-      text-shadow: 0px 0px 2px #000;
+         .section1Color {
+            color: $input-bg;
+            text-shadow: 0px 0px 2px #000;
+         }
+         .section2Color {
+            color: $detailing-shadow;
+            text-shadow: 0px 0px 2px #000;
+         }
+         .section3Color {
+            color: $specification-shadow;
+            text-shadow: 0px 0px 2px #000;
+         }
+         .section4Color {
+            color: $input-bg;
+            text-shadow: 0px 0px 2px #000;
+         }
+      }
    }
-   .section2Color {
-      color: $detailing-shadow;
-      text-shadow: 0px 0px 2px #000;
-   }
-   .section3Color {
-      color: $specification-shadow;
-      text-shadow: 0px 0px 2px #000;
-   }
-   .section4Color {
-      color: $input-bg;
-      text-shadow: 0px 0px 2px #000;
-   }
 
+   .navBody {
+      position: fixed;
+      width: 50%;
+      top: 2.7rem;
+      left: 0.2rem;
+      transition: left 0.3s;
+      background-color: rgba(68, 68, 67, 0.7);
+      backdrop-filter: blur(3px);
+      padding: 0.25rem 0.5rem;
+      overflow: auto;
+      z-index: 1;
+      border-radius: 3px;
+      box-shadow: 2px 2px 4px #000;
    
-}
+      @media (max-width: 360px) {
+         width: 70%;
+      }
+      @media (max-width: 400px) {
+         width: 60%;
+      }
 
-.navListMobile {
+      // .navListMobile {
 
-}
+      // }
 
-.navItemMobile {
-   margin: 0 auto;
-   color: $light-color;
-   text-align: center;
-   cursor: pointer;
-
+      .navItemMobile {
+         margin: 0 auto;
+         color: $light-color;
+         text-align: center;
+         cursor: pointer;
+      
+      }
+   }
 }
 
 .iconMenu {
@@ -94,7 +128,6 @@ nav {
    width: 1.875rem;
    height: 2.5rem;
 }
-
 .iconMenuLine,
 .iconMenu::before,
 .iconMenu::after {
@@ -106,18 +139,15 @@ nav {
    left: 0;
    transition: all 0.3s;
 }
-
 .iconMenu::before {
    top: 0.5rem;
 }
-
 .iconMenu::after {
    bottom: 0.5rem;
 }
 .iconMenuLine {
    top: calc(50% - 0.0625rem);
 }
-
 .menuOpen .iconMenu::before {
    top: calc(50% - 0.0625rem);
    transform: rotate(-45deg);
@@ -131,24 +161,9 @@ nav {
    width: 0;
 }
 
-.navBody {
-   position: fixed;
-   width: 50%;
-   top: 2.7rem;
-   right: 0.2rem;
-   transition: left 0.3s;
-   background-color: rgba(68, 68, 67, 0.7);
-   backdrop-filter: blur(3px);
-   padding: 0.25rem 0.5rem;
-   overflow: auto;
-   z-index: 1;
-   border-radius: 3px;
-   box-shadow: 2px 2px 4px #000;
 
-   @media (max-width: 360px) {
-      width: 70%;
-   }
-   @media (max-width: 400px) {
-      width: 60%;
-   }
-}
+
+
+
+
+

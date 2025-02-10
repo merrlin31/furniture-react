@@ -5,12 +5,33 @@ import style from './MySelect.module.scss'
 export const MySelect = ({options, value, onChange, className, translate}) => {
    const {t} = useTranslation()
    let name = (translate) ? translate + options.name : options.name
+   
    return (
       <div className={className}>
          <label>
-         <div className={style.label}>{options.name && t(name)}</div>
+            <div className={style.label}>{options.name && t(name)}</div>
             <select className={style.select} value={value} onChange={e => onChange(e.target.value)} id={options.id}>
-               <option disabled value=''>{t(options.defaulValue)}</option>
+               <option disabled value=''>{t(options.defaultValue)}</option>
+               {options.options.map((option, index) =>
+                  <option key={index} value={option.value}>
+                     {t(option.name)}
+                  </option>
+               )}
+            </select>
+         </label>
+      </div>   
+   );
+}
+
+export const MySelect1 = ({options, className, translate, register}) => {
+   const {t} = useTranslation()
+   let name = (translate) ? translate + options.name : options.name
+   return (
+      <div className={className}>
+         <label>
+            <div className={style.label}>{options.name && t(name)}</div>
+            <select className={style.select} id={options.select} {...register(options.select, options.validate)}>
+               <option disabled value=''>{t(options.defaultValue)}</option>
                {options.options.map((option, index) =>
                   <option key={index} value={option.value}>
                      {t(option.name)}
@@ -26,10 +47,24 @@ export const MyEditableSelect = ({id, options, value, onChange}) => {
    const {t} = useTranslation()
    return (
       <select className={style.editableSelect} value={value} onChange={e => onChange(e.target.value)} id={id}>
-         <option disabled value=''>{t(options.defaulValue)}</option>
+         <option disabled value=''>{t(options.defaultValue)}</option>
          {options.options.map((option, index) =>
             <option key={index} value={option.value}>
                {t(option.name)}
+            </option>
+         )}
+      </select>
+   );
+}
+
+export const MySearchSelect = ({className, options, value, onChange, translate}) => {
+   const {t} = useTranslation()
+   return (
+      <select className={className} value={value} onChange={e => onChange(e.target.value)} id={options.id}>
+         <option disabled value=''>{t(translate + options.defaultValue)}</option>
+         {options.options.map((option, index) =>
+            <option key={index} value={option.value}>
+               {t(translate + option.name)}
             </option>
          )}
       </select>

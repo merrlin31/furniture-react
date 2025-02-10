@@ -14,7 +14,6 @@ import { selectMaterialType } from "../properties/detailingProperties";
 
 export const SpecificationRow = ({material, change, allPrice, multiplicity, deleteFunc, manufacturer, manufacturerOptions, 
    name, description, code, amount, price = 0, totalPrice, discount, totalSum}) => {
-
    const dispatch = useDispatch()
    const [editeble, setEditeble] = useState(false)
    const {t} = useTranslation()

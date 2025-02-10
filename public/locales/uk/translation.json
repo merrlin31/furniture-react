@@ -1,5 +1,4 @@
 {
-   "text": "какойто текст",
    "material": "Матеріал",
    "downSection": "Нижня шафа",
    "upSection": "Верхня шафа",
@@ -64,6 +63,7 @@
 
    "telescopic": "Телескопічні",
    "hiddenMuller": "Приховані Muller",
+   "hiddenBlum": "Приховані Blum",
    "hiddenHettich": "Приховані Hettich",
    "tandemBox": "Стальні боковини",
    "drawersDefaultValue": "Оберіть направляючі",
@@ -143,6 +143,8 @@
    "3050": "3050",
    "4100": "4100",
 
+   "pureSize": "Чистий розмір",
+
    "bodyManufacturer": "Матеріал корпусу",
    "frontManufacturer": "Матеріал фасаду",
    "tabletopManufacturer": "Матеріл стільниці",
@@ -175,12 +177,15 @@
    "lumineProf": "Lumine профілі",
    "luminePower": "Lumine живлення",
    "ukraine": "Україна",
+   "ferroFiori": "Ferro Fiori",
+   "Cascata": "Cascata",
    "viyar": "Віяр",
    "manufacturerDefaultValue": "Оберіть виробника",
 
    "servicesManufacturer": "Віяр",
 
    "addItem": "Додати",
+   "deleteItem": "Видалити",
 
    "table": {
       "total": "Всього:",
@@ -258,6 +263,8 @@
       "pushtelescopic": "Направляюча телескопічна P2O ({{lenght}})",
       "softhiddenMuller": "Направляюча прихована з дотягувачем ({{lenght}})",
       "pushhiddenMuller": "Направляюча прихована P2O ({{lenght}})",
+      "softhiddenBlum": "Направляюча прихована з дотягувачем ({{lenght}})",
+      "pushhiddenBlum": "Направляюча прихована P2O ({{lenght}})",
       "softhiddenHettich": "Направляюча прихована з дотягувачем ({{lenght}})",
       "pushhiddenHettich": "Направляюча прихована P2O ({{lenght}})",
       "softtandemBox": "Тандембокс з дотягувачем ({{lenght}})",
@@ -318,10 +325,11 @@
       "indentBotFalseFront": "Відступ попереду між нижніми кутовими шафами",
       "indentUpFalseBack": "Відступ позаду між верхніми кутовими шафами",
       "indentUpFalseFront": "Відступ попереду між верхніми кутовими шафами",
-      "indentBotGola": "Відступ між фасадами з gola",
+      "indentGolaC": "Відступ між фасадами з gola",
+      "indentGolaL": "Відступ між фасадом з gola та стільницею",
       "indentUpGola": "Виступ знизу верхнього фасаду",
-      "indentCupboard": "Задній відступ шафи",
-      "indentHood": "Відступ витяжки по висоті",
+      "indentCupboard": "Відступ боковини шафи від переднього краю стільниці",
+      "indentHood": "Зменшення шафи витяжки по висоті",
       "indentJoinSection": "Відступ верхньої кутової шафи",
       "partition": "Ширина перетинки нижньої секції",
       "indentFront": "Відступ між фасадами",
@@ -351,7 +359,9 @@
       "section4Title2": "Перелік фурнітури:",
       "section4Title3": "Загальна вартість:",
       "section5Title1": "Налаштування відступів:",
+      "section6Title1": "Візуалізація",
       "sections": "Секції",
+      "rendering": "Візуалізація",
       "detailing": "Деталювання",
       "specification": "Розрахунок",
       "settings": "Налаштування"
@@ -367,6 +377,88 @@
       "profit": "Прибуток",
       "delivery": "Доставка",
       "gasoline": "Паливо"
+   },
+
+   "profile": {
+      "fullName": "Повне ім'я",
+      "telephone": "Телефон",
+      "adress": "Адреса",
+      "projectName": "Назва проекту",
+      "customer": "Замовник"
+   },
+
+   "addCustomer": "Додати замовника",
+   "saveProject": "Зберегти проект",
+   "loadProject": "Завантажити проект",
+   "projects not found": "Проектів не знайдено",
+   "email": "Електронна пошта",
+   "password": "Пароль",
+   "userName": "Ім'я користувача",
+   "logIn": "Вхід",
+   "logout": "Вихід",
+   "register": "Реєстрація",
+   "Don't have an account?": "Немає облікового запису?",
+   "Sign up": "Зареєструйтеся",
+   "Forgot your password?": "Забули пароль?",
+   "Go to login": "Перейти до входу",
+   "customer": "Замовник",
+   "adress": "Адреса проекту",
+   "total price": "Ціна проекту",
+   "modify date": "Дата збереження",
+   "used codes": "Використані товари",
+   "grn": "грн.",
+
+   "errors": {
+      "Invalid username or password": "Невірний логін або пароль",
+      "email is required": "E-mail обов'язковий",
+      "userName is required": "Ім'я обов'язкове",
+      "name is required": "Назва обов'язкова",
+      "customer is required": "Замовник обов'язковий",
+      "password is required": "Пароль обов'язковий",
+      "material code is required": "Код матеріала обов'язковий",
+      "thickness is required": "Товщина обов'язкова",
+      "height is required": "Висота обов'язкова",
+      "width is required": "Ширина обов'язкова",
+      "depth is required": "Глибина обов'язкова",
+      "front is required": "Кіл-ть фасадів обов'язкова",
+      "drawers is required": "Кіл-ть ящиків обов'язкова",
+      "shelves is required": "Кіл-ть поличок обов'язкова",
+      "invalid email": "Невірний e-mail",
+      "the customer already exists": "Такий замовник вже існує",
+      "the customer does not already exists": "Такого замовника не існує",
+      "the name already exists": "Така назва вже існує",
+      "min length": "Мінімальна довжина 3 символи",
+      "min length 1": "Мінімальна довжина 1 символ",
+      "max length": "Максимальна довжина 30 символи",
+      "max length 60": "Максимальна довжина 60 символів",
+      "max length 6": "Максимальна довжина 6 символів",
+      "max length 4": "Максимальна довжина 4 символів",
+      "max length 2": "Максимальна довжина 2 символи",
+      "max length 1": "Максимальна довжина 1 символ",
+      "max": "Максимальне значення {{count}}",
+      "min": "Мінімальне значення {{count}}"
+   },
+
+   "menu": {
+      "admin panel": "Адмінка",
+      "new project": "Новий проект",
+      "load project": "Завантажити проект",
+      "add customer": "Додати замовника",
+      "save project": "Зберегти проект",
+      "recover": "Відновити проект",
+      "update furniture prices": "Оновити ціни фурнітури",
+      "update service prices": "Оновити ціни послуг",
+      "update indents": "Оновити відступи",
+      "update db furniture prices": "Оновити ціни фурнітури у базі",
+      "update db service prices": "Оновити ціни послуг у базі",
+      "update db indents": "Оновити відступи у базі"
+   },
+   "search": {
+      "by name": "По назві",
+      "by customer": "По замовнику",
+      "by adress": "По адресі",
+      "by code": "По коду товару",
+      "search by": "Шукати"
    }
 
 }

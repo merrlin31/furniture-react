@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import { btnContainerClass, detailingTableResponsive, materialType1, materialType1SheetArea, materialType3, 
-   materialType4, section4BtnClass, serviceManufacturer, TblClass, titleClass } from "../../utils/description"
+   materialType4, section4BtnClass, VIYAR, TblClass, titleClass, modalClass, materialType1TotalSheetArea } from "../../utils/description"
 import { discount } from "../../utils/furniture"
 import { Title } from "../Title"
 import { SpecificationMaterials } from "./SpecificationMaterials"
@@ -59,35 +59,45 @@ export const SpecificationTable = (props) => {
       } 
       setModal(false)     
    }
-   
-   let finalMaterials, finalItems
-   if (props.materials) {
-      finalMaterials = props.materials.map(material => {
-         let dif = valueDifference.find(obj => obj.code === material.materialCode)
-         let value = dif?.value || 0
+   const prepareMaterial = (material, dif) => {
+      let value = dif?.value || 0
          let boldEdgeValue = dif?.boldEdge || 0
          let thinEdgeValue = dif?.thinEdge || 0
-         let amount = +(material.area + value).toFixed(2)
-         if (material.material === materialType1 || material.material === materialType3) amount = Math.ceil(amount / materialType1SheetArea) 
-         if (material.material === materialType4) amount = Math.ceil(amount / tabletopLength)
+         let scale = 1
+         if (material.material === materialType4) scale = 1000
+         let amount = +((material.area + value) / scale).toFixed(2)
+         if (!material.pureSize) {
+            if (material.material === materialType1 || material.material === materialType3) amount = Math.ceil(amount / materialType1SheetArea) 
+            if (material.material === materialType4) amount = Math.ceil(amount / (tabletopLength / scale))
+         }
+         let coefficient = 1.3   // Процент чистого размера!
+         if (material.material === materialType4) coefficient = 1.25
+         let length = (material.material === materialType4) ? tabletopLength / scale : materialType1TotalSheetArea
+         let pureSizePrice = coefficient / length 
+         let discountValue = material.discountValue  // Процент скидки!
+         if (material.pureSize) {
+            discountValue = 20
+            if (material.material === materialType4) discountValue = 12
+         }
          if (amount < 0) amount = 0
+         
          let boldEdge = Math.ceil(material.boldEdge + boldEdgeValue)
          let thinEdge = Math.ceil(material.thinEdge + thinEdgeValue)
-         let totalPrice = +(material.price * amount).toFixed(2)
+         let price = +material.price
+         if (material.pureSize) price = +(material.price * pureSizePrice).toFixed(2)  
+         let totalPrice = +(price * amount).toFixed(2)
          let boldEdgeTotalPrice = +(material.boldEdgePrice * boldEdge).toFixed(2)
          let thinEdgeTotalPrice = +(material.thinEdgePrice * thinEdge).toFixed(2)
-         let discount = +(totalPrice * material.discountValue / 100).toFixed(2)
+         let discount = +(totalPrice * discountValue / 100).toFixed(2)
          let boldEdgeDiscount = +(edgeDiscount * boldEdgeTotalPrice / 100).toFixed(2)
          let thinEdgeDiscount = +(edgeDiscount * thinEdgeTotalPrice / 100).toFixed(2)
          let totalSum = +(totalPrice - discount).toFixed(2)
          let boldEdgeTotalSum = +(boldEdgeTotalPrice - boldEdgeDiscount).toFixed(2)
          let thinEdgeTotalSum = +(thinEdgeTotalPrice - thinEdgeDiscount).toFixed(2)
-         return {...material, amount, totalPrice, discount, totalSum, boldEdge, thinEdge, 
+         return {...material, price, amount, totalPrice, discount, totalSum, boldEdge, thinEdge, 
             boldEdgeTotalPrice, thinEdgeTotalPrice, boldEdgeDiscount, thinEdgeDiscount, boldEdgeTotalSum, thinEdgeTotalSum}
-      }) 
-   } 
-   finalItems = props.content.map(item => {
-      let value = valueDifference.find(obj => obj.code === item.code)?.value || 0
+   }
+   const prepareItem = (item, value) => {
       let amount = +(item.value + value).toFixed(2)
       if (item.multiplicity) {
          amount = Math.ceil(amount / item.multiplicity)
@@ -98,8 +108,20 @@ export const SpecificationTable = (props) => {
       let totalPrice = +(props.price[item.name] * amount).toFixed(2) || 0
       let itemDiscount = +(totalPrice * getDiscont / 100).toFixed(2)
       let totalSum = +(totalPrice - itemDiscount).toFixed(2)
-      let manufacturer = (item.manufacturer) ? item.manufacturer : serviceManufacturer
+      let manufacturer = (item.manufacturer) ? item.manufacturer : VIYAR
       return {...item, materialCode: item.code, amount, price: props.price[item.name] || 0, totalPrice, discount: itemDiscount, totalSum, manufacturer}
+   }
+   
+   let finalMaterials, finalItems
+   if (props.materials) {
+      finalMaterials = props.materials.map(material => {
+         let dif = valueDifference.find(obj => obj.code === material.materialCode)
+         return prepareMaterial(material, dif)
+      })
+   } 
+   finalItems = props.content.map(item => {
+      let value = valueDifference.find(obj => obj.code === item.code)?.value || 0
+      return prepareItem(item, value)
    })
    const sortMaterials = useMemo(() => {
       if (!props.materials) return
@@ -134,7 +156,7 @@ export const SpecificationTable = (props) => {
             </table>
          </div>   
          <div className={btnContainerClass}><AddLogo className={props.class + section4BtnClass} onClick={addItem} /></div>
-         <MyModal visible={modal} setVisible={setModal}>
+         <MyModal visible={modal} setVisible={setModal} class={modalClass}>
             <AddItem addItem={addNewItem} materials={props.materials} />
          </MyModal>
       </div>

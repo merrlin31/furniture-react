@@ -17,7 +17,7 @@ export const materialType4ThinEdgePrice = 121.44
 
 export class Material {
    constructor(materialCode, area, boldEdge, thinEdge, edging, material, price = 0, 
-      boldEdgePrice = 0, thinEdgePrice = 0, manufacturer = materialManufacturer1, discountValue) {
+      boldEdgePrice = 0, thinEdgePrice = 0, manufacturer = materialManufacturer1, discountValue, pureSize = false) {
       this.materialCode = materialCode;
       this.area = +area.toFixed(2);
       this.boldEdge = +boldEdge;
@@ -27,8 +27,9 @@ export class Material {
       this.price = +price;
       this.boldEdgePrice = +boldEdgePrice;
       this.thinEdgePrice = +thinEdgePrice;
-      this.manufacturer = manufacturer
-      this.discountValue = discountValue
+      this.manufacturer = manufacturer;
+      this.discountValue = discountValue;
+      this.pureSize = pureSize
    }
 
    get cutting() {
@@ -50,7 +51,7 @@ export const bodyManufacturerName = {name: bodyManufacturer, id: bodyManufacture
    {value: materialManufacturer3, name: materialManufacturer3},
    {value: materialManufacturer4, name: materialManufacturer4},
    {value: materialManufacturer5, name: materialManufacturer5},
-], defaulValue: materialDefaultValue};
+], defautlValue: materialDefaultValue};
 export const frontManufacturerName = {name: frontManufacturer, id: frontManufacturer, select: frontManufacturer, options: [
    {value: materialManufacturer1, name: materialManufacturer1},
    {value: materialManufacturer2, name: materialManufacturer2},
@@ -59,7 +60,7 @@ export const frontManufacturerName = {name: frontManufacturer, id: frontManufact
    {value: materialManufacturer5, name: materialManufacturer5},
    {value: materialManufacturer6, name: materialManufacturer6},
    {value: materialManufacturer7, name: materialManufacturer7},
-], defaulValue: materialDefaultValue};
+], defaultValue: materialDefaultValue};
 export const tabletopManufacturerName = {name: tabletopManufacturer, id: tabletopManufacturer, select: tabletopManufacturer, options: [
    {value: materialManufacturer1, name: materialManufacturer1},
    {value: materialManufacturer2, name: materialManufacturer2},
@@ -68,11 +69,11 @@ export const tabletopManufacturerName = {name: tabletopManufacturer, id: tableto
    {value: materialManufacturer9, name: materialManufacturer9},
    {value: materialManufacturer10, name: materialManufacturer10},
    {value: materialManufacturer11, name: materialManufacturer11},
-], defaulValue: materialDefaultValue};
+], defaultValue: materialDefaultValue};
 export const dvpManufacturerName = {name: dvpManufacturer, id: dvpManufacturer, select: dvpManufacturer, options: [
    {value: materialManufacturer1, name: materialManufacturer1},
    {value: materialManufacturer12, name: materialManufacturer12},
-], defaulValue: materialDefaultValue};
+], defaultValue: materialDefaultValue};
 
 export const bodyManufacturerDiscount = {
    kronospan: 10,

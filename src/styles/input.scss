@@ -1,7 +1,7 @@
 @import "variable.scss";
 
 .input {
-   background-color: $input-bg;
+   // background-color: $input-bg;
    color: $dark-color;
    padding: 10px 15px;
    font-size: 1rem;
@@ -85,7 +85,7 @@
          flex-direction: column;
 
          :hover {
-            background-color: #f3ba66;
+            background-color: #e9c38b;;
          }
 
          @media (max-width: 768px) {
@@ -199,7 +199,7 @@
 
 .dishwasher-select {
    width: 25%;
-   background: #f3ba66;
+   background: #e9c38b;;
    line-height: 1.2;
    font-size: 0.8rem;
    border-radius: 2px;

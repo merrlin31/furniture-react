@@ -1,0 +1,27 @@
+.autocomplete-custom {
+   width: 50%;
+   border: none;
+}
+
+.autocomplete-custom .MuiAutocomplete-inputRoot {
+   border-color: #dbcdb6;
+}
+
+.autocomplete-custom input {
+   background: #dbcdb6;
+   height: 1.4rem;
+   line-height: 1.5;
+   font-size: 1.0rem;
+   border-radius: 2px;
+   padding: 0px 5px;
+   padding-top: 3px;
+   border: none;
+   appearance: none;
+   outline: none;
+   box-shadow: 0px 1px 0px #000;
+   text-align: center;
+}
+
+.autocomplete-custom .MuiAutocomplete-listbox {
+   background: #dbcdb6; /* Background color for the dropdown */
+}

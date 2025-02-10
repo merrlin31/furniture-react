@@ -4,7 +4,7 @@ import { drawers, furniture, FurnitureItem, KARGO, HOOKS_LEFT, RAIL, LATTICE, AB
    GOLA_L, DISH, GOLA_C, LIFT, TABLETOP_CONNECTOR, HOOKS_RIGHT_CUP, 
    HOOKS_LEFT_CUP, LEGS, LEGS_CLIPS, PUSH, PUSH_BAR, PLINTH_SEAL, HOOKS_RIGHT, hinges } from "./furniture";
 import { Section } from "./Section";
-import { frontOpeningType2, furnitureManufacturer1, furnitureManufacturer2, furnitureManufacturer3, 
+import { frontOpeningType2, HETTICH, MULLER, BLUM, 
    hingesType1, hingesType2, hingesType3, hingesType4, hingesType5, legsAmount1, legsAmount2, 
    levelType1, liftType1, liftType2, liftType3, openingType1, openingType2, sectionBottomType2, 
    sectionBottomType3, sectionUpperType3, sectionUpperType4, sectionBottomType1, ninthDetail, tenthDetail, 
@@ -19,7 +19,8 @@ import { frontOpeningType2, furnitureManufacturer1, furnitureManufacturer2, furn
    numberSelfTapping15Push, numberSelfTapping15Legs, numberSelfTapping15Lift, numberSelfTapping30Drawer, numberSelfTapping30JoinSection, 
    numberSelfTapping30Hook, 
    frontOpeningType5,
-   minCut} from "./description";
+   minCut,
+   drawerType5} from "./description";
 import { allService, MILLING_CUT_TABLETOP, DRILLING, DRILLING_HINGES, HANDLING_MILLING_CUT, TABLETOP_LOCK, GROOVE, MILLING_CUT, MILLING_CUT_MIN } from "./services";
 
 export class CreateSection {
@@ -34,7 +35,7 @@ export class CreateSection {
       section.initialValues = this.section
       let furnitures = []
       let services = []
-      let length = this.section.values.sectionWidth / scale
+      let length = this.section.values.width / scale
       let numberHinges = 0
       let opening = (this.section.values.frontOpening === frontOpeningType2) ? openingType1 : openingType2
       let numberFront = 0
@@ -54,7 +55,7 @@ export class CreateSection {
       
       if (this.section.values.level === levelType1) {
          furnitures = [...furnitures, {...furniture[LEGS]}]
-         legs = (this.section.values.sectionWidth <= 600) ? legsAmount1 : legsAmount2;
+         legs = (this.section.values.width <= 600) ? legsAmount1 : legsAmount2;
          changeFurniture(LEGS).value = legs
          furnitures = [...furnitures, {...furniture[LEGS_CLIPS]}]
          changeFurniture(LEGS_CLIPS).value = legs / 2
@@ -96,7 +97,7 @@ export class CreateSection {
             furnitures = [...furnitures, new FurnitureItem(numberHingesName, hinges[opening][hingesType], hinges.manufacturer, 1, numberHinges)]
             if (this.section.values.sectionType === sectionBottomType3) {
                let numberHingesNameSecond = opening + hingesType5
-               let manufacturer = (this.section.values.frontOpening === frontOpeningType2) ? furnitureManufacturer1 : furnitureManufacturer2
+               let manufacturer = (this.section.values.frontOpening === frontOpeningType2) ? HETTICH : MULLER
                furnitures = [...furnitures, new FurnitureItem(numberHingesNameSecond, hinges[opening][hingesType5], manufacturer, 1, numberHinges)]
                numberHinges *= hingesAmount
             }
@@ -109,11 +110,11 @@ export class CreateSection {
                numberLift = 2
                let code = (this.section.values.frontOpening === frontOpeningType2) ? hinges[opening][hingesType4] : hinges[opening][hingesType4]
                numberHingesName = opening + hingesType4
-               furnitures = [...furnitures, new FurnitureItem(numberHingesName, code, furnitureManufacturer2, 1, numberHinges / numberFront)]
+               furnitures = [...furnitures, new FurnitureItem(numberHingesName, code, MULLER, 1, numberHinges / numberFront)]
                if (numberFront > 1) {
                   numberHingesName = opening + hingesType6
                   code = (this.section.values.frontOpening === frontOpeningType2) ? hinges[opening][hingesType6] : hinges[opening][hingesType6]
-                  furnitures = [...furnitures, new FurnitureItem(numberHingesName, code, furnitureManufacturer2, 1, numberHinges - numberHinges / numberFront)]
+                  furnitures = [...furnitures, new FurnitureItem(numberHingesName, code, MULLER, 1, numberHinges - numberHinges / numberFront)]
                } 
 
             } else if (this.section.values.liftType === liftType2) {
@@ -126,7 +127,7 @@ export class CreateSection {
             
             furnitures = [...furnitures, {...furniture[LIFT]}]
             changeFurniture(LIFT).value = numberFront * numberLift
-            changeFurniture(LIFT).manufacturer = (this.section.values.liftType === liftType1) ? furnitureManufacturer2 : furnitureManufacturer3
+            changeFurniture(LIFT).manufacturer = (this.section.values.liftType === liftType1) ? MULLER : BLUM
          }   
          changeService(DRILLING).value += sectionFronts.numberHinges * 2
       }
@@ -175,9 +176,9 @@ export class CreateSection {
                ? Math.round(drawersDetails.find(detail => detail.name === drawerFirstDetail).height / drawerScale) * drawerScale
                : Math.round(drawersDetails.find(detail => detail.name === drawerThirdDetail).height / drawerScale) * drawerScale  
             let drawersName = opening + this.section.values.drawersType + '_' + drawersLenght
-            let code = (this.section.values.drawersType !== drawerType4) 
-               ? drawers[this.section.values.drawersType][opening][drawersLenght]
-               : '' 
+            let code = (this.section.values.drawersType === drawerType4 || this.section.values.drawersType === drawerType5) 
+               ? '' 
+               : drawers[this.section.values.drawersType][opening][drawersLenght]
             furnitures = [...furnitures, new FurnitureItem(drawersName, code, drawers[this.section.values.drawersType].manufacturer)]
             changeFurniture(drawersName).value = this.section.values.drawers
             changeFurniture(drawersName).drawer = true
@@ -199,7 +200,7 @@ export class CreateSection {
          }
          if (this.section.values.sectionType === sectionBottomType3) {
             let connectorDetail = this.section.getSectionDimensions().find(detail => detail.name === fourthDetail);
-            let height = this.section.values.sectionDepth - (this.section.prevDepth - this.section.constants.indentFrontBody) 
+            let height = this.section.values.depth - (this.section.prevDepth - this.section.constants.indentFrontBody) 
             - this.section.constants.materialWidth;
             connectorDetail.name = tenthDetail;
             connectorDetail.height = height
@@ -215,8 +216,20 @@ export class CreateSection {
             changeFurniture(CONFIRMATS).value += numberConfirmatsCornerBot;
          }
          if (this.section.values.sectionType === sectionBottomType4) {
+            let centralDetail = section.details.find(detail => detail.name === fourthDetail);
+            centralDetail.amount += 1
+            if (this.section.checkboxes.oven) centralDetail.amount += 1
+            if (this.section.checkboxes.microwave) centralDetail.amount += 1
+            if (this.section.values.frontOpening === frontOpeningType4 && (this.section.checkboxes.oven || this.section.checkboxes.microwave)) {
+               furnitures = [...furnitures, {...furniture[PUSH]}]
+               furnitures = [...furnitures, {...furniture[PUSH_BAR]}]
+               changeFurniture(PUSH).value = 1;
+               changeFurniture(PUSH_BAR).value = 1;
+            }
+
+
             section.details = [...section.details, this.section.getCupboardPlinth()]
-            changeService(GROOVE).value += this.section.values.kitchenHeight * 2 / scale
+            changeService(GROOVE).value += this.section.values.heightKitchen * 2 / scale
             if (this.section.checkboxes.oven || this.section.checkboxes.fridge) {
                furnitures = [...furnitures, {...furniture[LATTICE]}]
                changeFurniture(LATTICE).value = 1
@@ -253,7 +266,7 @@ export class CreateSection {
          furnitures = [...furnitures, {...furniture[RAIL]}]
          changeFurniture(RAIL).value = length;
          (this.section.values.level === levelType2)
-            ? changeService(GROOVE).value += ((this.section.values.sectionUpHeight * 2 + this.section.values.sectionWidth)) / scale
+            ? changeService(GROOVE).value += ((this.section.values.heightUpSection * 2 + this.section.values.width)) / scale
             : changeService(GROOVE).value += ((this.section.values.heightMezzanineSection * 2)) / scale
       }
       if (this.section.values.sectionType === sectionUpperType2) {
@@ -327,7 +340,7 @@ export class CreateSection {
          changeFurniture(PUSH_BAR).value = push;
       }
       if (this.section.values.frontOpening === frontOpeningType5 && this.section.values.sectionType === sectionUpperType3) {
-         const cut = (this.section.values.sectionWidth - (this.section.values.neighboringSectionWidth - 
+         const cut = (this.section.values.width - (this.section.values.neighboringWidth - 
             this.section.constants.indentUpFalseBack + this.section.constants.indentUpFalseFront) - 
             this.section.constants.materialWidth + this.section.constants.shorterBottom) / scale;
          (cut > minCut)

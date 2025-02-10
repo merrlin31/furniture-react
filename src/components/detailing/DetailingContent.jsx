@@ -1,7 +1,7 @@
 import '../../styles/detailing.scss';
 import { useEffect } from 'react';
 import { DetailingTable } from './DetailingTable';
-import { allService, Services } from '../../utils/services';
+import { allService } from '../../utils/services';
 import { addMaterial, addToArr, fillArr } from '.././properties/detailingProperties';
 import { detailingTable1Class, detailingTable2Class, detailingTable3Class, detailingTable4Class, 
    detailType1, detailType2, detailType3, detailType4, materialType1Height } from '../../utils/description';
@@ -42,8 +42,11 @@ export const DetailingContent = (props) => {
          rightTabletop: [],
       }
       let allMaterials = []
-      let service = new Services()
-      
+      let service = {}
+      for (let key in allService) {
+         service[key] = 0
+      }
+
       product.forEach(section => {
          fillArr(arrDetails, section[DETAILS], section)
          fillArr(arrFronts, section[FRONTS], section)

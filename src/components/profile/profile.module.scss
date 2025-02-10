@@ -1,0 +1,344 @@
+@import "../../styles/variable.scss";
+
+.container {
+   position: relative;
+   width: 12%;
+
+   @media (max-width: 1279px) {
+      width: 20%;
+   }
+
+   @media (max-width: 1279px) {
+      width: 20%;
+   }
+
+   @media (max-width: 899px) {
+      width: 25%;
+   }
+
+   @media (max-width: 769px) {
+      width: 30%;
+   }
+
+   @media (max-width: 599px) {
+      width: 20%;
+   }
+
+   .loginBtn {
+      color: $input-bg;
+      font-size: 1.4rem;
+      line-height: 1.7;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+   }
+
+   .profile {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      padding: 2px 5px;
+      width: 100%;
+      justify-items: center;
+
+      .avatar {
+         height: 1.6rem;
+         grid-row: span 2;
+         grid-column: 1 / 2;
+         align-self: center;
+         border-radius: 50%;
+         cursor: pointer;
+      }
+
+      .userName {
+         grid-column: 2 / 3;
+         color: rgb(199, 194, 194);
+         font-style: italic;
+         font-weight: bold;
+      }
+
+      .btn {
+         background: none;
+         border: none;
+         font-size: 0.8rem;
+         color: #fff;
+
+         &:hover {
+            text-decoration: underline;
+            font-size: 0.9rem;
+         }
+      }
+   }
+
+   .menu {
+      top: 104%;
+      right: 0;
+      position: absolute;
+      min-height: 200px;
+      width: max-content;
+      background-color: rgba(68, 68, 67, 0.7);
+      backdrop-filter: blur(3px);
+      padding: 0.5rem 1rem;
+      // overflow: hidden;
+      z-index: 1;
+      border-radius: 3px;
+      box-shadow: 2px 2px 4px #000;
+
+      & li {
+         margin: 0 auto;
+         color: $light-color;
+         cursor: pointer;
+      }
+
+      .menuItem {
+         position: relative;
+      }
+
+      .submenu {
+         padding: 0.5rem 1rem;
+         top: -1.6rem;
+         right: 120%;
+         position: absolute;
+         min-height: 200px;
+         width: max-content;
+         background-color: rgba(68, 68, 67, 1.0);
+         // backdrop-filter: blur(3px);
+         z-index: 5;
+         border-radius: 3px;
+         box-shadow: 2px 2px 4px #000;
+
+         &::after {
+            content: '';
+            height: 20px;
+            width: 20px;
+            background-color: rgba(68, 68, 67, 1.0);
+            position: absolute;
+            box-shadow: 2px 2px 2px #000;
+            left: 100%;
+            z-index: 4;
+            transform: translateX(-50%) rotate(-45deg);
+         }
+      }
+
+
+   }
+}
+
+// $text-color: rgb(25, 73, 13);
+$text-color: rgb(206, 201, 140);
+
+.label {
+   color: $text-color;
+   padding-top: 3px;
+   text-align: left;
+   font-size: 0.85rem;
+   text-decoration: underline;
+}
+
+.autocomplete {
+   background: #dbcdb6;
+   height: 1.4rem;
+   border: none;
+   box-shadow: 0px 1px 0px $text-color;
+   text-align: center;
+   width: 400px;
+}
+
+.input {
+   width: 100%;
+   background: #dbcdb6;
+   // background: #dbcdb6;
+   height: 1.4rem;
+   line-height: 1.5;
+   font-size: 1.0rem;
+   border-radius: 2px;
+   padding: 0px 5px;
+   padding-top: 3px;
+   border: none;
+   appearance: none;
+   outline: none;
+   box-shadow: 0px 1px 0px $text-color;
+   text-align: center;
+}
+
+.input:hover, .input:focus {
+   box-shadow: 0px 2px 0px $text-color;
+}
+
+.title {
+   text-align: center;
+   padding-bottom: 5px;
+   color: #fff;
+   font-family: Arial, sans-serif;
+}
+
+.loadProject {
+   width: 100%;
+}
+
+.customerContainer {
+   display: grid;
+   grid-template-columns: 3fr 2fr;
+   grid-template-rows: repeat(2, 1fr);
+   column-gap: 10px;
+   row-gap: 5px;
+   justify-items: center;
+   align-items: flex-start;
+
+   div {
+      width: 100%;
+   }
+}
+
+.customerBtn {
+   color: $text-color;
+   width: 80%;
+   line-height: 1.6;
+   font-size: 1.2rem;
+   margin: 5px;
+   margin-top: 10px;
+   border-radius: 5px;
+   border: none;
+   background-color: #5a5650;
+   transition: 0.3s;
+   box-shadow: 1px 4px 0px #000;
+
+   &:hover {
+      box-shadow: 1px 2px 0px #000;
+      transform: translateY(2px);
+   }
+}
+
+.saveProject {
+   position: relative;
+}
+
+.dropdown {
+   background-color: rgb(68, 68, 67);
+   color: #fff;
+   border: 1px solid #fff;
+   border-radius: 3px;
+   width: 100%;
+   max-height: 200px;
+   font-size: 1.2rem;
+   padding: 3px 5px;
+   position: absolute;
+   
+   & div {
+      border-bottom: 1px solid rgb(197, 197, 197);
+      cursor: pointer;
+   }
+
+   & div:last-child {
+      border-bottom: none;
+   }
+}
+
+.projectContainer {
+   display: grid;
+   grid-template-columns: 2fr 2fr;
+   grid-template-rows: repeat(3, 1fr);
+   column-gap: 10px;
+   row-gap: 5px;
+   justify-items: center;
+   align-items: flex-start;
+
+   @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+   }
+
+   div {
+      width: 100%;
+   }
+
+   .projectInfo {
+      background-color: rgb(197, 197, 197);
+      padding: 5px;
+      height: 100%;
+      border-radius: 3px;
+      box-shadow: inset -10px -10px 15px rgba(255, 255, 255, 0.5), 
+                  inset 10px 10px 15px rgba(70, 70, 70, 0.12);
+      
+      
+      .projectName {
+         text-align: center;
+         font-family: Arial, Helvetica, sans-serif;
+         font-weight: bold;
+         font-size: 1.2rem;
+         cursor: pointer;
+      }
+
+      &:hover .projectName {
+         color: rgb(36, 173, 236);
+      }
+
+      & div span {
+         font-family: Arial, Helvetica, sans-serif;
+         font-weight: bold;
+         font-size: 0.8rem;
+      }
+
+   }
+}
+
+.noProject {
+   width: 100%;
+   color: #fff;
+}
+
+.searchBar {
+   display: grid;
+   grid-template-columns: 3fr 2fr;
+   column-gap: 5px;
+   row-gap: 5px;
+   justify-items: center;
+   align-items: flex-start;
+
+   & input, & select {
+      margin-bottom: 10px;
+      margin-top: 5px;
+      padding: 3px 5px 1px;
+      width: 100%;
+      background: rgb(68, 68, 67);
+      height: 1.8rem;
+      font-size: 1.2rem;
+      border-radius: 3px;
+      color: #fff;
+      border: 1px solid #fff;
+      appearance: none;
+      outline: none;
+
+      &:hover, &:focus {
+         border: 2px solid rgb(36, 173, 236);
+      }
+   }
+
+   .searcInput {
+      
+      line-height: 1.6;
+   }
+
+   .searchType {
+      line-height: 1.0;
+   }
+}
+
+
+
+.buttons {
+   text-align: center;
+
+   svg {
+      height: 3rem;
+      margin: 5px;
+      fill: #fff;
+      cursor: pointer;
+      
+      &:hover {
+         fill: grey;
+      }
+   }
+}
+
+
+

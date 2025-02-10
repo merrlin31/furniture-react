@@ -1,7 +1,7 @@
 import { CreateSection } from "./CreateSection";
 import { Detail } from "./Detail";
 import { boldEdge, drawerFirstDetail, drawerSecondDetail, drawerThirdDetail, 
-   drawerType1, drawerType2, drawerType3, drawerType4, eighthDetail, fifthDetail, 
+   drawerType1, drawerType2, drawerType3, drawerType4, drawerType5, eighthDetail, fifthDetail, 
    firstDetail, firstDvp, firstFront, firstPlinthDetail, firstTabletopDetail, fourthDetail, frontMaxWidth, 
    frontMaxWidthFridge, frontOpeningType1, frontOpeningType3, frontOpeningType4, frontOpeningType5, levelType1, 
    levelType2, levelType3, materialType1, materialType3, materialType4, maxSectionDepth, secondDetail, 
@@ -15,19 +15,19 @@ export class SectionDimensions {
       this.values = values
       this.values.body = +values.body;
       this.values.front = +values.front;
-      this.values.dvp = +values.materialDvp;
-      this.values.tabletop = +values.materialTabletop;
-      this.values.kitchenHeight = +values.heightKitchen;
+      this.values.materialDvp = +values.materialDvp;
+      this.values.materialTabletop = +values.materialTabletop;
+      this.values.heightKitchen = +values.heightKitchen;
       this.values.sectionHeight = values.heightDownSection - values.tabletopThickness - values.plinth;
       this.values.heightMezzanineSection = +values.heightMezzanineSection;
-      this.values.sectionUpHeight = +values.heightUpSection;
-      this.values.sectionWidth = +values.width;
-      this.values.sectionDepth = +values.depth;
-      this.values.neighboringSectionWidth = +values.neighboringWidth;
+      this.values.heightUpSection = +values.heightUpSection;
+      this.values.width = +values.width;
+      this.values.depth = +values.depth;
+      this.values.neighboringWidth = +values.neighboringWidth;
       this.values.plinth = +values.plinth
       this.values.sectionType = values.sectionType;
       this.values.side = values.side;
-      this.values.material = values.frontMaterial;
+      this.values.frontMaterial = values.frontMaterial;
       this.values.level = values.level;
       this.values.frontAmount = +values.frontAmount;
       this.values.shelves = +values.shelves;
@@ -42,7 +42,7 @@ export class SectionDimensions {
    }
    getSectionDimensions() {
       let washEdge = (this.checkboxes.sink) ? thinEdge : withoutEdge;
-      let oven = this.checkboxes.oven ? this.values.sectionDepth - this.constants.indentTabletop : this.constants.partition;
+      let oven = this.checkboxes.oven ? this.values.depth - this.constants.indentTabletop : this.constants.partition;
       let amount = 1;
       let details
 
@@ -104,11 +104,11 @@ export class SectionDimensions {
       if (this.checkboxes.oven) ++numberShelves;
       if (this.checkboxes.microwave) ++numberShelves;
       let edge = [thinEdge, washEdge, washEdge, washEdge]
-      let detailHeight = this.values.sectionWidth - this.constants.materialWidth * 2
-      let detailWidth = this.values.sectionDepth - this.constants.indentTabletop - this.constants.indentShelve
+      let detailHeight = this.values.width - this.constants.materialWidth * 2
+      let detailWidth = this.values.depth - this.constants.indentTabletop - this.constants.indentShelve
       if (this.values.sectionType === sectionBottomType2) {
          detailHeight -= this.constants.indentWall
-         detailWidth = this.values.sectionDepth - this.constants.indentTabletop - this.constants.indentCornerSection
+         detailWidth = this.values.depth - this.constants.indentTabletop - this.constants.indentCornerSection
       }
       if (this.values.sectionType === sectionBottomType3) {
          detailHeight -= (this.constants.indentTabletop + this.constants.indentFrontBody)
@@ -116,8 +116,8 @@ export class SectionDimensions {
       }
       if (this.values.level !== levelType1) {
          detailWidth = (this.values.sectionType === sectionUpperType3) 
-            ? this.values.sectionDepth - this.constants.indentCornerSection - this.constants.indentBackside
-            : this.values.sectionDepth - this.constants.indentShelve - this.constants.indentBackside
+            ? this.values.depth - this.constants.indentCornerSection - this.constants.indentBackside
+            : this.values.depth - this.constants.indentShelve - this.constants.indentBackside
       }
 
       return new Detail(fifthDetail, (detailHeight), (detailWidth), numberShelves, edge, this.values.body)
@@ -147,6 +147,12 @@ export class SectionDimensions {
             indentWidth = 46;
             indentBottom = 12;
             break
+         case drawerType5:
+            indentLenth = 3;
+            indentGuide = 10;
+            indentWidth = 49;
+            indentBottom = 12;
+            break
          default:
             indentLenth = 0;
             indentGuide = 0;
@@ -155,8 +161,8 @@ export class SectionDimensions {
             break
       }
       
-      let sideHeight = Math.floor((this.values.sectionDepth - this.constants.indentTabletop - indentLenth) / drawerLenghtRounding) * drawerLenghtRounding - indentGuide
-      let backHeight = this.values.sectionWidth - this.constants.materialWidth * 2 - indentWidth
+      let sideHeight = Math.floor((this.values.depth - this.constants.indentTabletop - indentLenth) / drawerLenghtRounding) * drawerLenghtRounding - indentGuide
+      let backHeight = this.values.width - this.constants.materialWidth * 2 - indentWidth
       if (this.values.drawersType === drawerType4) {
          edge = [thinEdge, thinEdge, thinEdge, thinEdge];
          let widthDetailSide = (!this.checkboxes.oven) 
@@ -181,50 +187,50 @@ export class SectionDimensions {
    getVisibleSideDimensions() {
       let plinth = +this.values.plinth
       let amount = 1
-      return new Detail(sixthDetail, (this.values.sectionHeight + plinth), this.values.sectionDepth, amount, [boldEdge, thinEdge, thinEdge, thinEdge], this.values.body)
+      return new Detail(sixthDetail, (this.values.sectionHeight + plinth), this.values.depth, amount, [boldEdge, thinEdge, thinEdge, thinEdge], this.values.body)
    }
    getFalseDimensions() {
       let detail;
       let amount = 1
       let edge = [thinEdge, thinEdge, thinEdge, withoutEdge]
-      let heightDetail = (this.values.level === levelType2) ? this.values.sectionUpHeight : this.values.heightMezzanineSection
+      let heightDetail = (this.values.level === levelType2) ? this.values.heightUpSection : this.values.heightMezzanineSection
       if (this.values.sectionType === sectionBottomType2) {
-         detail = new Detail(seventhDetail, this.values.sectionHeight, (this.values.neighboringSectionWidth - this.constants.indentTabletop - 
+         detail = new Detail(seventhDetail, this.values.sectionHeight, (this.values.neighboringWidth - this.constants.indentTabletop - 
             this.constants.indentBotFalseBack + this.constants.indentBotFalseFront), amount, edge, this.values.body) 
       } else if (this.values.sectionType === sectionUpperType3) {
-         detail = new Detail(seventhDetail, heightDetail, (this.values.neighboringSectionWidth - 
+         detail = new Detail(seventhDetail, heightDetail, (this.values.neighboringWidth - 
             this.constants.indentUpFalseBack + this.constants.indentUpFalseFront), amount, edge, this.values.body) 
       } else if (this.values.sectionType === sectionBottomType3) {
          detail = new Detail(seventhDetail, this.values.sectionHeight - this.constants.materialWidth, 
-            this.values.neighboringSectionWidth - this.constants.indentTabletop, amount, edge, this.values.body)
+            this.values.neighboringWidth - this.constants.indentTabletop, amount, edge, this.values.body)
       }
       return detail
    }
    getFrontDimensions() {
-      let edge = (this.values.material === materialType1) ? [boldEdge, boldEdge, boldEdge, boldEdge] : [withoutEdge, withoutEdge, withoutEdge, withoutEdge];
+      let edge = (this.values.frontMaterial === materialType1) ? [boldEdge, boldEdge, boldEdge, boldEdge] : [withoutEdge, withoutEdge, withoutEdge, withoutEdge];
       let divider, numberFront, widthFront, heightFront, microwave;
       let gola = (this.values.frontOpening === frontOpeningType4) 
-         ? this.constants.indentBotGola 
+         ? this.constants.indentGolaC 
          : (this.values.frontOpening === frontOpeningType3) ? this.constants.indentUpGola : 0;
       let oven = (this.checkboxes.oven && this.values.sectionType !== sectionBottomType4) ? this.constants.ovenHeight : 0
       let falsePanel = (this.values.sectionType === sectionBottomType2) 
-         ? (this.values.neighboringSectionWidth - this.constants.indentTabletop - this.constants.indentBotFalseBack + 
+         ? (this.values.neighboringWidth - this.constants.indentTabletop - this.constants.indentBotFalseBack + 
             this.constants.indentBotFalseFront) + this.constants.indentWall
          : (this.values.sectionType === sectionUpperType3) 
-            ? (this.values.neighboringSectionWidth + this.constants.indentUpFalseFront) 
+            ? (this.values.neighboringWidth + this.constants.indentUpFalseFront) 
             : 0
 
       if (this.values.drawers > 0 || this.checkboxes.lift) {
          divider = 1;
       } else {
          divider = this.values.frontAmount
-         if (this.values.sectionWidth - falsePanel > frontMaxWidth && !this.checkboxes.lift) divider = 2;
+         if (this.values.width - falsePanel > frontMaxWidth && !this.checkboxes.lift) divider = 2;
       }
 
-      widthFront = (this.values.sectionWidth - falsePanel) / divider - this.constants.indentFront
+      widthFront = (this.values.width - falsePanel) / divider - this.constants.indentFront
 
-      if (this.values.sectionType === sectionBottomType3) widthFront = this.values.sectionWidth - 
-      (this.values.neighboringSectionWidth - this.constants.indentTabletop) - this.constants.indentTabletop + this.constants.indentFrontBody - 
+      if (this.values.sectionType === sectionBottomType3) widthFront = this.values.width - 
+      (this.values.neighboringWidth - this.constants.indentTabletop) - this.constants.indentTabletop + this.constants.indentFrontBody - 
       this.constants.materialWidth - this.constants.indentFront
 
       if (this.values.drawers > 0 ) {
@@ -237,7 +243,7 @@ export class SectionDimensions {
       
       heightFront = (this.values.level === levelType2 || this.values.level === levelType3) 
          ? (this.values.level === levelType2)
-            ? (this.values.sectionUpHeight + gola) / divider - this.constants.indentFront
+            ? (this.values.heightUpSection + gola) / divider - this.constants.indentFront
             : (this.values.heightMezzanineSection + gola) / divider - this.constants.indentFront
          : Math.round((this.values.sectionHeight - this.constants.indentFront) / divider) - this.constants.indentFront - gola - oven;
 
@@ -245,7 +251,7 @@ export class SectionDimensions {
          numberFront = this.values.drawers
       } else if (this.values.sectionType === sectionBottomType3) {
          numberFront = 1
-      } else if (this.values.sectionWidth - falsePanel > frontMaxWidth && !this.checkboxes.lift) {
+      } else if (this.values.width - falsePanel > frontMaxWidth && !this.checkboxes.lift) {
          numberFront = 2
       } else {
          numberFront = this.values.frontAmount
@@ -257,7 +263,7 @@ export class SectionDimensions {
       }
       
       let detail = {fronts: [], numberHinges: 0}
-      detail.fronts.push(new Detail(firstFront, heightFront, widthFront, numberFront, edge, this.values.front, this.values.material))
+      detail.fronts.push(new Detail(firstFront, heightFront, widthFront, numberFront, edge, this.values.front, this.values.frontMaterial))
       if (this.checkboxes.withoutFront || this.checkboxes.simpleFridge) detail.fronts = []
 
       this.checkboxes.lift 
@@ -270,40 +276,40 @@ export class SectionDimensions {
          oven = (this.checkboxes.oven) ? this.constants.ovenHeight : 0
          microwave = (this.checkboxes.microwave) ? this.constants.microwaveHeight : 0
          let numberSecondFront
-         if (this.values.sectionWidth > frontMaxWidthFridge && !this.checkboxes.lift) {
+         if (this.values.width > frontMaxWidthFridge && !this.checkboxes.lift) {
             numberSecondFront = 2
-         } else if (this.values.sectionWidth > frontMaxWidth && !this.checkboxes.lift) {
+         } else if (this.values.width > frontMaxWidth && !this.checkboxes.lift) {
             (this.checkboxes.simpleFridge) 
                ? numberSecondFront = this.values.frontAmount
                : numberSecondFront = 2
          } else {
             numberSecondFront = this.values.frontAmount
          }
-         let heightSecondFront = this.values.kitchenHeight - this.values.plinth - heightFront - this.constants.indentFront * 2 - oven - microwave;
-         if (this.checkboxes.fridge) heightSecondFront = this.values.kitchenHeight - (heightFront + this.constants.indentFront) * 2 - this.values.plinth - this.constants.indentFront
+         let heightSecondFront = this.values.heightKitchen - this.values.plinth - heightFront - this.constants.indentFront * 2 - oven - microwave;
+         if (this.checkboxes.fridge) heightSecondFront = this.values.heightKitchen - (heightFront + this.constants.indentFront) * 2 - this.values.plinth - this.constants.indentFront
          divider = (!this.checkboxes.lift) ? 1 : this.values.frontAmount
-         if (this.checkboxes.simpleFridge) heightSecondFront = (this.values.kitchenHeight - this.constants.fridgeHeight) / divider - this.constants.indentFront
+         if (this.checkboxes.simpleFridge) heightSecondFront = (this.values.heightKitchen - this.constants.fridgeHeight) / divider - this.constants.indentFront
          divider = (this.checkboxes.lift) ? 1 : this.values.frontAmount
          if (this.checkboxes.lift) {
             divider = 1
          } else {
             divider = numberSecondFront
          }
-         let widthSecondFront = (this.values.sectionWidth / divider - this.constants.indentFront);
+         let widthSecondFront = (this.values.width / divider - this.constants.indentFront);
 
          this.checkboxes.lift 
          ? detail.numberHinges += this.getHinges(widthSecondFront)
          : detail.numberHinges += this.getHinges(heightSecondFront)
-         detail.secondFront = new Detail(secondFront, heightSecondFront, widthSecondFront, numberSecondFront, edge, this.values.front, this.values.material)
+         detail.fronts.push(new Detail(secondFront, heightSecondFront, widthSecondFront, numberSecondFront, edge, this.values.front, this.values.frontMaterial))
       }
 
       if (this.values.sectionType === sectionBottomType3) {
          let numberSecondFront = 1
          let heightSecondFront = heightFront
-         let widthSecondFront = this.values.sectionDepth - this.prevDepth + this.constants.indentFrontBody - this.constants.materialWidth - this.constants.indentFront;
+         let widthSecondFront = this.values.depth - this.prevDepth + this.constants.indentFrontBody - this.constants.materialWidth - this.constants.indentFront;
 
          detail.numberHinges += this.getHinges(heightSecondFront)
-         detail.fronts.push(new Detail(secondFront, heightSecondFront, widthSecondFront, numberSecondFront, edge, this.values.front, this.values.material))
+         detail.fronts.push(new Detail(secondFront, heightSecondFront, widthSecondFront, numberSecondFront, edge, this.values.front, this.values.frontMaterial))
       }
       if (this.checkboxes.withoutFront) {
          detail.numberHinges = 0
@@ -314,17 +320,17 @@ export class SectionDimensions {
    getPlinthDimensions() {
       let detail = [];
       let cornerIndent = (this.values.sectionType === sectionBottomType2 || this.values.sectionType === sectionBottomType3) 
-         ? this.values.neighboringSectionWidth - this.constants.indentFrontBody - this.constants.indentPlinth - this.constants.materialWidth 
+         ? this.values.neighboringWidth - this.constants.indentFrontBody - this.constants.indentPlinth - this.constants.materialWidth 
          : 0;
       const edge = [thinEdge, thinEdge, withoutEdge, withoutEdge]
       let heightSecondPlinth = 0
       let handleIndent = 0
       let amount = 1
       if (this.values.frontOpening === frontOpeningType1) handleIndent = this.constants.materialWidth
-      if (this.values.sectionType === sectionBottomType3) heightSecondPlinth = this.values.sectionDepth - this.prevDepth + this.constants.indentPlinth;
+      if (this.values.sectionType === sectionBottomType3) heightSecondPlinth = this.values.depth - this.prevDepth + this.constants.indentPlinth;
       if (this.values.sectionType === sectionBottomType2) heightSecondPlinth = this.constants.materialWidth * 2 + this.constants.indentPlinth + handleIndent;
 
-      let heightPlinth = this.values.sectionWidth - cornerIndent;
+      let heightPlinth = this.values.width - cornerIndent;
       if (this.values.sectionType === sectionBottomType4) heightPlinth = 0;
       if (this.values.side === sideType3)  {
          detail = [new Detail(thirdPlinthDetail, heightPlinth, this.values.plinth, amount, edge, this.values.body), {}, {}]
@@ -344,15 +350,15 @@ export class SectionDimensions {
       return detail
    }
    getCupboardPlinth() {
-      return new Detail(eighthDetail, (this.values.sectionWidth - this.constants.materialWidth * 2), this.values.plinth, 1, 
+      return new Detail(eighthDetail, (this.values.width - this.constants.materialWidth * 2), this.values.plinth, 1, 
          [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body)
    }
    getTabletopDimension() {
       let detail = [];
-      let topEdge = (this.values.sectionDepth < maxSectionDepth) ? boldEdge : withoutEdge;
-      let widthTabletop = this.values.sectionDepth;
+      let topEdge = (this.values.depth < maxSectionDepth) ? boldEdge : withoutEdge;
+      let widthTabletop = this.values.depth;
       let edge = [topEdge, boldEdge, withoutEdge, withoutEdge];
-      let heightTabletop = this.values.sectionWidth;
+      let heightTabletop = this.values.width;
       let handleIndent = 0
       let amount = 1
       if (this.values.sectionType === sectionBottomType4) heightTabletop = 0;
@@ -360,23 +366,23 @@ export class SectionDimensions {
       if (this.values.frontOpening === frontOpeningType1) handleIndent = this.constants.materialWidth
       if (this.values.sectionType === sectionBottomType2) heightSecondTabletop = this.constants.materialWidth * 2 - this.constants.indentFrontBody + handleIndent;
       if (this.values.sectionType === sectionBottomType3) {
-         heightSecondTabletop = this.values.sectionDepth - this.prevDepth;
+         heightSecondTabletop = this.values.depth - this.prevDepth;
          widthTabletop = this.prevDepth;
       }
       if (this.values.side === sideType1) {
          detail = [
-            new Detail(firstTabletopDetail, heightTabletop, widthTabletop, amount, edge, this.values.tabletop, materialType4),
-            new Detail(secondTabletopDetail, heightSecondTabletop, this.values.neighboringSectionWidth, amount, edge, this.values.tabletop, materialType4),
+            new Detail(firstTabletopDetail, heightTabletop, widthTabletop, amount, edge, this.values.materialTabletop, materialType4),
+            new Detail(secondTabletopDetail, heightSecondTabletop, this.values.neighboringWidth, amount, edge, this.values.materialTabletop, materialType4),
             {}
          ]
       } else if (this.values.side === sideType2) {
          detail = [
             {},
-            new Detail(secondTabletopDetail, heightTabletop, widthTabletop, amount, edge, this.values.tabletop, materialType4),
-            new Detail(thirdTabletopDetail, heightSecondTabletop, this.values.neighboringSectionWidth, amount, edge, this.values.tabletop, materialType4)
+            new Detail(secondTabletopDetail, heightTabletop, widthTabletop, amount, edge, this.values.materialTabletop, materialType4),
+            new Detail(thirdTabletopDetail, heightSecondTabletop, this.values.neighboringWidth, amount, edge, this.values.materialTabletop, materialType4)
          ]
       } else {
-         detail = [{}, {}, new Detail(thirdTabletopDetail, heightTabletop, widthTabletop, amount, edge, this.values.tabletop, materialType4)]
+         detail = [{}, {}, new Detail(thirdTabletopDetail, heightTabletop, widthTabletop, amount, edge, this.values.materialTabletop, materialType4)]
       }
       return detail
    }
@@ -387,12 +393,12 @@ export class SectionDimensions {
       let detail = []
       if (this.values.level === levelType1) {
          dvpHeight = this.values.sectionHeight - this.constants.indentDvp;
-         dvpWidth = this.values.sectionWidth - this.constants.indentDvp;
+         dvpWidth = this.values.width - this.constants.indentDvp;
          if (this.values.sectionType === sectionBottomType3) {
-            dvpWidth = this.values.sectionWidth - this.constants.indentTabletop + this.constants.indentFrontBody - this.constants.indentDvp
-            dvpUpWidth = this.values.sectionDepth - this.prevDepth + this.constants.materialWidth - this.constants.indentDvp + this.constants.indentFrontBody
+            dvpWidth = this.values.width - this.constants.indentTabletop + this.constants.indentFrontBody - this.constants.indentDvp
+            dvpUpWidth = this.values.depth - this.prevDepth + this.constants.materialWidth - this.constants.indentDvp + this.constants.indentFrontBody
          }
-         dvpUpHeight = this.values.kitchenHeight - this.values.plinth - dvpHeight - this.constants.indentDvp * 2;
+         dvpUpHeight = this.values.heightKitchen - this.values.plinth - dvpHeight - this.constants.indentDvp * 2;
          if (this.values.sectionType === sectionBottomType2) dvpWidth -= this.constants.indentWall;
          if (this.checkboxes.oven) {
             (this.values.sectionType === sectionBottomType4) 
@@ -402,21 +408,21 @@ export class SectionDimensions {
          if (this.checkboxes.microwave) dvpUpHeight -= this.constants.microwaveHeight;
 
          if (!(this.checkboxes.sink || this.checkboxes.dishwasher || this.checkboxes.fridge || this.checkboxes.simpleFridge)) { 
-            detail.push(new Detail(firstDvp, dvpHeight, dvpWidth, amount, edge, this.values.dvp, materialType3));
+            detail.push(new Detail(firstDvp, dvpHeight, dvpWidth, amount, edge, this.values.materialDvp, materialType3));
          }
-         if (this.checkboxes.fridge) dvpUpHeight = this.values.kitchenHeight - this.constants.fridgeHeight - this.constants.indentDvp - this.values.plinth - this.constants.materialWidth;
-         if (this.checkboxes.simpleFridge) dvpUpHeight = this.values.kitchenHeight - this.constants.fridgeHeight - this.constants.indentDvp;
+         if (this.checkboxes.fridge) dvpUpHeight = this.values.heightKitchen - this.constants.fridgeHeight - this.constants.indentDvp - this.values.plinth - this.constants.materialWidth;
+         if (this.checkboxes.simpleFridge) dvpUpHeight = this.values.heightKitchen - this.constants.fridgeHeight - this.constants.indentDvp;
          if (this.values.sectionType === sectionBottomType3) {
             dvpUpHeight = dvpHeight;
             dvpWidth = dvpUpWidth;
          }
          if (this.values.sectionType === sectionBottomType4 || this.values.sectionType === sectionBottomType3) 
-            detail.push(new Detail(secondDvp, dvpUpHeight, dvpWidth, amount, edge, this.values.dvp, materialType3));
+            detail.push(new Detail(secondDvp, dvpUpHeight, dvpWidth, amount, edge, this.values.materialDvp, materialType3));
       } else {
-         dvpHeight = this.values.sectionUpHeight - this.constants.indentDvp
+         dvpHeight = this.values.heightUpSection - this.constants.indentDvp
          if (this.values.level === levelType2) dvpHeight -= (this.constants.materialWidth - this.constants.dvpGrooveDepth);
-         dvpWidth = this.values.sectionWidth - this.constants.materialWidth * 2 + this.constants.dvpGrooveDepth * 2 - this.constants.indentDvp;
-         detail.push(new Detail(firstDvp, dvpHeight, dvpWidth, amount, edge, this.values.dvp, materialType3))
+         dvpWidth = this.values.width - this.constants.materialWidth * 2 + this.constants.dvpGrooveDepth * 2 - this.constants.indentDvp;
+         detail.push(new Detail(firstDvp, dvpHeight, dvpWidth, amount, edge, this.values.materialDvp, materialType3))
       } 
 
       return detail
@@ -437,25 +443,25 @@ export class SectionDimensions {
 
    getBotType1Dimensions(washEdge, amount, oven) {
       return [
-         new Detail(firstDetail, this.values.sectionHeight - this.constants.materialWidth, this.values.sectionDepth - this.constants.indentTabletop, amount, 
+         new Detail(firstDetail, this.values.sectionHeight - this.constants.materialWidth, this.values.depth - this.constants.indentTabletop, amount, 
             [thinEdge, washEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(secondDetail, this.values.sectionHeight - this.constants.materialWidth, this.values.sectionDepth - this.constants.indentTabletop, amount, 
+         new Detail(secondDetail, this.values.sectionHeight - this.constants.materialWidth, this.values.depth - this.constants.indentTabletop, amount, 
             [thinEdge, washEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth, this.values.sectionDepth - this.constants.indentTabletop, amount, 
+         new Detail(thirdDetail, this.values.width, this.values.depth - this.constants.indentTabletop, amount, 
             [thinEdge, washEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2, oven, amount, 
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2, oven, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
    getBotType2Dimensions(washEdge, amount) {
       return [
-         new Detail(firstDetail, this.values.sectionHeight - this.constants.materialWidth, this.values.sectionDepth - this.constants.indentTabletop, amount, 
+         new Detail(firstDetail, this.values.sectionHeight - this.constants.materialWidth, this.values.depth - this.constants.indentTabletop, amount, 
             [thinEdge, washEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(secondDetail, this.values.sectionHeight - this.constants.materialWidth, this.values.sectionDepth - this.constants.indentTabletop, amount, 
+         new Detail(secondDetail, this.values.sectionHeight - this.constants.materialWidth, this.values.depth - this.constants.indentTabletop, amount, 
             [thinEdge, washEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.indentWall, this.values.sectionDepth - this.constants.indentTabletop, amount, 
+         new Detail(thirdDetail, this.values.width - this.constants.indentWall, this.values.depth - this.constants.indentTabletop, amount, 
             [thinEdge, washEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2 - this.constants.indentWall, this.constants.partition, amount, 
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2 - this.constants.indentWall, this.constants.partition, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
@@ -463,24 +469,24 @@ export class SectionDimensions {
       return [
          new Detail(firstDetail, this.values.sectionHeight - this.constants.materialWidth, this.prevDepth - this.constants.indentTabletop, amount * 2, 
             [thinEdge, washEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(secondDetail, this.values.sectionHeight - this.constants.materialWidth, this.values.neighboringSectionWidth - this.constants.indentTabletop, amount, 
+         new Detail(secondDetail, this.values.sectionHeight - this.constants.materialWidth, this.values.neighboringWidth - this.constants.indentTabletop, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.indentTabletop + this.constants.indentFrontBody, 
-            this.values.sectionDepth - this.constants.indentTabletop + this.constants.indentFrontBody, amount, 
+         new Detail(thirdDetail, this.values.width - this.constants.indentTabletop + this.constants.indentFrontBody, 
+            this.values.depth - this.constants.indentTabletop + this.constants.indentFrontBody, amount, 
             [thinEdge, washEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2 - this.constants.indentTabletop + this.constants.indentFrontBody, 
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2 - this.constants.indentTabletop + this.constants.indentFrontBody, 
             this.constants.partition, amount * 2, [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
    getBotType4Dimensions(amount) {
       return [
-         new Detail(firstDetail, this.values.kitchenHeight, this.values.sectionDepth - this.constants.indentCupboard, amount, 
-            [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(secondDetail, this.values.kitchenHeight, this.values.sectionDepth - this.constants.indentCupboard, amount, 
-            [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentTabletop, amount, 
-            [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentTabletop, amount, 
+         new Detail(firstDetail, this.values.heightKitchen - this.constants.materialWidth - this.values.plinth, this.values.depth - this.constants.indentCupboard, amount, 
+            [thinEdge, thinEdge, withoutEdge, thinEdge], this.values.body),
+         new Detail(secondDetail, this.values.heightKitchen - this.constants.materialWidth - this.values.plinth, this.values.depth - this.constants.indentCupboard, amount, 
+            [thinEdge, thinEdge, withoutEdge, thinEdge], this.values.body),
+         new Detail(thirdDetail, this.values.width, this.values.depth - this.constants.indentTabletop, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentTabletop, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
@@ -488,87 +494,87 @@ export class SectionDimensions {
    getUpType1Dimensions(amount) {
       let subtract = (this.values.frontOpening === frontOpeningType5) ? this.constants.shorterBottom : 0
       return [
-         new Detail(firstDetail, this.values.sectionUpHeight, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(secondDetail, this.values.sectionUpHeight, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - subtract, amount, 
-            [thinEdge, thinEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
+         new Detail(firstDetail, this.values.heightUpSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(secondDetail, this.values.heightUpSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(thirdDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - subtract, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
    getUpType2Dimensions(amount) {
       return [
-         new Detail(firstDetail, this.values.sectionUpHeight - this.constants.indentHood, this.values.sectionDepth, amount, 
-            [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(secondDetail, this.values.sectionUpHeight - this.constants.indentHood, this.values.sectionDepth, amount, 
-            [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth, amount, 
-            [thinEdge, thinEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
+         new Detail(firstDetail, this.values.heightUpSection - this.constants.indentHood, this.values.depth, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(secondDetail, this.values.heightUpSection - this.constants.indentHood, this.values.depth, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(thirdDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
    getUpType3Dimensions(amount) {
       return [
-         new Detail(firstDetail, this.values.sectionUpHeight, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(secondDetail, this.values.sectionUpHeight, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth, amount, 
-            [thinEdge, thinEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
+         new Detail(firstDetail, this.values.heightUpSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(secondDetail, this.values.heightUpSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(thirdDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
    getUpType4Dimensions(amount) {
       let subtract = (this.values.frontOpening === frontOpeningType5) ? this.constants.shorterBottom : 0
       return [
-         new Detail(firstDetail, this.values.sectionUpHeight, this.values.sectionDepth + this.constants.indentJoinSection, amount, 
-            [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(secondDetail, this.values.sectionUpHeight, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - subtract, amount, 
-            [thinEdge, thinEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
+         new Detail(firstDetail, this.values.heightUpSection, this.values.depth + this.constants.indentJoinSection, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(secondDetail, this.values.heightUpSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(thirdDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - subtract, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
 
    getMezType1Dimensions(amount) {
       return [
-         new Detail(firstDetail, this.values.heightMezzanineSection, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(secondDetail, this.values.heightMezzanineSection, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
-            [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
+         new Detail(firstDetail, this.values.heightMezzanineSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(secondDetail, this.values.heightMezzanineSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(thirdDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
    getMezType2Dimensions(amount) {
       return [
-         new Detail(firstDetail, this.values.heightMezzanineSection, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(secondDetail, this.values.heightMezzanineSection, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
-            [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
+         new Detail(firstDetail, this.values.heightMezzanineSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(secondDetail, this.values.heightMezzanineSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(thirdDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
    getMezType3Dimensions(amount) {
       return [
-         new Detail(firstDetail, this.values.heightMezzanineSection, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(secondDetail, this.values.heightMezzanineSection, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
-            [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
+         new Detail(firstDetail, this.values.heightMezzanineSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(secondDetail, this.values.heightMezzanineSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(thirdDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }
    getMezType4Dimensions(amount) {
       return [
-         new Detail(firstDetail, this.values.heightMezzanineSection, this.values.sectionDepth + this.constants.indentJoinSection, amount, 
-            [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(secondDetail, this.values.heightMezzanineSection, this.values.sectionDepth, amount, [thinEdge, thinEdge, thinEdge, thinEdge], this.values.body),
-         new Detail(thirdDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
-            [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body),
-         new Detail(fourthDetail, this.values.sectionWidth - this.constants.materialWidth * 2, this.values.sectionDepth - this.constants.indentBackside, amount, 
+         new Detail(firstDetail, this.values.heightMezzanineSection, this.values.depth + this.constants.indentJoinSection, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(secondDetail, this.values.heightMezzanineSection, this.values.depth, amount, [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(thirdDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
+            [thinEdge, withoutEdge, thinEdge, thinEdge], this.values.body),
+         new Detail(fourthDetail, this.values.width - this.constants.materialWidth * 2, this.values.depth - this.constants.indentBackside, amount, 
             [thinEdge, withoutEdge, withoutEdge, withoutEdge], this.values.body)
       ]
    }

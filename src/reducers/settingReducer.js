@@ -1,6 +1,4 @@
-import { initialFurniturePrice } from "../utils/furniture";
-import { initialServicesPrice } from "../utils/services";
-import { initialIndentValues, initialPercentage } from "../components/properties/settingsProperties";
+import { initialPercentage } from "../components/properties/settingsProperties";
 
 const EDIT_VALUE = 'EDIT_VALUE'
 const SET_ALL_PRICE = 'SET_ALL_PRICE'
@@ -15,9 +13,9 @@ export const SERVICES = 'servicePrices'
 export const INDENTS = 'indentValues'
 
 const defaultState = {
-   furniturePrices: {...initialFurniturePrice, id: FURNITURES},
-   servicePrices: {...initialServicesPrice, id: SERVICES},
-   indentValues: {...initialIndentValues, id: INDENTS},
+   furniturePrices: {id: FURNITURES},
+   servicePrices: {id: SERVICES},
+   indentValues: {id: INDENTS},
    percentage: initialPercentage,
    codes: []
 }
@@ -27,9 +25,9 @@ export default function settingReducer(state = defaultState, action) {
       case EDIT_VALUE:
          return {...state, [action.payload.key]: {...state[action.payload.key], [action.payload.field]: action.payload.value}}     
       case SET_ALL_PRICE:
-         return {...state, [action.payload.key]: {...action.payload.obj}}         
+         return {...state, [action.payload.key]: {...action.payload.obj, id: action.payload.key}}         
       case SET_ALL_INDENT:
-         return {...state, indentValues: {...action.payload.obj}}     
+         return {...state, indentValues: {...action.payload.obj, id: INDENTS}}     
       case EDIT_PERCENTAGE:
          return {...state, percentage: {...state.percentage, [action.payload.key]: action.payload.value}} 
       case SET_CODES:

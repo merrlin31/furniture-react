@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { btnContainerClass, detailClass, detailingTableResponsive, detailInputClass, detailType4, edge1, edge2, section3BtnClass, titleClass } from "../../utils/description";
+import { btnContainerClass, detailClass, detailingTableResponsive, detailInputClass, detailType4, edge1, edge2, modalClass, section3BtnClass, titleClass } from "../../utils/description";
 import { DetailingItem } from ".././detailing/DetailingItem";
 import { Title } from "../Title";
 import { AddDetail } from "../UI/AddDetail";
@@ -82,7 +82,7 @@ export const DetailingTable = ({className, title, parent, details, type, edge, a
          </div>
          { type !== detailType4 && 
             <div className={btnContainerClass}><AddLogo className={parent + section3BtnClass} onClick={addItem} /></div>}
-         <MyModal visible={modal} setVisible={setModal}>
+         <MyModal visible={modal} setVisible={setModal} class={modalClass} >
             <AddDetail addDetail={addDetail} type={type} />
          </MyModal>
       </div>

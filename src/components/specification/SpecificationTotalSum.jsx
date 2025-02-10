@@ -44,10 +44,10 @@ export const SpecificationTotalSum = (props) => {
    const updateCodes = () => {
       let newCodes = [];
       [...furnitures, ...services].forEach(item => {
-         if (!newCodes.includes(item.code) && item.code && item.value !== 0) newCodes.push(item.code)
+         if (!newCodes.includes(item.code) && item.code && item.value !== 0) newCodes.push(+item.code)
       })
       materials.forEach(item => {
-         if (!newCodes.includes(item.materialCode) && item.materialCode) newCodes.push(item.materialCode)
+         if (!newCodes.includes(item.materialCode) && item.materialCode) newCodes.push(+item.materialCode)
       })
       dispatch(setCodes(newCodes))
    }

@@ -106,7 +106,7 @@ export default function detailReducer(state = defaultState, action) {
             if(item.materialCode === material.materialCode) {
                return new Material(material.materialCode, material.area, material.boldEdge, material.thinEdge, 
                   material.edging, material.material, material.price, material.boldEdgePrice, 
-                  material.thinEdgePrice, material.manufacturer, material.discountValue)
+                  material.thinEdgePrice, material.manufacturer, material.discountValue, material.pureSize)
             }
             return item
          })}   

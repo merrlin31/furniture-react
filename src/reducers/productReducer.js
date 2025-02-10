@@ -1,4 +1,4 @@
-import { initialItemAmount, initialValues } from "../components/properties/inputProperties";
+import { initialItemAmount, initialValues, productLimits } from "../components/properties/inputProperties";
 import { Detail } from "../utils/Detail";
 
 const ADD_SECTION = 'ADD_SECTION'
@@ -6,11 +6,13 @@ const EDIT_SECTION = 'EDIT_SECTION'
 const DELETE_SECTION = 'DELETE_SECTION'
 const INCREMETN_SECTION_COUNT = 'INCREMETN_SECTION_COUNT'
 const DECREMENT_SECTION_COUNT = 'DECREMENT_SECTION_COUNT'
+const UPDATE_SECTION_ID = 'UPDATE_SECTION_ID'
 const ADD_FURNITURE = 'ADD_FURNITURE'
 const ADD_SERVICE = 'ADD_SERVICE'
 const EDIT_FURNITURE = 'EDIT_FURNITURE'
 const EDIT_SERVICE = 'EDIT_SERVICE'
 const CHANGE_INITIAL_VALUES = 'CHANGE_INITIAL_VALUES'
+const CHANGE_PRODUCT_LIMITS = 'CHANGE_PRODUCT_LIMITS'
 const CHANGE_MATERIAL_CODE = 'CHANGE_MATERIAL_CODE'
 const CHANGE_MATERIAL_TYPE = 'CHANGE_MATERIAL_TYPE'
 const ADD_VALUE_DIFFERENCE = 'ADD_VALUE_DIFFERENCE'
@@ -24,9 +26,19 @@ const defaultState = {
    sectionAmount: {...initialItemAmount},
    furnitures: [],
    services: [],
-   initialValues: initialValues,
+   initialValues: {...initialValues},
+   productLimits: {...productLimits},
    valueDifference: [],
    totalSum: 0
+}
+
+const newDetailType = (detail, type) => {
+   return new Detail(detail.name, detail.height, detail.width, detail.amount, 
+   [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], detail.materialCode, type)
+}
+const newDetailCode = (detail, code) => {
+   return new Detail(detail.name, detail.height, detail.width, detail.amount, 
+   [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], code, detail.materialType)
 }
 
 export default function productReducer(state = defaultState, action) {
@@ -65,6 +77,10 @@ export default function productReducer(state = defaultState, action) {
                [action.payload]: --state.sectionAmount[action.payload]
             }
          }
+      case UPDATE_SECTION_ID:
+         return {...state, product: state.product.map((section, index) => {
+            return {...section, id: (index + 1)}
+         })}
       case ADD_FURNITURE:    
          return {...state, furnitures: [...state.furnitures.filter(item => item.name !== action.payload.name), action.payload]} 
       case EDIT_FURNITURE:    
@@ -85,6 +101,8 @@ export default function productReducer(state = defaultState, action) {
          })}   
       case CHANGE_INITIAL_VALUES:
          return {...state, initialValues:{...state.initialValues, ...action.payload}}   
+      case CHANGE_PRODUCT_LIMITS:
+         return {...state, productLimits:{...state.productLimits, ...action.payload}}   
       case ADD_VALUE_DIFFERENCE:
          return {...state, valueDifference:[...state.valueDifference.filter(item => item.code !== action.payload.code), action.payload]} 
       case CHANGE_VALUE_DIFFERENCE:
@@ -98,38 +116,33 @@ export default function productReducer(state = defaultState, action) {
          return {...state, product: state.product.map(section => {
             return {
                ...section, 
-               details: section.details.map(detail =>{
+               details: section.details.map(detail => {
                   if (detail.materialCode === action.payload.materialCode) {
-                     return new Detail(detail.name, detail.height, detail.width, detail.amount, 
-                        [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], action.payload.newMaterialCode, detail.materialType)
+                     return newDetailCode(detail, action.payload.newMaterialCode)
                   }
                   return detail
                }),
-               fronts: section.fronts.map(detail =>{
+               fronts: section.fronts.map(detail => {
                   if (detail.materialCode === action.payload.materialCode) {
-                     return new Detail(detail.name, detail.height, detail.width, detail.amount, 
-                        [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], action.payload.newMaterialCode, detail.materialType)
+                     return newDetailCode(detail, action.payload.newMaterialCode)
                   }
                   return detail
                }),
-               dvps: section.dvps.map(detail =>{
+               dvps: section.dvps.map(detail => {
                   if (detail.materialCode === action.payload.materialCode) {
-                     return new Detail(detail.name, detail.height, detail.width, detail.amount, 
-                        [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], action.payload.newMaterialCode, detail.materialType)
+                     return newDetailCode(detail, action.payload.newMaterialCode)
                   }
                   return detail
                }),
-               tabletops: section.tabletops.map(detail =>{
+               tabletops: section.tabletops.map(detail => {
                   if (detail.materialCode === action.payload.materialCode) {
-                     return new Detail(detail.name, detail.height, detail.width, detail.amount, 
-                        [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], action.payload.newMaterialCode, detail.materialType)
+                     return newDetailCode(detail, action.payload.newMaterialCode)
                   }
                   return detail
                }),
-               plinth: section.plinth.map(detail =>{
+               plinth: section.plinth.map(detail => {
                   if (detail.materialCode === action.payload.materialCode) {
-                     return new Detail(detail.name, detail.height, detail.width, detail.amount, 
-                        [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], action.payload.newMaterialCode, detail.materialType)
+                     return newDetailCode(detail, action.payload.newMaterialCode)
                   }
                   return detail
                })
@@ -139,51 +152,46 @@ export default function productReducer(state = defaultState, action) {
          return {...state, product: state.product.map(section => {
             return {
                ...section, 
-               details: section.details.map(detail =>{
+               details: section.details.map(detail => {
                   if (detail.materialCode === action.payload.materialCode) {
-                     return new Detail(detail.name, detail.height, detail.width, detail.amount, 
-                        [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], detail.materialCode, action.payload.newType)
+                     return newDetailType(detail, action.payload.newType)
                   }
                   return detail
                }),
-               fronts: section.fronts.map(detail =>{
+               fronts: section.fronts.map(detail => {
                   if (detail.materialCode === action.payload.materialCode) {
-                     return new Detail(detail.name, detail.height, detail.width, detail.amount, 
-                        [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], detail.materialCode, action.payload.newType)
+                     return newDetailType(detail, action.payload.newType)
                   }
                   return detail
                }),
-               dvps: section.dvps.map(detail =>{
+               dvps: section.dvps.map(detail => {
                   if (detail.materialCode === action.payload.materialCode) {
-                     return new Detail(detail.name, detail.height, detail.width, detail.amount, 
-                        [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], detail.materialCode, action.payload.newType)
+                     return newDetailType(detail, action.payload.newType)
                   }
                   return detail
                }),
-               tabletops: section.tabletops.map(detail =>{
+               tabletops: section.tabletops.map(detail => {
                   if (detail.materialCode === action.payload.materialCode) {
-                     return new Detail(detail.name, detail.height, detail.width, detail.amount, 
-                        [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], detail.materialCode, action.payload.newType)
+                     return newDetailType(detail, action.payload.newType)
                   }
                   return detail
                }),
-               plinth: section.plinth.map(detail =>{
+               plinth: section.plinth.map(detail => {
                   if (detail?.materialCode === action.payload.materialCode) {
-                     return new Detail(detail.name, detail.height, detail.width, detail.amount, 
-                        [detail.edge.top, detail.edge.bottom, detail.edge.left, detail.edge.right], detail.materialCode, action.payload.newType)
+                     return newDetailType(detail, action.payload.newType)
                   }
                   return detail
                })
             }
          })}
       case SET_TOTAL_SUM:
-         return {...state, totalSum: action.payload}
+         return {...state, totalSum: action.payload};
       case CLEAR_PRODUCT:
-         return defaultState
+         return {...defaultState, sectionAmount: {...initialItemAmount}};
       case LOAD_PRODUCT:
-         return action.payload
+         return {...action.payload} 
       default:
-         return state
+         return state;
    }
 }
 
@@ -192,11 +200,13 @@ export const editSectionObject = (key, sectionIndex, detailName, detail) => ({ty
 export const deleteSectionObject = (sectionId) => ({type: DELETE_SECTION, payload: sectionId})
 export const addSectionCount = (sectionType) => ({type: INCREMETN_SECTION_COUNT, payload: sectionType})
 export const subtractSectionCount = (sectionType) => ({type: DECREMENT_SECTION_COUNT, payload: sectionType})
+export const updateSectionId = () => ({type: UPDATE_SECTION_ID})
 export const addFurnitureItem = (furnitureItem) => ({type: ADD_FURNITURE, payload: furnitureItem})
 export const addServiceItem = (serviceItem) => ({type: ADD_SERVICE, payload: serviceItem})
 export const editFurnitureItem = (furnitureItem) => ({type: EDIT_FURNITURE, payload: furnitureItem})
 export const editServiceItem = (serviceItem) => ({type: EDIT_SERVICE, payload: serviceItem})
 export const changeValues = (data) => ({type: CHANGE_INITIAL_VALUES, payload: data})
+export const changeProductLimits = (data) => ({type: CHANGE_PRODUCT_LIMITS, payload: data})
 export const changeMaterialCode = (materialCode, newMaterialCode) => ({type: CHANGE_MATERIAL_CODE, payload: {materialCode, newMaterialCode}})
 export const changeMaterialType = (materialCode, newType) => ({type: CHANGE_MATERIAL_TYPE, payload: {materialCode, newType}})
 export const addValueDifference = (item) => ({type: ADD_VALUE_DIFFERENCE, payload: item})

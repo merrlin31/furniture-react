@@ -51,14 +51,14 @@ export const AddDetail = (props) => {
 
    const edgeElement = (edgeSide) => ({name: edgeSide, select: edgeSide, 
          options: edge.map(item => ({value: item, name: item}))
-         , defaulValue: 'choiseEdgeDefaultValue'})
+         , defaultValue: 'choiseEdgeDefaultValue'})
    
 
    const options = [
       {name: option1, id: option1, type:inputType},
       {name: option10, select: option10, 
          options: materialType.map(item => ({value: item, name: item}))
-         , defaulValue: 'materialTypeDefaultValue'},
+         , defaultValue: 'materialTypeDefaultValue'},
       {name: option9, id: option9,},
       {name: option4, id: option4,},
       {name: option2, id: option2,},

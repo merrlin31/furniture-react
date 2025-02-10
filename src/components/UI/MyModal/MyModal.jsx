@@ -6,11 +6,15 @@ export const MyModal = (props) => {
       props.setVisible(false)
    }
 
+   const showModal = () => {
+      props.setVisible(true)
+   }
+
    return (
       <>
          {props.visible &&
             <div className={style.background} onClick={closeModal}>
-               <div className={style.form} onClick={(e) => e.stopPropagation()}>
+               <div className={style[props.class]} onClick={(e) => e.stopPropagation()}>
                   {props.children}
                </div>
             </div>

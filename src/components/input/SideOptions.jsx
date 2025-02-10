@@ -1,18 +1,17 @@
-import { changeValues } from "../../reducers/productReducer";
-import { sideClass, sideOption1, sideType1, sideType2, sideType3 } from "../../utils/description";
-import { MySelect } from "../UI/MySelect/MySelect";
+import { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { sideClass, sideOption1 } from "../../utils/description";
+import { sideOptions } from "../properties/inputProperties";
+import { MySelect1 } from "../UI/MySelect/MySelect";
 
-export const SideOptions = ({className, value, dispatch}) => {
-
-   const side = {
-      name: sideOption1, select: sideOption1, id: sideOption1, options: [
-         {value: sideType1, name: sideType1},
-         {value: sideType2, name: sideType2},
-         {value: sideType3, name: sideType3},
-      ], defaulValue: 'sideDefaultValue'
-   }
+export const SideOptions = ({className}) => {
+   const { register } = useFormContext();
+   const defaultValue = 'sideDefaultValue'
+   const [side] = useState({defaultValue: defaultValue, name: sideOption1, select: sideOption1, id: sideOption1,
+      options: sideOptions
+   })
 
    return (
-      <MySelect options={side} value={value.side} className={className + sideClass} onChange={(v) => dispatch(changeValues({side: v}))} />
+      <MySelect1 className={className + sideClass} options={side} register={register} />
    );
 }

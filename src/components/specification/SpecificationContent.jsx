@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { addFurnitureItem, addServiceItem, editFurnitureItem, editServiceItem } from '../../reducers/productReducer';
 import '../../styles/specification.scss';
-import { furnitureClass, materialClass, serviceManufacturer, totalClass } from '../../utils/description';
+import { furnitureClass, materialClass, VIYAR, totalClass } from '../../utils/description';
 import { furniture, furnitureManufacturerList } from '../../utils/furniture';
 import { allService } from '../../utils/services';
 import { initialSum } from '../properties/settingsProperties';
@@ -22,11 +22,11 @@ export const SpecificationContent = (props) => {
    const [serviceSum, setServiceSum] = useState(initialSum)
    const [furnitureSum, setFurnitureSum] = useState(initialSum)
 
-   const furnitureManufacturer = {defaulValue: 'manufacturerDefaultValue',
+   const furnitureManufacturer = {defaultValue: 'manufacturerDefaultValue',
       options: furnitureManufacturerList.map(item => ({value: item, name: item}))
    }
-   const servicesManufacturer = {defaulValue: 'manufacturerDefaultValue',
-      options: [{value: serviceManufacturer, name: serviceManufacturer}]
+   const servicesManufacturer = {defaultValue: 'manufacturerDefaultValue',
+      options: [{value: VIYAR, name: VIYAR}]
    }
 
    return (

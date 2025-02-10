@@ -2,7 +2,7 @@
 
 .input {
    width: 100%;
-   background: #f3ba66;
+   background: #e9c38b;
    height: 1.4rem;
    line-height: 1.5;
    font-size: 1.0rem;
@@ -14,10 +14,34 @@
    outline: none;
    box-shadow: 0px 1px 0px grey;
    text-align: center;
+
+   &:hover, &:focus {
+      box-shadow: 0px 2px 0px $green-btn;
+   }
 }
 
-.input:hover, .input:focus {
-   box-shadow: 0px 2px 0px $green-btn;
+.authInput {
+   width: 100%;
+   background: rgb(68, 68, 67);
+   height: 1.8rem;
+   line-height: 1.6;
+   font-size: 1.2rem;
+   border-radius: 3px;
+   padding: 1px 5px;
+   padding-top: 3px;
+   color: #fff;
+   border: 1px solid #fff;
+   appearance: none;
+   outline: none;
+   text-align: center;
+
+   &:hover, &:focus {
+      border: 2px solid rgb(36, 173, 236);
+   }
+}
+
+.errors {
+   color: red;
 }
 
 .checbox {
@@ -49,11 +73,21 @@
 .label {
    padding-top: 3px;
    text-align: left;
-   color: rgb(78, 78, 78);
+   
    font-size: 0.85rem;
    text-decoration: underline;
-   text-decoration-color: grey;
+   
    // position: relative;
+}
+
+.grey {
+   color: rgb(78, 78, 78);
+   text-decoration-color: grey;
+}
+
+.white {
+   color: rgb(214, 214, 214);
+   text-decoration-color: rgb(224, 224, 224);
 }
 
 .circleQuestion {

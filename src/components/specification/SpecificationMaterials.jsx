@@ -2,7 +2,7 @@ import { t } from "i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { changeAddedDetailsCode, changeAddedDetailsType, editMaterial } from "../../reducers/detailReducer";
 import { changeMaterialCode, addValueDifference, changeMaterialType } from "../../reducers/productReducer";
-import { edge1, edge2, materialType1, materialType1SheetArea, materialType3, materialType4 } from "../../utils/description";
+import { edge1, edge2, materialType1, materialType1SheetArea, materialType1TotalSheetArea, materialType3, materialType4 } from "../../utils/description";
 import { choiceOption } from "../../utils/Material";
 import { SpecificationRow } from "./SpecificationRow";
 
@@ -38,12 +38,31 @@ export const SpecificationMaterials = ({sortMaterials}) => {
             dispatch(changeAddedDetailsType(item.code, item.material))
             searchItem.material = item.material
          }
-         searchItem.price = item.price
          searchItem.manufacturer = item.manufacturer
+         
+         searchItem.price = item.price
+         let scale = (searchItem.material === materialType4) ? 1000 : 1
+         let coefficient = (searchItem.material === materialType4) ? 1.25 : 1.3   // Процент чистого размера!
+         let length = (searchItem.material === materialType4) ? tabletopLength / scale : materialType1TotalSheetArea
+         let pureSizePrice = coefficient / length
+         if (searchItem.pureSize) {
+            searchItem.price = +(item.price / pureSizePrice).toFixed(2)
+         } else {
+            searchItem.price = item.price
+         }
+
          if (item.material === materialType1 || item.material === materialType3) {
-            value += options.difference * materialType1SheetArea
+            if (searchItem.pureSize) {
+               value += options.difference
+            } else {
+               value += options.difference * materialType1SheetArea
+            }
          } else if (item.material === materialType4) {
-            value += options.difference * tabletopLength
+            if (searchItem.pureSize) {
+               value += options.difference * 1000
+            } else {
+               value += options.difference * tabletopLength
+            }
          } else {
             value += options.difference
          }

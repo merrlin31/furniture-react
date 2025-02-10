@@ -64,10 +64,9 @@ export function addMaterial(detail, allMaterials, service, materials) {
    let amount = detail.area
    if (detail.materialType === materialType4) amount = detail.height
 
-   
+   let existMaterial = materials.find(item => item.materialCode === detail.materialCode)
    let material = new Material(detail.materialCode, amount, detail.boldEdge(), detail.thinEdge(), 
-      detail.edging(), detail.materialType, materialPrice, boldEdgePrice, thinEdgePrice, manufacturer, discount)
-   
+      detail.edging(), detail.materialType, materialPrice, boldEdgePrice, thinEdgePrice, manufacturer, discount, existMaterial?.pureSize)
    let duplicateMaterial = allMaterials.find(item => item.materialCode === detail.materialCode)
    if (duplicateMaterial) {
          duplicateMaterial.area += material.area;
@@ -145,7 +144,7 @@ export const addToArr = (detail, arr, maxHeight) => {
    }   
 }
 
-export const selectMaterialType = {defaulValue: 'materialTypeDefaultValue',
+export const selectMaterialType = {defaultValue: 'materialTypeDefaultValue',
 options: [
    {value: materialType1, name: materialType1},
    {value: materialType2, name: materialType2},

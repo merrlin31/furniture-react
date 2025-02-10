@@ -26,7 +26,7 @@ export const SettingsForm = ({className, title, parent, optionsClass, options, s
             {options.map((option) => 
                !option.select
                ? <MyInput option={option}  key={option.id} className ={optionsClass + itemClass}
-                     value={state[option.id]} onChange={e => dispatch(editValue(key, option.id, +e.target.value))} translate={translate} hint={hint} />
+                     value={state[option.id] || 0} onChange={e => dispatch(editValue(key, option.id, +e.target.value))} translate={translate} hint={hint} />
                : <MySelect options={option} className ={optionsClass + itemClass}
                   key={option.id} value={state[option.select]} onChange={(value) => dispatch(editValue(key, option.select, value))} translate={translate} />
             )}

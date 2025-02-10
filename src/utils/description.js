@@ -1,6 +1,11 @@
+export const clientUrl = 'http://localhost:3000/'
+export const imgUrl = clientUrl + ''
+
+
 export const levelType1 = 'downSection'
 export const levelType2 = 'upSection'
 export const levelType3 = 'mezzanine'
+export const levelOption1 = 'level'
 export const levelAmount1 = '1'
 export const levelAmount2 = '2'
 export const sectionBottomType1 = 'originalBottomSection'
@@ -14,6 +19,7 @@ export const sectionUpperType4 = 'cornerJoinSection'
 
 export const materialType1 = 'dsp'
 export const materialType1SheetArea = 5.3
+export const materialType1TotalSheetArea = 5.796
 export const materialType1Height = 2800
 export const materialType2 = 'mdf'
 export const materialType3 = 'dvp'
@@ -62,6 +68,7 @@ export const drawerType1 = 'telescopic'
 export const drawerType2 = 'hiddenMuller'
 export const drawerType3 = 'hiddenHettich'
 export const drawerType4 = 'tandemBox'
+export const drawerType5 = 'hiddenBlum'
 export const drawerScale = 50
 export const tandemHeight1 = 116
 export const tandemHeight2 = 84
@@ -141,6 +148,7 @@ export const addBtnColor = 'green'
 export const delBtnColor = 'red'
 export const addFurnitureBtnColor = 'dark-blue'
 export const addDetailBtnColor = 'dark-blue'
+export const registrationBtnColor = 'dark'
 export const containerClass = '__container'
 export const section1BtnClass = '__button'
 export const section3BtnClass = '__button'
@@ -187,6 +195,9 @@ export const section4Class = 'specification'
 export const section5Class = 'settings'
 export const mainClass = 'content'
 export const btnContainerClass = 'buttonContainer'
+export const modalClass = 'form'
+export const modalClass1 = 'profileForm'
+export const menuLabelColor = 'white'
 
 export const section1Title1 = 'section1Title1'
 export const section1Title2 = 'section1Title2'
@@ -202,33 +213,57 @@ export const section4Title1 = 'section4Title1'
 export const section4Title2 = 'section4Title2'
 export const section4Title3 = 'section4Title3'
 export const section5Title1 = 'section5Title1'
+export const section6Title1 = 'section6Title1'
 
 export const section1Name = 'sections'
 export const section2Name = 'detailing'
 export const section3Name = 'specification'
 export const section4Name = 'settings'
+export const section5Name = 'rendering'
 
 export const frontMaxWidth = 600
+export const frontMinWidth = 300
 export const frontMaxWidthFridge = 650
 export const maxSectionDepth = 600
+export const minSectionDepth = 200
+export const maxTabletopThickness = 60
+export const minTabletopThickness = 8
+export const maxKitchenHeight = 2755
+export const minKitchenHeight = 820
+export const minMezzanineSectionHeight1Level = 400
+export const minMezzanineSectionHeight2Level = 0
+export const minUpSectionHeight = 200
+export const maxSectionHeight = 950
+export const maxPlinthHeight = 200
+export const minPlinthHeight = 60
+export const minSectionWidth = 100
+export const maxSectionWidth = 1200
+export const maxFrontAmount = 2
+export const minFrontAmount = 1
+export const maxDrawersAmount = 6
+export const minDrawersAmount = 0
+export const maxShelvesAmount = 6
+export const minShelvesAmount = 0
 
 export const legsAmount1 = 4
 export const legsAmount2 = 6
 
-export const furnitureManufacturer1 = 'hettich'
-export const furnitureManufacturer2 = 'muller'
-export const furnitureManufacturer3 = 'blum'
-export const furnitureManufacturer4 = 'scilm'
-export const furnitureManufacturer5 = 'termoplast'
-export const furnitureManufacturer6 = 'camar'
-export const furnitureManufacturer7 = 'hafele'
-export const furnitureManufacturer8 = 'china'
-export const furnitureManufacturer9 = 'poland'
-export const furnitureManufacturer10 = 'lumine'
-export const furnitureManufacturer11 = 'lumineProf'
-export const furnitureManufacturer12 = 'luminePower'
-export const furnitureManufacturer13 = 'ukraine'
-export const serviceManufacturer = 'viyar'
+export const HETTICH = 'hettich'
+export const MULLER = 'muller'
+export const BLUM = 'blum'
+export const SCILM = 'scilm'
+export const TERMOPLAST = 'termoplast'
+export const CAMAR = 'camar'
+export const HAFELE = 'hafele'
+export const CHINA = 'china'
+export const POLAND = 'poland'
+export const LUMINE = 'lumine'
+export const LUMINE_PROF = 'lumineProf'
+export const LUMINE_PWR = 'luminePower'
+export const UKRAINE = 'ukraine'
+export const FERRO_FIORI = 'ferroFiori'
+export const CASCATA = 'Cascata'
+export const VIYAR = 'viyar'
 
 export const bodyManufacturer = 'bodyManufacturer'
 export const frontManufacturer = 'frontManufacturer'
@@ -281,3 +316,42 @@ export const numberSelfTapping30Drawer = 4
 export const numberSelfTapping30Hook = 2
 export const numberSelfTapping30JoinSection = 6
 export const minCut = 0.4
+
+export const btnType1 = 'authBtn'
+export const menuBtnType = 'menuBtn'
+
+export const mainRole = 'admin'
+
+export const REQUIRED_EMAIL = 'email is required'
+export const REQUIRED_USERNAME = 'userName is required'
+export const REQUIRED_NAME = 'name is required'
+export const REQUIRED_CUSTOMER = 'customer is required'
+export const REQUIRED_PASSWORD = 'password is required'
+export const REQUIRED_MATERIAL = 'material code is required'
+export const REQUIRED_THICKNESS = 'thickness is required'
+export const REQUIRED_HEIGHT = 'height is required'
+export const REQUIRED_WIDTH = 'width is required'
+export const REQUIRED_DEPTH = 'depth is required'
+export const REQUIRED_FRONT = 'front is required'
+export const REQUIRED_DRAWERS = 'drawers is required'
+export const REQUIRED_SHELVES = 'shelves is required'
+export const CUSTOMER_EXISTS = 'the customer already exists'
+export const NAME_EXISTS = 'the name already exists'
+export const CUSTOMER_NOT_EXISTS = 'the customer does not already exists'
+
+export const INVALID_EMAIL = 'invalid email'
+export const MIN_LENGTH = 'min length'
+export const MIN_LENGTH_1 = 'min length 1'
+export const MAX_LENGTH = 'max length'
+export const MAX_LENGTH_60 = 'max length 60'
+export const MAX_LENGTH_6 = 'max length 6'
+export const MAX_LENGTH_4 = 'max length 4'
+export const MAX_LENGTH_2 = 'max length 2'
+export const MAX_LENGTH_1 = 'max length 1'
+
+export const searchValue1 = 'projectName'
+export const searchValue2 = 'customerId'
+export const searchValue3 = 'adress'
+export const searchValue4 = 'usedCodes'
+
+export const networkError = 'Network response was not ok'

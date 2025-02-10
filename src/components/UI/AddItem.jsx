@@ -49,7 +49,7 @@ export const AddItem = (props) => {
       {name: option4, id: option4,},
       {name: option5, select: option5, 
          options: furnitureManufacturerList.map(item => ({value: item, name: item})), 
-         defaulValue: 'manufacturerDefaultValue'},
+         defaultValue: 'manufacturerDefaultValue'},
       {name: option6, id: option6,},
    ]
    if (props.materials) {
